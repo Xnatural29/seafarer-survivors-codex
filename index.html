@@ -301,6 +301,24 @@
   .node .tv{font-size:19px;color:var(--amber);line-height:1.2;margin-top:2px}
   .node .td{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.45}
 
+  /* ---------- decisions ---------- */
+  .decs{display:grid;gap:12px;margin-top:10px}
+  .dec{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:14px;padding:13px 14px 12px;
+    background:linear-gradient(170deg,rgba(24,66,78,.5),rgba(8,28,36,.86))}
+  .dec::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:rgba(232,192,122,.75)}
+  .dh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .dh h3{margin:0;font-size:15px;line-height:1.35}
+  .dtag{font-size:10px;letter-spacing:.08em;color:#0a1e25;background:var(--amber);border-radius:5px;padding:2px 6px;font-weight:700;flex:0 0 auto}
+  .dq{margin:8px 0 0;font-size:12.5px;color:#dfe9e7;line-height:1.6}
+  .dlabel{margin:10px 0 0;font-size:10.5px;letter-spacing:.12em;color:#7d9499}
+  .dopt{margin:5px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:12px;color:#cbdcdb}
+  .dopt li{padding-left:12px;position:relative;line-height:1.55}
+  .dopt li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:rgba(79,196,184,.75)}
+  .dopt b{color:var(--amber)}
+  .drec{margin-top:10px;padding:8px 10px;border-radius:9px;background:rgba(79,196,184,.09);
+    border-left:2px solid rgba(79,196,184,.65);font-size:12px;color:#d7e9e6;line-height:1.6}
+  .drec b{color:var(--teal)}
+
   @media (max-width:640px){
     .paths{grid-template-columns:1fr}
     .cab-row{grid-template-columns:1fr;gap:5px}
@@ -341,7 +359,7 @@
   <header class="hero">
     <p class="kicker">Seafarer Survivors · Design Codex</p>
     <h1>航海幸存者 <em>设定总览</em></h1>
-    <p class="sub">经济、柜型、展厅、法师、成长、章节与验收线，全部从仓库里的 spec、docs 与 <span class="mono">scripts/data/*.lua</span> 读取。口径冲突逐条标注；仓库里找不到出处的留进「留空清单」，不编。表格在手机上可左右滑动。</p>
+    <p class="sub">经济、柜型、展厅、法师、成长、章节与验收线，全部从仓库里的 spec、docs 与 <span class="mono">scripts/data/*.lua</span> 读取；需要你拍板的 5 件事单独收在「待确认」。口径冲突逐条标注；仓库里找不到出处的留进「留空清单」，不编。表格在手机上可左右滑动。</p>
     <div class="hero-meta">
       <span class="pill">1 份 = 471 币</span>
       <span class="pill">周期 17.4 局</span>
@@ -360,6 +378,7 @@
       <a href="#growth">局内成长</a>
       <a href="#chapters">章节</a>
       <a href="#accept">验收线</a>
+      <a href="#decisions">待确认</a>
       <a href="#codex">图鉴</a>
       <a href="#gaps">留空清单</a>
     </div>
@@ -607,6 +626,32 @@
       <div class="stat orange"><div class="n">74<small>%</small></div><div class="lbl">第二章现状通关率（B1 未落地）</div></div>
     </div>
 
+    <h3 class="sh">三种做法的成本与感知对比</h3>
+    <div class="tw"><table>
+      <thead><tr><th>维度</th><th>A 只换 Boss</th><th>B1 同图主题层<br>（推荐）</th><th>B2 主题层 + 新海面</th><th>C 完全重画</th></tr></thead>
+      <tbody>
+        <tr><td>内容定义</td><td>同图同岛同海面，只加 1 只 Boss + 1 条曲线</td><td><b>同骨架</b>；换色板 / 雾 / 岛皮 / 怪变体 / Boss，加 1 条环境机制</td><td>B1 + 重画 2–4 张 <span class="mono">sea_zone_*</span> 海面层</td><td>新尺寸 / 新分层 / 新岛簇 / 新岛型 / 新配额 / 新港口</td></tr>
+        <tr><td>美术工作量</td><td>0.5–1 人日</td><td><b>3–5 人日</b></td><td>5–7 人日</td><td>12–20 人日</td></tr>
+        <tr><td>代码工作量</td><td>0.5–1.5 人日</td><td><b>7–9 人日</b></td><td>7–9 人日（多贴图接线 0.5）</td><td>12–18 人日</td></tr>
+        <tr><td>包体增量</td><td>+0.3–0.5MB</td><td><b>+0.8–1.0MB</b></td><td>+2.1–3.4MB（撞 20MB 红线）</td><td>+4–6MB（必须删旧图）</td></tr>
+        <tr><td>玩家感知</td><td>2 / 10</td><td><b>6–7 / 10</b></td><td>7–8 / 10</td><td>9 / 10</td></tr>
+        <tr><td>复用率</td><td>≈98%</td><td><b>82–88%</b></td><td>78–85%</td><td>35–50%</td></tr>
+        <tr><td>过 §10.2 换皮判据</td><td class="dim">不过（三项全不变）</td><td><b>过</b>（怪权重 ≥30% 重排 + 货值表重定价）</td><td>过</td><td>过</td></tr>
+        <tr><td>主要风险</td><td>被读成「同一张图加个 Boss」</td><td>只调色会滑向换皮；环境机制调不好会撞验收线</td><td>直接撞 20MB 红线</td><td>产能与包体双爆，第三章无路可走</td></tr>
+      </tbody>
+    </table></div>
+    <p class="srcnote">出处：<code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §2.1 L140–153（总表）、§2.2–2.4 L154–197（A / B / C 分述）；工时与包体为文档内估算，未实测。</p>
+
+    <h3 class="sh">为什么推荐 B1</h3>
+    <ul class="rules">
+      <li><b>包体唯一可行</b>：+0.8–1.0MB；B2 与 C 都会把余量吃光（20MB 红线）。若实测余量只有 0.3–1MB，先做 PNG 量化 / 释放休眠 UI。</li>
+      <li><b>产能可持续</b>：第三章边际 ≈1 配置日 + 1 Boss 代码日 + 3–5 美术日，能按「一章一皮肤包」排期；C 每章 12–18 日不可持续。</li>
+      <li><b>判据能过</b>：怪权重 ≥30% 重排 + 货值表重定价两项，满足换皮判据的「至少两项」；节奏不同是硬条件。前提是先修订局外 spec 的「零贴图」硬约束。</li>
+      <li><b>骨架可复用</b>：第二章曲线（165s / 9,000 血 / 精英 ×1.2 / 密度 ×1.12）已实测 74%，不需要重做数值，只补主题层。</li>
+      <li><b>风险可控</b>：环境机制可按开关灰度；不改地图尺寸与撤离点唯一性，验收线漂移面最小。</li>
+    </ul>
+    <p class="hint" style="margin-top:8px">现状提醒：现在的第二关其实已经是 A 的雏形——同图、同 <span class="mono">tide_lord</span>、同美术，只换曲线与 9,000 血，玩家感知接近 0。这正是「只换数值」这条路的实测答案。</p>
+
     <h3 class="sh">第二章的差异做法</h3>
     <div class="tw"><table>
       <thead><tr><th>维度</th><th>第一章「雾港近海」</th><th>第二章「风暴航路」</th><th>手段</th></tr></thead>
@@ -675,6 +720,23 @@
       <li>Boss 前 45s 不抽负向事件；精英出现前后 15s 不抽能见度事件。</li>
       <li>同类事件一局最多 1 次；连续 2 局抽到同一负向事件，第 3 局强制换池。</li>
     </ul>
+    <h3 class="sh"><span class="mono">chapters.lua</span> 字段清单（规划，文件尚未建）</h3>
+    <div class="tw"><table>
+      <thead><tr><th>组</th><th>关键字段</th><th>作用</th></tr></thead>
+      <tbody>
+        <tr><td>A 身份与解锁</td><td class="mono">id / name / sub / unlock.prev_stage / unlock.clears / order</td><td>选关 UI、海图排序、解锁条件</td></tr>
+        <tr><td>B 地图</td><td class="mono">map.skeleton / layout_ref / pois / island_pool / anchors / extract / props / boss_arena</td><td>引用骨架；<b>只写 type 与 y</b>，x 由种子生成；撤离点首发只允许 1 个</td></tr>
+        <tr><td>C 美术与氛围</td><td class="mono">art.palette_ref / hud_accent / island_skin / mob_skins / boss_skin / sea_skins / sea_grade / fog / ambient / audio_bed</td><td>色板、岛皮、怪变体、雾；B1 海面层全复用，靠 <span class="mono">sea_grade</span> 叠色</td></tr>
+        <tr><td>D 刷怪与敌人</td><td class="mono">waves.segments_ref / events_ref / visible_scale / boss_at；spawn.caps；enemy.mob_mix_override / elite_variants / boss_id / boss_hp / elite_hp_mult；difficulty_ref</td><td>曲线、密度、Boss 入场与血量；<span class="mono">mob_mix_override</span> 变化 ≥30% 才算「组合不同」</td></tr>
+        <tr><td>E 环境与事件</td><td class="mono">env.mechanic / current / visibility / storm；events.pool / count / windows / exclude_before_boss / repeat_limit</td><td>三选一环境机制；Boss 前 45s 禁抽负向事件</td></tr>
+        <tr><td>F 经济</td><td class="mono">economy.coin_mult / drop_mult / xp_mult（<b>恒 1.0</b>）；cargo_table_ref；extract_bonus_keep</td><td>只允许「整张货值表重定价」，禁止倍率改单格</td></tr>
+        <tr><td>G 单局变化</td><td class="mono">variation.seed / island_jitter / type_draw / type_guarantees / chest_density / elite_pick / boss_variant / budget</td><td>18 项变化点的开关与幅度</td></tr>
+        <tr><td>H 验收</td><td class="mono">validate.expected_coin(471) / pass_band / survival_min / p10_min / boss_ttk</td><td>启动校验：期望 ±5%、通关率带、P10 下限、TTK 带</td></tr>
+      </tbody>
+    </table></div>
+    <p class="hint" style="margin-top:8px">口径提醒：spec 正文写「1 个 Lua 表条目，40–60 字段」，但 §4.2 的字段清单逐条枚举下来是 60 余条——文档内小口径不一致，以上表为准（以清单为准，正文的「40–60」待修订）。</p>
+    <p class="srcnote">出处：<code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §4.1 L265–273（放哪、谁解析）、§4.2 L275–380（A–H 全量字段）、§4.3 L382–400（现状硬编码需外置的位置）、§4.4 L402–409（只改配置出一章 + 校验）。</p>
+
     <div class="warnbar">现状提醒：第二章仍是 <span class="mono">tide_lord</span> 同 id、只把血量改到 9,000，<b>B1 的「风暴领主 + 环境机制」尚未落地</b>；上面「风暴航路」的差异是设计目标，不是已完成状态。章节数据 <span class="mono">data/chapters.lua</span> 也还没有。</div>
     <p class="srcnote">出处：<code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §3.2 L210–228（一章 = 什么、8:2）、§3.3 L230–239（8 条不变量）、§3.4 L241–247（B1 交付物）、§5.1 L421–444（18 项全量清单）、§5.2 L446–461（变化预算与硬规则）、§6.1 L497–505（第一眼）、§6.2 L507–516（第一分钟）、§6.3 L518–531（整局差异）。</p>
   </section>
@@ -695,6 +757,100 @@
     </ul>
     <div class="warnbar"><b>TTK 门槛当前口径存疑，如实标注：</b>目标是 25–40s。<code>docs/issues.md</code> I-05 的权威口径是 <b>Boss 20,000 血、清杂单体、180s 配装 → 中位 21.1s</b>（分布 10.6–38.4s），结论「仍低于目标，但血量按制作人指令冻结在 20,000」；而第一关 6,000 血在 <code>docs/balance.md</code> L289 记的是 <b>9.5–9.9s</b>。两者血量、配装、是否清杂都不同，<b>不能混用</b>，所以本页不给单一的「TTK 达标」结论。</div>
     <p class="srcnote">出处：<code>docs/balance-master.md</code> §0-8（三项基线）、验收门槛一节；<code>docs/balance.md</code> L289（第一关 TTK 9.5–9.9s）；<code>docs/issues.md</code> I-05（L39 起，权威口径与作废口径）。</p>
+  </section>
+
+  <section class="panel" id="decisions" aria-labelledby="decisions-title">
+    <h2 id="decisions-title">待确认 · 需要你拍板</h2>
+    <p class="hint">这里只放「需要你决定、我不能替你定」的事项。每项写三件事：要定什么、每个选项的代价、我的建议。以后新的设计规划都追加到这一区，不另开页面。</p>
+    <div class="decs">
+
+      <article class="dec">
+        <div class="dh"><span class="dtag">D1</span><h3>第二章走 B1 还是 B2；旧 spec 的「不新增贴图」要不要作废</h3></div>
+        <p class="dq"><b>要定什么：</b>第二章按 <b>B1</b>（同骨架 + 主题层 + 1 条环境机制 + 1 只专属 Boss）还是 <b>B2</b>（再加 2–4 张新海面层）落地；同时决定 <code>20261112_局外港口与收藏馆/spec.md</code> 里「海域 2/3 不重建岛屿、不新增贴图」这条硬约束是否正式作废。</p>
+        <p class="dlabel">选项与代价</p>
+        <ul class="dopt">
+          <li><b>B1</b>：+0.8–1.0MB、3–5 美术日 + 7–9 代码日，感知 6–7/10；能过换皮判据，第三章可复制。</li>
+          <li><b>B2</b>：+2.1–3.4MB，直接撞 20MB 红线；要先删旧图或做 PNG 量化才有余量，感知只比 B1 高 1 分。</li>
+          <li><b>保留「零贴图」</b>：等于只能做 A（只换 Boss），实测感知 2/10；二关现状已经证明这条路无效。</li>
+        </ul>
+        <div class="drec"><b>我的建议：</b>走 B1，并把「零贴图」改成「不重建地图骨架；每章允许 ≤1MB 皮肤包」。包体是唯一硬约束，B1 是唯一同时过包体、过判据、可复制到第三章的做法。这条同时决定局外 spec §10.1 / §10.2 要修订。</div>
+      </article>
+
+      <article class="dec">
+        <div class="dh"><span class="dtag">D2</span><h3>经济是否接受「整表重定价，但期望守 471」</h3></div>
+        <p class="dq"><b>要定什么：</b>换皮判据要求「货值档不同」，最干净的做法是第二章整张货值表重定价（每格绝对值可变），但单局期望必须守 <b>471 币</b>、总池 <b>17.4 局</b>不动。是否接受这条路线。</p>
+        <p class="dlabel">选项与代价</p>
+        <ul class="dopt">
+          <li><b>接受整表重定价</b>：改动集中在章节引用的货值表；代价是每个海域的期望都要重算，靠 <code>expected_coin 471 ±5%</code> 校验守门。</li>
+          <li><b>沿用同一张表</b>：少一项换皮判据，只剩「怪权重 ≥30% 重排」一项，判据不过。</li>
+          <li><b>用倍率（×1.2 之类）</b>：直接破红线，<code>coin_mult / drop_mult / xp_mult</code> 必须恒 1.0，禁用。</li>
+        </ul>
+        <div class="drec"><b>我的建议：</b>接受整表重定价，但必须用 <code>economy.cargo_table_ref</code> 引用整张表 + 启动校验 <code>expected_coin 471 ±5%</code> + <code>accept_real</code> 150 局复核。任何倍率字段 ≠ 1.0 一律视为进线失败。</div>
+      </article>
+
+      <article class="dec">
+        <div class="dh"><span class="dtag">D3</span><h3>TTK 验收线：继续含航行，还是改 kill-only 重定基线</h3></div>
+        <p class="dq"><b>要定什么：</b>现在 TTK 是「含航行的总时长」还是「只算击杀输出」，以及 25–40s 的目标带是否维持、新基线定多少。口径不定，后面每一批实测都不可比。</p>
+        <p class="dlabel">仓库里的现有读数</p>
+        <div class="tw"><table>
+          <thead><tr><th>口径</th><th>数值</th><th>出处</th></tr></thead>
+          <tbody>
+            <tr><td>目标带</td><td>25–40s</td><td><code>docs/balance-master.md</code> §0-8 / <code>docs/balance.md</code> L123</td></tr>
+            <tr><td>改前（HEAD，一关 6,000 血）</td><td>9.5–9.9s</td><td><code>docs/balance.md</code> L289</td></tr>
+            <tr><td>满树静态折算</td><td>8.7–9.3s（下限碰 9.0 地板）</td><td><code>docs/balance.md</code> L290</td></tr>
+            <tr><td>权威口径（Boss 20,000 血、清杂单体、180s 配装）</td><td>中位 21.1s（10.6–38.4s）</td><td><code>docs/issues.md</code> I-05</td></tr>
+          </tbody>
+        </table></div>
+        <p class="dlabel">选项与代价</p>
+        <ul class="dopt">
+          <li><b>维持含航行</b>：与历史数据可比；但航行时间被算进 TTK，数值被稀释，9.0 地板实际约束的是「航行 + 击杀」而不是输出。</li>
+          <li><b>改 kill-only</b>：口径干净、只反映输出；代价是历史 9.5–9.9 / 8.7–9.3 / 21.1 全部不可直接比，必须重测基线。</li>
+        </ul>
+        <div class="drec"><b>我的建议：</b>验收改用 <b>kill-only</b>，同时连续 3 批「两套数并记」，确认新基线后再写死。你提到的「含航行 8.80s 已击穿 9.0、kill-only 4.4s」这两个数在仓库 docs 里检索不到原文，页面不把它们当既有事实，等补进仓库后再回填。</div>
+      </article>
+
+      <article class="dec">
+        <div class="dh"><span class="dtag">D4</span><h3>云存档与排行榜：11 项取舍</h3></div>
+        <p class="dq"><b>要定什么：</b>云存档与排行榜的整体路线，以及其中 5 个关键项：<b>主榜口径、是否挂奖励、<code>clientCloud</code> 的作弊风险、单活设备、离线是否允许购买升级</b>。</p>
+        <div class="tw"><table>
+          <thead><tr><th>#</th><th>问题</th><th>建议默认</th></tr></thead>
+          <tbody>
+            <tr><td class="num">1</td><td>云存档首要目标：防丢档 / 跨设备 / 防作弊</td><td><b>防丢档 + 跨设备</b>，不承诺防作弊</td></tr>
+            <tr><td class="num">2</td><td>是否接受 v1「单活设备 + 冲突保留高进度 + 低进度备份」</td><td><b>接受</b>（决定要不要做字段级账本）</td></tr>
+            <tr><td class="num">3</td><td><b>排行榜是否挂奖励</b>（海币 / 解锁 / 实物）</td><td><b>不挂</b>；挂了就必须上服务端</td></tr>
+            <tr><td class="num">4</td><td><b>主榜口径</b>：A 撤离货值 / B 海币 / C Boss 用时</td><td><b>A</b>；C 作副榜</td></tr>
+            <tr><td class="num">5</td><td>A 榜用「基础货值」还是「含成长货值」</td><td><b>基础货值</b>（需记 <code>base_value</code>）</td></tr>
+            <tr><td class="num">6</td><td>是否分 stage / 分端（手机 / PC）</td><td><b>分 stage</b>；上 PC 再分端</td></tr>
+            <tr><td class="num">7</td><td>赛季周期与历史榜保留</td><td><b>4 或 8 周</b>；旧 key 只读保留</td></tr>
+            <tr><td class="num">8</td><td>双设备冲突：自动保留高进度 / 弹窗让玩家选</td><td><b>自动保留高进度 + 提示 + 备份</b></td></tr>
+            <tr><td class="num">9</td><td><b>离线是否允许购买升级</b></td><td>离线可玩可赚、<b>购买需在线</b>；否则接受 v1 单活设备 + 允许离线购买</td></tr>
+            <tr><td class="num">10</td><td>首发范围：云存档先行、榜单后置</td><td><b>是</b>；成就另立专项</td></tr>
+            <tr><td class="num">11</td><td>谁提供真机测试账号 / 环境，谁执行验证</td><td><b>制作人指定</b></td></tr>
+          </tbody>
+        </table></div>
+        <p class="dlabel">作弊风险与代价</p>
+        <ul class="dopt">
+          <li><code>clientCloud</code> 是<b>客户端可写、无事务、无冲突合并、无断点续传</b>；榜单只能是「单 key 全服整数榜」，没有好友榜 / 周期参数，也不能单独删别人的成绩。</li>
+          <li>榜单一旦挂奖励，就必须有服务端权威（方案 C：改联网形态 + 逐条 URL 申报），这是「改项目形态」而不是增量功能。</li>
+          <li>单活设备能省掉字段级合并，但换设备时低进度那一端会被覆盖——必须留备份。</li>
+        </ul>
+        <div class="drec"><b>我的建议：</b>先做 B（平台云存档）：防丢档 + 跨设备为唯一目标，接受 v1 单活设备；榜单只做<b>不挂奖励的娱乐榜</b>，主榜用 A（基础货值）、C 作副榜；离线可玩可赚、购买需在线。竞技榜与成就都后置。</div>
+      </article>
+
+      <article class="dec">
+        <div class="dh"><span class="dtag">D5</span><h3>广告激励视频：需要你在平台后台开通 <code>@runtime.ad</code></h3></div>
+        <p class="dq"><b>要定什么：</b>是否现在走 <code>get_ad_config</code> 把广告配置写进 <code>.project/settings.json</code> 的 <code>@runtime.ad</code>，以及先接哪个点位、给什么奖励。</p>
+        <p class="dlabel">现状与代价</p>
+        <ul class="dopt">
+          <li>平台<b>只有激励视频一个广告 API</b>，宿主已完成广告接入，游戏侧只需调 <code>sdk:ShowRewardVideoAd(callback)</code>。</li>
+          <li>本项目<b>当前没有 <code>@runtime.ad</code></b>；<code>project.json</code> 里的 <code>app_id / developer_id</code> 只是开通前置条件，不等于已开通。</li>
+          <li>未拿到 <code>ad.status == 1</code> 前，按仓库约定<b>不得实现 / 测试广告代码</b>，所以这条线现在阻塞在后台配置，不是代码。</li>
+        </ul>
+        <div class="drec"><b>我的建议：</b>先在平台后台开通配置，只接 <b>1 个点位</b>灰度（回港后的「额外补给 / 双倍结算」类最稳），奖励不碰 471 / 17.4 经济红线；拿到 <code>ad.status == 1</code> 后再写真机验证。开通动作需要你或制作人在后台执行，我这边没有 <code>get_ad_config</code> 工具。</div>
+      </article>
+
+    </div>
+    <p class="srcnote">出处：D1 / D2 来自 <code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §2–§4 与 §1.7 冲突表；D3 见 <code>docs/balance.md</code> L123 / L289 / L290、<code>docs/issues.md</code> I-05（8.80s 与 4.4s 在本仓库检索不到原文）；D4 见 <code>docs/spec/20261114_云存档与排行榜_调研与方案.md</code> §2.1 L33–54、§5 L317–414、§7 L504–547、§8 L548–562；D5 见 <code>docs/spec/20261114_激励视频广告接入_调研与点位方案.md</code> L9–12 / L35–50 与 <code>20261114_激励视频广告接入_任务清单.md</code> L10–13。</p>
   </section>
 
   <div class="toolbar" role="region" aria-label="筛选">
@@ -754,6 +910,7 @@
       <li><b>三相共鸣的预期收益</b>：<span class="mono">talents.lua</span> 里 <span class="mono">mult = 0</span>，文档只写「刻意留空」，没给未来该值多少。</li>
       <li><b>单件均值与展厅日收益的实测</b>：页面引的是文档读数与「区间中值 × 占格」的推导值，本轮没有复跑 harness。</li>
       <li><b>TTK 门槛</b>：不是缺失，是没有唯一口径——I-05 的 20,000 血 / 21.1s 与第一关 6,000 血 / 9.5–9.9s 不可混用，页面因此不给达标结论。</li>
+      <li><b>TTK 8.80s 与 kill-only 4.4s</b>：本轮要求里给的两个数，在仓库 docs 里全文检索不到原文；页面只把它们记进「待确认 D3」，不当作既有事实。</li>
     </ul>
     <p class="srcnote">核对方式：对 <code>scripts/</code> 全仓 grep <span class="mono">collectibles</span>、<span class="mono">chapters</span>、<span class="mono">storm_lord</span> 等标识；未命中的不填。</p>
   </section>
@@ -771,9 +928,11 @@
     <p><b>局内成长</b><br>
       <code>scripts/data/talents.lua</code>；<code>docs/spec/20261113_局内成长与出卡规则_设计.md</code> §1.1 L21–31、§1.2 L32–55、§3.2–3.4 L148–212、§3.6 L224–238；<code>docs/spec/20261114_法师通用天赋树_设计/spec.md</code>。</p>
     <p><b>章节与单局变化</b><br>
-      <code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §3.2 L210–228、§3.3 L230–239、§5.1 L421–444、§5.2 L446–461、§6.1 L497–505、§6.2 L507–516、§6.3 L518–531。</p>
+      <code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §2.1 L140–153（三种做法成本）、§3.1 L200–208（推荐 B1）、§3.2 L210–228、§3.3 L230–239、§4.2 L275–380（chapters.lua 字段）、§5.1 L421–444、§5.2 L446–461、§6.1 L497–505、§6.2 L507–516、§6.3 L518–531。</p>
     <p><b>验收线</b><br>
       <code>docs/balance-master.md</code> §0-8（三项基线）、验收门槛一节；<code>docs/balance.md</code> L289（第一关 TTK 9.5–9.9s）；<code>docs/issues.md</code> I-05（L39 起）。</p>
+    <p><b>待确认</b><br>
+      D1 / D2：<code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §1.7 L121–134（口径冲突）、§2.1 L140–153（A/B1/B2/C 成本）、§4.2 L349–357（经济三倍率恒 1.0）；D3：<code>docs/balance.md</code> L123 / L289 / L290、<code>docs/issues.md</code> I-05；D4：<code>docs/spec/20261114_云存档与排行榜_调研与方案.md</code> §2.1 L33–54、§7 L504–547、§8 L548–562（11 项）；D5：<code>docs/spec/20261114_激励视频广告接入_调研与点位方案.md</code> L9–12 / L35–50、<code>…_任务清单.md</code> L10–13。</p>
     <p><b>藏品表（14 件、稀有度、海域、品类、产出柜型）</b><br>
       <code>docs/spec/20261114_宝物藏品与陈列柜落地/spec.md</code> §2 唯一 ID 表 L56–69；池子非空校验 L71–77；稀有度色 / 权重 / 海域乘数 L89–110；附加位与上限 L115–120；陈列柜 5×3 与槽位 L210–215；容量与溢出 L231–234。</p>
     <p><b>货值三档、每格价值、占格、档位权重</b><br>
