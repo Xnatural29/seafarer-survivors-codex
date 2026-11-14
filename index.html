@@ -319,6 +319,43 @@
     border-left:2px solid rgba(79,196,184,.65);font-size:12px;color:#d7e9e6;line-height:1.6}
   .drec b{color:var(--teal)}
 
+  /* ---------- decision form ---------- */
+  .dec.done::before{background:rgba(79,196,184,.9)}
+  .dstat{margin-left:auto;flex:0 0 auto;font-size:10.5px;padding:2px 8px;border-radius:999px;
+    border:1px solid rgba(140,160,160,.35);color:#93a8ab;white-space:nowrap}
+  .dstat.on{color:#04202a;background:var(--teal);border-color:transparent;font-weight:700}
+  .dform{margin-top:10px}
+  .opts{display:grid;gap:6px}
+  .opt{display:flex;gap:8px;align-items:flex-start;padding:9px 10px;border:1px solid rgba(120,150,150,.22);
+    border-radius:9px;background:rgba(4,20,26,.35);font-size:12px;line-height:1.55;color:#cbdcdb;cursor:pointer}
+  .opt input{margin:3px 0 0;accent-color:#4fc4b8;flex:0 0 auto}
+  .opt.sel{border-color:rgba(79,196,184,.7);background:rgba(79,196,184,.12);color:#eaf6f3}
+  .opt .cost{color:#8fa6a9}
+  .dnote{width:100%;box-sizing:border-box;margin-top:8px;padding:9px 10px;border-radius:9px;
+    border:1px solid rgba(120,150,150,.22);background:rgba(4,20,26,.45);color:#e6f0ee;
+    font:inherit;font-size:12px;line-height:1.55;resize:vertical;min-height:44px}
+  .dnote:focus{outline:2px solid rgba(79,196,184,.5);outline-offset:1px}
+  .dprog{display:flex;align-items:center;gap:10px;margin:12px 0 2px;font-size:11.5px;color:#9fb4b7}
+  .dbar{flex:1;height:6px;border-radius:999px;background:rgba(120,150,150,.18);overflow:hidden;min-width:80px}
+  .dbar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#4fc4b8,#e8c07a);transition:width .25s}
+  .dbtn{border:0;border-radius:9px;padding:10px 14px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;
+    background:var(--teal);color:#04202a}
+  .dbtn.ghost{background:rgba(79,196,184,.1);color:#bfe6e1;border:1px solid rgba(79,196,184,.4)}
+  .dbtn[disabled]{opacity:.45;cursor:not-allowed}
+  .dmiss{margin-top:10px;padding:9px 11px;border-radius:10px;border:1px solid rgba(232,192,122,.45);
+    background:rgba(232,192,122,.08);font-size:12px;color:#f0dcb6;line-height:1.6;display:none}
+  .dmiss b{color:var(--amber)}
+  .dout{margin-top:12px;display:none}
+  .dout.open{display:block}
+  .dout textarea{width:100%;box-sizing:border-box;min-height:220px;padding:10px;border-radius:10px;
+    border:1px solid rgba(120,150,150,.25);background:rgba(2,14,19,.7);color:#dfe9e7;
+    font:12px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical}
+  .dsend{margin-top:9px;font-size:12.5px;color:var(--amber);font-weight:700;line-height:1.6}
+  .dlimit{margin:8px 0 0;font-size:11.5px;color:#9fb4b7;line-height:1.65}
+  #dnav{display:inline-block;margin-left:5px;font-size:10px;padding:1px 5px;border-radius:999px;
+    background:rgba(79,196,184,.16);color:#8fd8cf}
+  .dactions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+
   @media (max-width:640px){
     .paths{grid-template-columns:1fr}
     .cab-row{grid-template-columns:1fr;gap:5px}
@@ -328,6 +365,7 @@
   }
   @media (max-width:520px){
     body{padding:0 11px 44px}
+    .topnav{margin-left:-11px;margin-right:-11px;padding-left:11px;padding-right:11px}
     .toolbar{margin:18px -11px 10px;padding:8px 11px 9px}
     .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
     .card h3{font-size:13.5px}
@@ -378,7 +416,7 @@
       <a href="#growth">局内成长</a>
       <a href="#chapters">章节</a>
       <a href="#accept">验收线</a>
-      <a href="#decisions">待确认</a>
+      <a href="#decisions">待确认<span id="dnav">0/5</span></a>
       <a href="#codex">图鉴</a>
       <a href="#gaps">留空清单</a>
     </div>
@@ -760,36 +798,47 @@
   </section>
 
   <section class="panel" id="decisions" aria-labelledby="decisions-title">
-    <h2 id="decisions-title">待确认 · 需要你拍板</h2>
-    <p class="hint">这里只放「需要你决定、我不能替你定」的事项。每项写三件事：要定什么、每个选项的代价、我的建议。以后新的设计规划都追加到这一区，不另开页面。</p>
+    <h2 id="decisions-title">待确认 · 填好发我</h2>
+    <p class="hint">这里只放「需要你决定、我不能替你定」的事项。每项：要定什么 → 选项与代价 → 我的建议 → 你选一个（或在补充里写别的）。选完点最底部的「生成确认单」，复制后发我。</p>
+    <div class="dprog" aria-live="polite"><span id="dprogText">0 / 5 已填</span><div class="dbar"><i id="dbar"></i></div></div>
+    <p class="dlimit"><b>静态页限制（如实说）：</b>本页托管在 GitHub Pages，没有后端。点「生成确认单」只在你的浏览器里生成一段文本，<b>不会自动发给我</b>，也没有已读回执——必须复制或导出后发我。填写内容只存在本机浏览器的 <code>localStorage</code>，换设备或清缓存就没了。<br><b>访问通道：</b>固定地址 <a href="https://xnatural29.github.io/seafarer-survivors-codex/">xnatural29.github.io/seafarer-survivors-codex</a>；临时隧道域名会变，页面上不保留任何已失效的旧域名。</p>
     <div class="decs">
 
-      <article class="dec">
-        <div class="dh"><span class="dtag">D1</span><h3>第二章走 B1 还是 B2；旧 spec 的「不新增贴图」要不要作废</h3></div>
+      <article class="dec" data-dec="D1">
+        <div class="dh"><span class="dtag">D1</span><h3>第二章走 B1 还是 B2；旧 spec 的「不新增贴图」要不要作废</h3><span class="dstat" data-for="D1">未填</span></div>
         <p class="dq"><b>要定什么：</b>第二章按 <b>B1</b>（同骨架 + 主题层 + 1 条环境机制 + 1 只专属 Boss）还是 <b>B2</b>（再加 2–4 张新海面层）落地；同时决定 <code>20261112_局外港口与收藏馆/spec.md</code> 里「海域 2/3 不重建岛屿、不新增贴图」这条硬约束是否正式作废。</p>
-        <p class="dlabel">选项与代价</p>
-        <ul class="dopt">
-          <li><b>B1</b>：+0.8–1.0MB、3–5 美术日 + 7–9 代码日，感知 6–7/10；能过换皮判据，第三章可复制。</li>
-          <li><b>B2</b>：+2.1–3.4MB，直接撞 20MB 红线；要先删旧图或做 PNG 量化才有余量，感知只比 B1 高 1 分。</li>
-          <li><b>保留「零贴图」</b>：等于只能做 A（只换 Boss），实测感知 2/10；二关现状已经证明这条路无效。</li>
-        </ul>
+        <p class="dlabel">选一个（灰字是代价）</p>
+        <div class="dform">
+          <div class="opts" role="radiogroup" aria-label="D1 选项">
+            <label class="opt"><input type="radio" name="D1" value="走 B1：同骨架 + 主题层 + 1 条环境机制 + 1 只专属 Boss，并作废「零贴图」硬约束"><span>走 B1：同骨架 + 主题层 + 1 条环境机制 + 1 只专属 Boss，并作废「零贴图」硬约束<br><span class="cost">+0.8–1.0MB，3–5 美术日 + 7–9 代码日，感知 6–7/10，能过换皮判据</span></span></label>
+            <label class="opt"><input type="radio" name="D1" value="走 B2：在 B1 基础上再加 2–4 张新海面层"><span>走 B2：在 B1 基础上再加 2–4 张新海面层<br><span class="cost">+2.1–3.4MB，直接撞 20MB 红线，感知只高 1 分</span></span></label>
+            <label class="opt"><input type="radio" name="D1" value="只换 Boss（A）：保留「零贴图」，同图同岛同海面"><span>只换 Boss（A）：保留「零贴图」，同图同岛同海面<br><span class="cost">+0.3–0.5MB，感知 2/10，换皮判据不过（二关现状已验证）</span></span></label>
+            <label class="opt"><input type="radio" name="D1" value="完全重画（C）：新地图 / 新岛簇 / 新港口"><span>完全重画（C）：新地图 / 新岛簇 / 新港口<br><span class="cost">+4–6MB，12–20 人日，第三章没有第二次产能</span></span></label>
+            <label class="opt"><input type="radio" name="D1" value="暂不定：先补一份当前 HEAD 的包体实测再拍"><span>暂不定：先补一份当前 HEAD 的包体实测再拍<br><span class="cost">多一轮等待；避免在余量 0.3–1MB 不确定时硬押 B1/B2</span></span></label>
+          </div>
+          <textarea class="dnote" data-id="D1" rows="2" placeholder="补充条件或否决理由，例如「B1 可以，但皮肤包预算锁 1.0MB」（可留空）"></textarea>
+        </div>
         <div class="drec"><b>我的建议：</b>走 B1，并把「零贴图」改成「不重建地图骨架；每章允许 ≤1MB 皮肤包」。包体是唯一硬约束，B1 是唯一同时过包体、过判据、可复制到第三章的做法。这条同时决定局外 spec §10.1 / §10.2 要修订。</div>
       </article>
 
-      <article class="dec">
-        <div class="dh"><span class="dtag">D2</span><h3>经济是否接受「整表重定价，但期望守 471」</h3></div>
+      <article class="dec" data-dec="D2">
+        <div class="dh"><span class="dtag">D2</span><h3>经济是否接受「整表重定价，但期望守 471」</h3><span class="dstat" data-for="D2">未填</span></div>
         <p class="dq"><b>要定什么：</b>换皮判据要求「货值档不同」，最干净的做法是第二章整张货值表重定价（每格绝对值可变），但单局期望必须守 <b>471 币</b>、总池 <b>17.4 局</b>不动。是否接受这条路线。</p>
-        <p class="dlabel">选项与代价</p>
-        <ul class="dopt">
-          <li><b>接受整表重定价</b>：改动集中在章节引用的货值表；代价是每个海域的期望都要重算，靠 <code>expected_coin 471 ±5%</code> 校验守门。</li>
-          <li><b>沿用同一张表</b>：少一项换皮判据，只剩「怪权重 ≥30% 重排」一项，判据不过。</li>
-          <li><b>用倍率（×1.2 之类）</b>：直接破红线，<code>coin_mult / drop_mult / xp_mult</code> 必须恒 1.0，禁用。</li>
-        </ul>
+        <p class="dlabel">选一个（灰字是代价）</p>
+        <div class="dform">
+          <div class="opts" role="radiogroup" aria-label="D2 选项">
+            <label class="opt"><input type="radio" name="D2" value="接受整表重定价：每格绝对值可变，期望守 471±5%，倍率恒 1.0"><span>接受整表重定价：每格绝对值可变，期望守 471 ±5%，倍率恒 1.0<br><span class="cost">换皮判据能过；代价是每个海域的期望都要重算，靠启动校验 + 150 局复核</span></span></label>
+            <label class="opt"><input type="radio" name="D2" value="沿用同一张货值表：不改经济"><span>沿用同一张货值表：不改经济<br><span class="cost">少一项换皮判据，只剩怪权重一项，判据不过</span></span></label>
+            <label class="opt"><input type="radio" name="D2" value="用倍率改单格（×1.2 之类）：我接受破红线的风险"><span>用倍率改单格（×1.2 之类）：我接受破红线的风险<br><span class="cost">改动最小，但直接破坏 471 币与 17.4 局</span></span></label>
+            <label class="opt"><input type="radio" name="D2" value="暂不定：先看第二章怪权重方案再定"><span>暂不定：先看第二章怪权重方案再定<br><span class="cost">章节方案无法收口，经济线先挂着</span></span></label>
+          </div>
+          <textarea class="dnote" data-id="D2" rows="2" placeholder="补充，例如「可以重定价，但 ±3% 以内」（可留空）"></textarea>
+        </div>
         <div class="drec"><b>我的建议：</b>接受整表重定价，但必须用 <code>economy.cargo_table_ref</code> 引用整张表 + 启动校验 <code>expected_coin 471 ±5%</code> + <code>accept_real</code> 150 局复核。任何倍率字段 ≠ 1.0 一律视为进线失败。</div>
       </article>
 
-      <article class="dec">
-        <div class="dh"><span class="dtag">D3</span><h3>TTK 验收线：继续含航行，还是改 kill-only 重定基线</h3></div>
+      <article class="dec" data-dec="D3">
+        <div class="dh"><span class="dtag">D3</span><h3>TTK 验收线：继续含航行，还是改 kill-only 重定基线</h3><span class="dstat" data-for="D3">未填</span></div>
         <p class="dq"><b>要定什么：</b>现在 TTK 是「含航行的总时长」还是「只算击杀输出」，以及 25–40s 的目标带是否维持、新基线定多少。口径不定，后面每一批实测都不可比。</p>
         <p class="dlabel">仓库里的现有读数</p>
         <div class="tw"><table>
@@ -801,17 +850,22 @@
             <tr><td>权威口径（Boss 20,000 血、清杂单体、180s 配装）</td><td>中位 21.1s（10.6–38.4s）</td><td><code>docs/issues.md</code> I-05</td></tr>
           </tbody>
         </table></div>
-        <p class="dlabel">选项与代价</p>
-        <ul class="dopt">
-          <li><b>维持含航行</b>：与历史数据可比；但航行时间被算进 TTK，数值被稀释，9.0 地板实际约束的是「航行 + 击杀」而不是输出。</li>
-          <li><b>改 kill-only</b>：口径干净、只反映输出；代价是历史 9.5–9.9 / 8.7–9.3 / 21.1 全部不可直接比，必须重测基线。</li>
-        </ul>
+        <p class="dlabel">选一个（灰字是代价）</p>
+        <div class="dform">
+          <div class="opts" role="radiogroup" aria-label="D3 选项">
+            <label class="opt"><input type="radio" name="D3" value="改 kill-only，并按 4.4s 重定基线"><span>改 kill-only，并按 4.4s 重定基线<br><span class="cost">口径干净、只反映输出；历史 9.5–9.9 / 8.7–9.3 / 21.1 全部不可直接比，需重测</span></span></label>
+            <label class="opt"><input type="radio" name="D3" value="两套并记 3 批后再定"><span>两套并记 3 批后再定<br><span class="cost">不立刻改验收；多花 3 批实测，期间两套数都要留</span></span></label>
+            <label class="opt"><input type="radio" name="D3" value="维持含航行口径，不改"><span>维持含航行口径，不改<br><span class="cost">与历史可比；但 TTK 被航行时间稀释，9.0 地板约束的是「航行 + 击杀」</span></span></label>
+            <label class="opt"><input type="radio" name="D3" value="其他：我在补充里写新算法"><span>其他：我在补充里写新算法<br><span class="cost">需要把算法写清（起点/终点/是否含航行），否则无法复核</span></span></label>
+          </div>
+          <textarea class="dnote" data-id="D3" rows="2" placeholder="补充，例如「kill-only 从 Boss 入场开始计时」（可留空）"></textarea>
+        </div>
         <div class="drec"><b>我的建议：</b>验收改用 <b>kill-only</b>，同时连续 3 批「两套数并记」，确认新基线后再写死。你提到的「含航行 8.80s 已击穿 9.0、kill-only 4.4s」这两个数在仓库 docs 里检索不到原文，页面不把它们当既有事实，等补进仓库后再回填。</div>
       </article>
 
-      <article class="dec">
-        <div class="dh"><span class="dtag">D4</span><h3>云存档与排行榜：11 项取舍</h3></div>
-        <p class="dq"><b>要定什么：</b>云存档与排行榜的整体路线，以及其中 5 个关键项：<b>主榜口径、是否挂奖励、<code>clientCloud</code> 的作弊风险、单活设备、离线是否允许购买升级</b>。</p>
+      <article class="dec" data-dec="D4">
+        <div class="dh"><span class="dtag">D4</span><h3>云存档与排行榜：11 项取舍</h3><span class="dstat" data-for="D4">未填</span></div>
+        <p class="dq"><b>要定什么：</b>云存档与排行榜的整体路线。11 项逐条列在下面，勾选你同意的项；不同意的那条留空并在补充里写理由。</p>
         <div class="tw"><table>
           <thead><tr><th>#</th><th>问题</th><th>建议默认</th></tr></thead>
           <tbody>
@@ -823,11 +877,29 @@
             <tr><td class="num">6</td><td>是否分 stage / 分端（手机 / PC）</td><td><b>分 stage</b>；上 PC 再分端</td></tr>
             <tr><td class="num">7</td><td>赛季周期与历史榜保留</td><td><b>4 或 8 周</b>；旧 key 只读保留</td></tr>
             <tr><td class="num">8</td><td>双设备冲突：自动保留高进度 / 弹窗让玩家选</td><td><b>自动保留高进度 + 提示 + 备份</b></td></tr>
-            <tr><td class="num">9</td><td><b>离线是否允许购买升级</b></td><td>离线可玩可赚、<b>购买需在线</b>；否则接受 v1 单活设备 + 允许离线购买</td></tr>
+            <tr><td class="num">9</td><td><b>离线是否允许购买升级</b></td><td>离线可玩可赚、<b>购买需在线</b></td></tr>
             <tr><td class="num">10</td><td>首发范围：云存档先行、榜单后置</td><td><b>是</b>；成就另立专项</td></tr>
             <tr><td class="num">11</td><td>谁提供真机测试账号 / 环境，谁执行验证</td><td><b>制作人指定</b></td></tr>
           </tbody>
         </table></div>
+        <p class="dlabel">多选（勾上 = 同意该条的建议默认）</p>
+        <div class="dform">
+          <button type="button" class="dbtn ghost" data-fill="D4" style="margin-bottom:8px">全部采用建议</button>
+          <div class="opts" aria-label="D4 选项">
+            <label class="opt"><input type="checkbox" name="D4" value="云存档首要目标 = 防丢档 + 跨设备（不承诺防作弊）"><span>1. 云存档首要目标 = 防丢档 + 跨设备（不承诺防作弊）</span></label>
+            <label class="opt"><input type="checkbox" name="D4" value="接受 v1 单活设备；冲突保留高进度、低进度做备份"><span>2. 接受 v1 单活设备；冲突保留高进度、低进度做备份</span></label>
+            <label class="opt"><input type="checkbox" name="D4" value="排行榜不挂奖励（挂了必须上服务端）"><span>3. 排行榜不挂奖励（挂了必须上服务端）</span></label>
+            <label class="opt"><input type="checkbox" name="D4" value="主榜用 A：撤离基础货值；Boss 用时作副榜"><span>4. 主榜用 A：撤离基础货值；Boss 用时作副榜</span></label>
+            <label class="opt"><input type="checkbox" name="D4" value="A 榜用基础货值，不含成长加成"><span>5. A 榜用基础货值，不含成长加成</span></label>
+            <label class="opt"><input type="checkbox" name="D4" value="分 stage 出榜；上 PC 后再分端"><span>6. 分 stage 出榜；上 PC 后再分端</span></label>
+            <label class="opt"><input type="checkbox" name="D4" value="赛季 4 或 8 周，旧榜只读保留"><span>7. 赛季 4 或 8 周，旧榜只读保留</span></label>
+            <label class="opt"><input type="checkbox" name="D4" value="双设备冲突自动保留高进度 + 提示 + 备份"><span>8. 双设备冲突自动保留高进度 + 提示 + 备份</span></label>
+            <label class="opt"><input type="checkbox" name="D4" value="离线可玩可赚，购买升级需在线"><span>9. 离线可玩可赚，购买升级需在线</span></label>
+            <label class="opt"><input type="checkbox" name="D4" value="首发云存档先行，榜单后置，成就另立专项"><span>10. 首发云存档先行，榜单后置，成就另立专项</span></label>
+            <label class="opt"><input type="checkbox" name="D4" value="真机测试账号与环境由制作人指定"><span>11. 真机测试账号与环境由制作人指定</span></label>
+          </div>
+          <textarea class="dnote" data-id="D4" rows="2" placeholder="哪几条不同意、为什么（可留空）"></textarea>
+        </div>
         <p class="dlabel">作弊风险与代价</p>
         <ul class="dopt">
           <li><code>clientCloud</code> 是<b>客户端可写、无事务、无冲突合并、无断点续传</b>；榜单只能是「单 key 全服整数榜」，没有好友榜 / 周期参数，也不能单独删别人的成绩。</li>
@@ -837,8 +909,8 @@
         <div class="drec"><b>我的建议：</b>先做 B（平台云存档）：防丢档 + 跨设备为唯一目标，接受 v1 单活设备；榜单只做<b>不挂奖励的娱乐榜</b>，主榜用 A（基础货值）、C 作副榜；离线可玩可赚、购买需在线。竞技榜与成就都后置。</div>
       </article>
 
-      <article class="dec">
-        <div class="dh"><span class="dtag">D5</span><h3>广告激励视频：需要你在平台后台开通 <code>@runtime.ad</code></h3></div>
+      <article class="dec" data-dec="D5">
+        <div class="dh"><span class="dtag">D5</span><h3>广告激励视频：需要你在平台后台开通 <code>@runtime.ad</code></h3><span class="dstat" data-for="D5">未填</span></div>
         <p class="dq"><b>要定什么：</b>是否现在走 <code>get_ad_config</code> 把广告配置写进 <code>.project/settings.json</code> 的 <code>@runtime.ad</code>，以及先接哪个点位、给什么奖励。</p>
         <p class="dlabel">现状与代价</p>
         <ul class="dopt">
@@ -846,9 +918,35 @@
           <li>本项目<b>当前没有 <code>@runtime.ad</code></b>；<code>project.json</code> 里的 <code>app_id / developer_id</code> 只是开通前置条件，不等于已开通。</li>
           <li>未拿到 <code>ad.status == 1</code> 前，按仓库约定<b>不得实现 / 测试广告代码</b>，所以这条线现在阻塞在后台配置，不是代码。</li>
         </ul>
+        <p class="dlabel">选一个（灰字是代价）</p>
+        <div class="dform">
+          <div class="opts" role="radiogroup" aria-label="D5 选项">
+            <label class="opt"><input type="radio" name="D5" value="现在开通 @runtime.ad，只接 1 个点位灰度（回港额外补给 / 双倍结算）"><span>现在开通 <code>@runtime.ad</code>，只接 1 个点位灰度（回港额外补给 / 双倍结算）<br><span class="cost">能真机验证；需要你在平台后台配置，奖励不能碰 471 / 17.4</span></span></label>
+            <label class="opt"><input type="radio" name="D5" value="先只做本地奖励 UI 占位，不调广告 API"><span>先只做本地奖励 UI 占位，不调广告 API<br><span class="cost">不阻塞其他线；无法真机验证，广告仍未上线</span></span></label>
+            <label class="opt"><input type="radio" name="D5" value="广告线整体后置，等版本节奏再开"><span>广告线整体后置，等版本节奏再开<br><span class="cost">零成本；这条线一直空着</span></span></label>
+            <label class="opt"><input type="radio" name="D5" value="其他：我在补充里写点位与奖励"><span>其他：我在补充里写点位与奖励<br><span class="cost">需要写清点位、奖励内容与每日频次，否则无法实现</span></span></label>
+          </div>
+          <textarea class="dnote" data-id="D5" rows="2" placeholder="补充，例如「先接结算页双倍，每天 3 次」（可留空）"></textarea>
+        </div>
         <div class="drec"><b>我的建议：</b>先在平台后台开通配置，只接 <b>1 个点位</b>灰度（回港后的「额外补给 / 双倍结算」类最稳），奖励不碰 471 / 17.4 经济红线；拿到 <code>ad.status == 1</code> 后再写真机验证。开通动作需要你或制作人在后台执行，我这边没有 <code>get_ad_config</code> 工具。</div>
       </article>
 
+    </div>
+    <div class="dactions">
+      <button type="button" class="dbtn" id="dmake">生成确认单</button>
+      <button type="button" class="dbtn ghost" id="dpartial" style="display:none">只生成已填部分</button>
+      <button type="button" class="dbtn ghost" id="dreset">清空重填</button>
+    </div>
+    <div class="dmiss" id="dmiss" role="status"></div>
+    <div class="dout" id="dout">
+      <textarea id="dtext" readonly aria-label="确认单文本"></textarea>
+      <div class="dactions">
+        <button type="button" class="dbtn" id="dcopy">一键复制</button>
+        <button type="button" class="dbtn ghost" id="dtxt">导出 .txt</button>
+        <button type="button" class="dbtn ghost" id="djson">导出 .json</button>
+      </div>
+      <p class="dsend">这段请发给我 —— 点「一键复制」后粘贴到聊天里。页面不会自动送达，也不会通知我。</p>
+      <p class="dlimit" id="dmsg" aria-live="polite"></p>
     </div>
     <p class="srcnote">出处：D1 / D2 来自 <code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §2–§4 与 §1.7 冲突表；D3 见 <code>docs/balance.md</code> L123 / L289 / L290、<code>docs/issues.md</code> I-05（8.80s 与 4.4s 在本仓库检索不到原文）；D4 见 <code>docs/spec/20261114_云存档与排行榜_调研与方案.md</code> §2.1 L33–54、§5 L317–414、§7 L504–547、§8 L548–562；D5 见 <code>docs/spec/20261114_激励视频广告接入_调研与点位方案.md</code> L9–12 / L35–50 与 <code>20261114_激励视频广告接入_任务清单.md</code> L10–13。</p>
   </section>
@@ -1296,6 +1394,227 @@
 
   buildCabinet();
   render();
+})();
+</script>
+<script>
+/* 待确认确认单：本机填写 + 本机生成文本，无后端 */
+(function () {
+  var KEY = 'ss_codex_decisions_v1';
+  var IDS = ['D1', 'D2', 'D3', 'D4', 'D5'];
+  var TITLES = {
+    D1: '第二章走 B1 还是 B2；旧 spec 的「不新增贴图」要不要作废',
+    D2: '经济是否接受「整表重定价，但期望守 471」',
+    D3: 'TTK 验收线：继续含航行，还是改 kill-only 重定基线',
+    D4: '云存档与排行榜：11 项取舍',
+    D5: '广告激励视频：需要你在平台后台开通 @runtime.ad'
+  };
+  var state = {};
+  IDS.forEach(function (id) { state[id] = { sel: [], note: '' }; });
+
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $all(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (!raw) return;
+      var o = JSON.parse(raw);
+      IDS.forEach(function (id) {
+        if (!o[id]) return;
+        state[id].sel = Array.isArray(o[id].sel) ? o[id].sel.filter(function (x) { return typeof x === 'string'; }) : [];
+        state[id].note = typeof o[id].note === 'string' ? o[id].note : '';
+      });
+    } catch (e) {}
+  }
+  function isFilled(id) { return state[id].sel.length > 0 || state[id].note.trim() !== ''; }
+
+  function applyUI() {
+    IDS.forEach(function (id) {
+      var on = isFilled(id);
+      var stat = $('.dstat[data-for="' + id + '"]');
+      var card = $('.dec[data-dec="' + id + '"]');
+      if (stat) { stat.textContent = on ? '已填' : '未填'; stat.classList.toggle('on', on); }
+      if (card) card.classList.toggle('done', on);
+      $all('input[name="' + id + '"]').forEach(function (inp) {
+        var lab = inp.closest('.opt');
+        if (lab) lab.classList.toggle('sel', inp.checked);
+      });
+    });
+    var n = IDS.filter(isFilled).length;
+    var pt = document.getElementById('dprogText');
+    if (pt) pt.textContent = n + ' / ' + IDS.length + ' 已填';
+    var bar = document.getElementById('dbar');
+    if (bar) bar.style.width = (n / IDS.length * 100) + '%';
+    var nav = document.getElementById('dnav');
+    if (nav) nav.textContent = n + '/' + IDS.length;
+  }
+
+  function restoreUI() {
+    IDS.forEach(function (id) {
+      var sel = state[id].sel;
+      $all('input[name="' + id + '"]').forEach(function (inp) { inp.checked = sel.indexOf(inp.value) > -1; });
+      var ta = $('.dnote[data-id="' + id + '"]');
+      if (ta) ta.value = state[id].note;
+    });
+  }
+
+  function stale() {
+    var out = document.getElementById('dout');
+    if (out && out.classList.contains('open')) {
+      var m = document.getElementById('dmsg');
+      if (m) m.textContent = '表单已改动，请重新点「生成确认单」。';
+    }
+    var miss = document.getElementById('dmiss');
+    if (miss) miss.style.display = 'none';
+  }
+
+  document.addEventListener('change', function (e) {
+    var inp = e.target && e.target.closest ? e.target.closest('input[type=radio],input[type=checkbox]') : null;
+    if (!inp || !state[inp.name]) return;
+    var id = inp.name;
+    if (inp.type === 'radio') {
+      state[id].sel = [inp.value];
+    } else {
+      state[id].sel = $all('input[name="' + id + '"]:checked').map(function (x) { return x.value; });
+    }
+    save(); applyUI(); stale();
+  });
+
+  document.addEventListener('input', function (e) {
+    var ta = e.target && e.target.closest ? e.target.closest('.dnote') : null;
+    if (!ta || !state[ta.dataset.id]) return;
+    state[ta.dataset.id].note = ta.value;
+    save(); applyUI(); stale();
+  });
+
+  $all('[data-fill]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-fill');
+      $all('input[name="' + id + '"]').forEach(function (inp) { inp.checked = true; });
+      state[id].sel = $all('input[name="' + id + '"]:checked').map(function (x) { return x.value; });
+      save(); applyUI(); stale();
+    });
+  });
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function stamp() {
+    var d = new Date();
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  }
+
+  function build(onlyFilled) {
+    var L = [];
+    var n = IDS.filter(isFilled).length;
+    L.push('【航海幸存者 · 待确认确认单】');
+    L.push('时间：' + stamp() + '　已填 ' + n + '/' + IDS.length);
+    L.push('');
+    IDS.forEach(function (id) {
+      var ok = isFilled(id);
+      if (onlyFilled && !ok) return;
+      L.push(id + '　' + TITLES[id]);
+      if (!ok) { L.push('  【未填】'); L.push(''); return; }
+      if (state[id].sel.length === 1) {
+        L.push('  选择：' + state[id].sel[0]);
+      } else if (state[id].sel.length > 1) {
+        L.push('  选择（多选）：' + state[id].sel.map(function (s, i) { return (i + 1) + ') ' + s; }).join('；'));
+      } else {
+        L.push('  选择：（未勾选，见补充）');
+      }
+      if (state[id].note.trim()) L.push('  补充：' + state[id].note.trim());
+      L.push('');
+    });
+    L.push('—— 由静态页面生成，请整段发我。');
+    return L.join('\n');
+  }
+
+  function render(only) {
+    var missBox = document.getElementById('dmiss');
+    var partial = document.getElementById('dpartial');
+    var out = document.getElementById('dout');
+    var filled = IDS.filter(isFilled);
+    var missing = IDS.filter(function (id) { return !isFilled(id); });
+
+    if (!only && missing.length) {
+      missBox.style.display = 'block';
+      missBox.innerHTML = '还差 <b>' + missing.length + '</b> 条未填：<b>' + missing.join('、') + '</b>。可以回去补，也可以只生成已填部分。';
+      if (partial) partial.style.display = 'inline-block';
+      out.classList.remove('open');
+      return;
+    }
+    if (only && !filled.length) {
+      missBox.style.display = 'block';
+      missBox.innerHTML = '一条都还没填。先勾选项或写补充。';
+      return;
+    }
+    missBox.style.display = 'none';
+    if (partial) partial.style.display = 'none';
+    document.getElementById('dtext').value = build(only);
+    out.classList.add('open');
+    document.getElementById('dmsg').textContent =
+      '已生成 ' + (only ? filled.length + ' 条（仅已填部分）' : IDS.length + ' 条') + '，时间 ' + stamp() + '。点「一键复制」后发我。';
+    out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('dmake').addEventListener('click', function () { render(false); });
+  document.getElementById('dpartial').addEventListener('click', function () { render(true); });
+
+  document.getElementById('dcopy').addEventListener('click', function () {
+    var ta = document.getElementById('dtext');
+    var msg = document.getElementById('dmsg');
+    function ok() { msg.textContent = '已复制到剪贴板。请粘贴到聊天里发我。'; }
+    function fallback() {
+      ta.focus(); ta.select();
+      try { document.execCommand('copy'); ok(); }
+      catch (e) { msg.textContent = '复制失败：请长按文本框全选后手动复制。'; }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(ok).catch(fallback);
+    } else { fallback(); }
+  });
+
+  function dl(name, text, type) {
+    var b = new Blob([text], { type: type });
+    var u = URL.createObjectURL(b);
+    var a = document.createElement('a');
+    a.href = u; a.download = name;
+    document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(u); a.remove(); }, 800);
+  }
+  function fname(ext) {
+    var d = new Date();
+    return 'seafarer-codex-' + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + '-' + pad(d.getHours()) + pad(d.getMinutes()) + '.' + ext;
+  }
+
+  document.getElementById('dtxt').addEventListener('click', function () {
+    var v = document.getElementById('dtext').value;
+    if (!v) { render(false); v = document.getElementById('dtext').value; }
+    dl(fname('txt'), v, 'text/plain;charset=utf-8');
+  });
+
+  document.getElementById('djson').addEventListener('click', function () {
+    var data = {
+      form: 'seafarer-survivors-codex',
+      version: 1,
+      generated_at: stamp(),
+      filled: IDS.filter(isFilled).length,
+      total: IDS.length,
+      items: IDS.map(function (id) {
+        return { id: id, title: TITLES[id], selected: state[id].sel, note: state[id].note, filled: isFilled(id) };
+      })
+    };
+    dl(fname('json'), JSON.stringify(data, null, 2), 'application/json;charset=utf-8');
+  });
+
+  document.getElementById('dreset').addEventListener('click', function () {
+    if (!window.confirm('清空这 5 项的选择和补充？')) return;
+    IDS.forEach(function (id) { state[id] = { sel: [], note: '' }; });
+    save(); restoreUI(); applyUI();
+    document.getElementById('dout').classList.remove('open');
+    document.getElementById('dmiss').style.display = 'none';
+    document.getElementById('dpartial').style.display = 'none';
+  });
+
+  load(); restoreUI(); applyUI();
 })();
 </script>
 </body>
