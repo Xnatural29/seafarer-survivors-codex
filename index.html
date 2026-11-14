@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05171f">
+<title>航海幸存者 · 设定总览</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2305171f'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%234fc4b8' stroke-width='2' stroke-dasharray='4 3'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23e8c07a'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --deep:#05171f;
+    --deep2:#082530;
+    --ink:#f2ead9;
+    --muted:#9fb4ba;
+    --teal:#4fc4b8;
+    --orange:#e8794a;
+    --amber:#e8c07a;
+    --ice:#8fc0e0;
+    --line:rgba(242,234,217,.13);
+    --r1:#8fb8c9;
+    --r2:#5fd0c8;
+    --r3:#e0533f;
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    padding:0 14px 56px;
+    color:var(--ink);
+    background-color:var(--deep);
+    background-image:
+      radial-gradient(1200px 700px at 12% -8%, rgba(35,110,116,.30), transparent 60%),
+      radial-gradient(900px 620px at 92% 4%, rgba(20,80,96,.28), transparent 62%),
+      radial-gradient(1000px 800px at 50% 108%, rgba(8,45,58,.55), transparent 60%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.55'/></svg>");
+    background-attachment:fixed, fixed, fixed, fixed;
+    background-blend-mode:normal,normal,normal,overlay;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Segoe UI",sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+
+  /* ---------- hero ---------- */
+  .hero{padding:34px 2px 14px}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{margin:0;font-size:clamp(25px,5.6vw,40px);line-height:1.18;letter-spacing:.01em}
+  h1 em{font-style:normal;color:var(--amber)}
+  .sub{margin:10px 0 0;color:var(--muted);font-size:clamp(13px,2.6vw,15px);max-width:66ch}
+  .hero-meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:4px 10px;border-radius:999px;
+    border:1px solid rgba(79,196,184,.30);background:rgba(79,196,184,.08);color:#cfe9e5}
+  .pill.warm{border-color:rgba(232,192,122,.35);background:rgba(232,192,122,.08);color:#f0d9b2}
+  .pill.red{border-color:rgba(224,83,63,.38);background:rgba(224,83,63,.10);color:#f4b6a9}
+
+  /* ---------- panels ---------- */
+  section{margin-top:22px}
+  .panel{
+    background:linear-gradient(165deg, rgba(20,58,69,.62), rgba(8,28,36,.82));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 16px 18px;
+    box-shadow:0 14px 34px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.045);
+  }
+  .panel h2{margin:0 0 4px;font-size:clamp(17px,3.2vw,20px);letter-spacing:.02em}
+  .panel .hint{margin:0 0 14px;color:var(--muted);font-size:12.5px}
+
+  /* ---------- stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .stat{
+    background:linear-gradient(160deg, rgba(30,80,92,.55), rgba(9,33,42,.75));
+    border:1px solid rgba(79,196,184,.18);
+    border-radius:12px;padding:11px 13px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .stat .n{font-size:26px;line-height:1.1;font-weight:700;letter-spacing:.01em}
+  .stat .n small{font-size:12px;font-weight:500;color:var(--muted);margin-left:3px}
+  .stat .lbl{margin-top:3px;font-size:12px;color:var(--muted)}
+  .stat.teal .n{color:var(--teal)}
+  .stat.amber .n{color:var(--amber)}
+  .stat.orange .n{color:var(--orange)}
+  .stat.red .n{color:#f08b74}
+
+  /* ---------- callout ---------- */
+  .callout{
+    margin:14px 0 0;padding:11px 13px;border-radius:10px;
+    border-left:3px solid rgba(232,121,74,.8);
+    background:rgba(232,121,74,.08);
+    font-size:13.5px;color:#f3d9ca;
+  }
+  .callout b{color:#ffd9c6}
+
+  /* ---------- cabinet ---------- */
+  .cabinet{display:grid;gap:9px;margin-top:4px}
+  .cab-row{display:grid;grid-template-columns:88px 1fr;gap:10px;align-items:stretch}
+  .cab-meta{display:flex;flex-direction:column;justify-content:center;gap:1px;padding:2px 0}
+  .cab-meta b{font-size:12.5px;letter-spacing:.04em}
+  .cab-meta span{font-size:10.5px;color:var(--muted)}
+  .cab-cells{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+  .cab-cell{
+    position:relative;min-height:66px;border-radius:10px;padding:7px 6px 6px;
+    border:1px solid rgba(242,234,217,.12);
+    background:linear-gradient(160deg, rgba(255,255,255,.045), rgba(255,255,255,.012));
+    display:flex;flex-direction:column;justify-content:space-between;gap:4px;
+  }
+  .cab-cell .n{font-size:9.5px;color:var(--muted);letter-spacing:.04em}
+  .cab-cell .nm{font-size:11.5px;font-weight:600;line-height:1.2;word-break:keep-all}
+  .cab-cell .lv{position:absolute;right:5px;top:4px;font-size:9px;color:var(--muted);opacity:.8}
+  .cab-cell.locked{border-style:dashed;opacity:.42;align-items:center;justify-content:center;text-align:center}
+  .cab-cell.locked .nm{font-size:10.5px;font-weight:500}
+  .caplegend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:11px;font-size:11.5px;color:var(--muted)}
+  .caplegend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:baseline}
+
+  /* ---------- two paths ---------- */
+  .paths{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+  .path{border:1px solid var(--line);border-radius:12px;padding:12px 13px;background:rgba(4,20,26,.45)}
+  .path h3{margin:0 0 6px;font-size:14px;display:flex;align-items:center;gap:7px}
+  .path h3 i{width:8px;height:8px;border-radius:2px;display:inline-block}
+  .path p{margin:0;font-size:12.5px;color:#c9d7d7}
+  .path .tagline{display:inline-block;margin-top:8px;font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+  .rules{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:7px}
+  .rules li{position:relative;padding-left:16px;font-size:12.5px;color:#d7e2e2}
+  .rules li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:2px;background:var(--teal);opacity:.8}
+  .rules b{color:var(--ink);font-weight:600}
+  .rules .warn::before{background:var(--orange)}
+
+  /* ---------- toolbar ---------- */
+  .toolbar{
+    position:sticky;top:0;z-index:30;
+    margin:22px -14px 12px;padding:9px 14px 10px;
+    background:rgba(5,23,31,.92);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-top:1px solid rgba(79,196,184,.14);
+    border-bottom:1px solid rgba(79,196,184,.14);
+  }
+  .toolbar-inner{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:7px}
+  .filter-row{display:flex;align-items:center;gap:8px;min-width:0}
+  .flabel{flex:0 0 auto;font-size:10.5px;letter-spacing:.12em;color:var(--muted)}
+  .filters{display:flex;gap:7px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;min-width:0}
+  .filters::-webkit-scrollbar{display:none}
+  .chip{
+    flex:0 0 auto;appearance:none;cursor:pointer;
+    font:inherit;font-size:12.5px;padding:6px 12px;border-radius:999px;
+    color:#cfe0e0;background:rgba(255,255,255,.03);
+    border:1px solid rgba(242,234,217,.16);
+    transition:background .15s,border-color .15s,color .15s;
+    min-height:34px;
+  }
+  .chip:hover{border-color:rgba(79,196,184,.5)}
+  .chip[aria-pressed="true"]{background:rgba(79,196,184,.16);border-color:rgba(79,196,184,.75);color:#eafffb}
+  .chip .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  .toolbar-foot{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:11.5px;color:var(--muted)}
+  .toolbar-foot b{color:#dfe9e7;font-weight:600}
+
+  /* ---------- section head ---------- */
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:24px 2px 10px}
+  .sec-head h2{margin:0;font-size:clamp(18px,3.6vw,23px);letter-spacing:.02em}
+  .sec-head p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+  .sec-num{flex:0 0 auto;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+
+  /* ---------- cards ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:12px}
+  .card{
+    position:relative;overflow:hidden;cursor:pointer;
+    background:linear-gradient(168deg, rgba(24,66,78,.90), rgba(8,28,36,.95));
+    border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 26px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.05);
+    display:flex;flex-direction:column;
+    outline:none;
+  }
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,var(--teal));opacity:.9;z-index:2}
+  .card:focus-visible{box-shadow:0 0 0 3px rgba(79,196,184,.35),0 12px 26px rgba(0,0,0,.30)}
+  .art{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#0a2029;border-bottom:1px solid rgba(242,234,217,.07)}
+  .art::after{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.13;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><rect width='120' height='120' filter='url(%23n)'/></svg>");
+  }
+  .art svg{display:block;width:100%;height:100%}
+  .body{padding:11px 13px 12px;display:flex;flex-direction:column;gap:5px;flex:1}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .badge{font-size:10.5px;padding:2px 8px;border-radius:6px;border:1px solid;letter-spacing:.04em;white-space:nowrap}
+  .slot{font-size:10.5px;color:#6f8b91;letter-spacing:.04em}
+  .card h3{margin:1px 0 0;font-size:15.5px;line-height:1.35;letter-spacing:.01em}
+  .sub{font-size:12px;color:var(--muted)}
+  .facts{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:2px}
+  .fact{font-size:10.5px;padding:2px 7px;border-radius:999px;border:1px solid rgba(242,234,217,.12);color:#c3d2d3;background:rgba(255,255,255,.025)}
+  .fact.no{color:#f0a08b;border-color:rgba(232,121,74,.35);background:rgba(232,121,74,.08)}
+  .src{margin-top:auto;padding-top:4px;font-size:11px;color:#8fa8ad;line-height:1.4}
+  .big{font-size:23px;font-weight:700;line-height:1.15;color:var(--accent,var(--ink));letter-spacing:.01em}
+  .big small{font-size:11px;font-weight:500;color:var(--muted);margin-left:3px;letter-spacing:0}
+
+  .cargo-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .cargo-card .art{aspect-ratio:16/9}
+  .cargo-card .art svg{object-fit:cover}
+  .cargo-card .body{padding-top:12px}
+
+  .empty{display:none;margin:18px 2px;padding:22px;border:1px dashed rgba(242,234,217,.18);border-radius:12px;text-align:center;color:var(--muted);font-size:13px}
+
+  /* ---------- footer ---------- */
+  footer{margin-top:28px;padding-top:15px;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px}
+  footer h2{font-size:13px;color:var(--ink);margin:0 0 8px;letter-spacing:.04em}
+  footer p{margin:4px 0}
+  footer code{color:#a9c4c6;word-break:break-all}
+  footer ul{margin:4px 0 0;padding-left:16px}
+  footer li{margin:3px 0}
+  .warnbar{margin-top:10px;padding:8px 10px;border-radius:8px;background:rgba(232,192,122,.07);border-left:2px solid rgba(232,192,122,.6);color:#e7cfa8;font-size:11.5px}
+
+  /* ---------- modal ---------- */
+  .modal{
+    position:fixed;inset:0;z-index:80;display:none;
+    align-items:flex-start;justify-content:center;
+    padding:16px;overflow-y:auto;
+    background:rgba(2,12,17,.80);
+    backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+  }
+  .modal.open{display:flex}
+  .modal-card{
+    position:relative;width:min(720px,100%);margin:18px 0 48px;
+    background:linear-gradient(165deg,#12343f,#071e26);
+    border:1px solid var(--line);border-radius:18px;padding:18px;
+    box-shadow:0 30px 80px rgba(0,0,0,.58), inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .modal-close{
+    position:absolute;right:10px;top:10px;z-index:2;
+    width:36px;height:36px;border-radius:10px;cursor:pointer;
+    border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);
+    font-size:17px;line-height:1;display:flex;align-items:center;justify-content:center;
+  }
+  .modal-close:hover{border-color:rgba(79,196,184,.6)}
+  .dhead{display:flex;gap:14px;align-items:center;padding-right:38px}
+  .dart{width:96px;height:96px;flex:0 0 auto;border-radius:14px;overflow:hidden;border:1px solid rgba(242,234,217,.12);background:#0a2029;position:relative}
+  .dart svg{display:block;width:100%;height:100%}
+  .dhead h2{margin:4px 0 2px;font-size:22px;line-height:1.25}
+  .dhead .dsub{margin:0;font-size:12.5px;color:var(--muted)}
+  .dtable{margin-top:15px;border-top:1px solid var(--line)}
+  .drow{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:8px 2px;border-bottom:1px solid rgba(242,234,217,.07);font-size:13px}
+  .drow .k{color:var(--muted);font-size:12px}
+  .drow .v{color:#e6efec}
+  .drow .v b{color:var(--amber);font-weight:600}
+  .dnote{margin:12px 0 0;padding:9px 11px;border-radius:0 8px 8px 0;border-left:2px solid rgba(232,121,74,.6);background:rgba(232,121,74,.07);font-size:12px;color:#e8b78f;line-height:1.55}
+  .dsrc{margin:12px 0 0;font-size:10.5px;color:#6f8b91;line-height:1.6;word-break:break-all}
+
+  /* ---------- top nav ---------- */
+  .topnav{
+    position:sticky;top:0;z-index:60;margin:0 -14px 6px;padding:7px 14px 8px;
+    background:rgba(5,23,31,.95);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(79,196,184,.18);
+  }
+  .topnav-inner{max-width:1180px;margin:0 auto;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+  .topnav-inner::-webkit-scrollbar{display:none}
+  .topnav a{
+    flex:0 0 auto;display:inline-flex;align-items:center;min-height:32px;padding:5px 12px;
+    border-radius:999px;font-size:12.5px;color:#bcd2d4;text-decoration:none;
+    border:1px solid rgba(242,234,217,.14);background:rgba(255,255,255,.03);
+  }
+  .topnav a:hover{border-color:rgba(79,196,184,.7);background:rgba(79,196,184,.14);color:#eafffb}
+
+  section[id]{scroll-margin-top:58px}
+  .toolbar{top:48px}
+
+  .sh{margin:18px 0 2px;font-size:13.5px;letter-spacing:.04em;color:#dfe9e7}
+  .tw{overflow-x:auto;margin-top:8px;border:1px solid var(--line);border-radius:12px;background:rgba(4,20,26,.42)}
+  .tw table{border-collapse:collapse;width:100%;min-width:540px;font-size:12.5px}
+  .tw th,.tw td{padding:8px 10px;text-align:left;border-bottom:1px solid rgba(242,234,217,.07);vertical-align:top}
+  .tw th{font-size:11px;letter-spacing:.05em;color:var(--muted);font-weight:600;background:rgba(79,196,184,.07);white-space:nowrap}
+  .tw tr:last-child td{border-bottom:0}
+  .tw td b{color:var(--amber);font-weight:600}
+  .tw .dim{color:var(--muted)}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .formula{
+    margin-top:8px;padding:9px 11px;border-radius:9px;border:1px solid var(--line);background:rgba(0,0,0,.28);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12px;color:#cfe4e2;overflow-x:auto;white-space:nowrap;
+  }
+  .srcnote{margin:12px 0 0;font-size:10.5px;color:#7d9499;line-height:1.65}
+  .srcnote code{color:#9ab3b6;word-break:break-all}
+
+  /* ---------- mages ---------- */
+  .mages{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:12px;margin-top:6px}
+  .mage{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:14px;padding:14px 14px 13px;
+    background:linear-gradient(170deg,rgba(24,66,78,.78),rgba(8,28,36,.92))}
+  .mage::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--mc)}
+  .mh{display:flex;align-items:center;gap:10px}
+  .swatch{width:34px;height:34px;border-radius:10px;background:var(--mc);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);flex:0 0 auto}
+  .mh h3{margin:0;font-size:17px}
+  .role{font-size:11px;color:var(--muted);letter-spacing:.03em}
+  .mage dl{margin:11px 0 0;display:grid;grid-template-columns:58px 1fr;gap:6px 9px;font-size:12.5px}
+  .mage dt{color:var(--muted);font-size:11.5px;white-space:nowrap}
+  .mage dd{margin:0;color:#dbe6e5}
+  .mage dd b{color:var(--amber)}
+  .mfoot{margin-top:10px;padding-top:9px;border-top:1px solid rgba(242,234,217,.08);font-size:11px;color:#8fa8ad;line-height:1.55}
+
+  /* ---------- talent tree ---------- */
+  .tree{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:9px;margin-top:9px}
+  .node{border:1px solid var(--line);border-radius:11px;padding:10px 11px;background:rgba(255,255,255,.026)}
+  .node .tier{font-size:9.5px;letter-spacing:.1em;color:#7d9499}
+  .node .tn{font-size:13px;font-weight:600;margin-top:1px}
+  .node .tv{font-size:19px;color:var(--amber);line-height:1.2;margin-top:2px}
+  .node .td{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.45}
+
+  @media (max-width:640px){
+    .paths{grid-template-columns:1fr}
+    .cab-row{grid-template-columns:1fr;gap:5px}
+    .cab-meta{flex-direction:row;align-items:baseline;gap:7px;padding:0}
+    .cab-cell{min-height:62px;padding:6px 5px}
+    .cab-cell .nm{font-size:10.5px}
+  }
+  @media (max-width:520px){
+    body{padding:0 11px 44px}
+    .toolbar{margin:18px -11px 10px;padding:8px 11px 9px}
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+    .card h3{font-size:13.5px}
+    .body{padding:9px 10px 10px;gap:4px}
+    .sub{font-size:11px}
+    .fact{font-size:9.5px;padding:2px 5px}
+    .src{font-size:10px}
+    .big{font-size:19px}
+    .stat .n{font-size:23px}
+    .panel{padding:14px 13px 15px}
+    .cargo-grid{grid-template-columns:1fr}
+    .cargo-card .art{aspect-ratio:16/8}
+    .dhead{gap:11px}
+    .dart{width:76px;height:76px}
+    .dhead h2{font-size:18px}
+    .drow{grid-template-columns:78px 1fr;font-size:12.5px}
+    .modal{padding:9px}
+    .modal-card{padding:15px 13px;border-radius:15px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .card{transition:transform .16s ease, border-color .16s ease}
+    .card:hover{transform:translateY(-2px);border-color:rgba(79,196,184,.38)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="kicker">Seafarer Survivors · Design Codex</p>
+    <h1>航海幸存者 <em>设定总览</em></h1>
+    <p class="sub">经济、柜型、展厅、法师、成长、章节与验收线，全部从仓库里的 spec、docs 与 <span class="mono">scripts/data/*.lua</span> 读取。口径冲突逐条标注；仓库里找不到出处的留进「留空清单」，不编。表格在手机上可左右滑动。</p>
+    <div class="hero-meta">
+      <span class="pill">1 份 = 471 币</span>
+      <span class="pill">周期 17.4 局</span>
+      <span class="pill warm">14 件藏品</span>
+      <span class="pill red">普通货只能卖</span>
+    </div>
+    <div class="callout"><b>一句话取舍：普通货只能卖，藏品才能进展厅。</b> 货舱里再贵的 2×3 也只是结算成海币；只有 14 件藏品会被登记进博物馆。</div>
+  </header>
+
+  <nav class="topnav" aria-label="分区跳转">
+    <div class="topnav-inner">
+      <a href="#econ">经济口径</a>
+      <a href="#chests">宝藏与柜型</a>
+      <a href="#museum">展厅</a>
+      <a href="#mages">法师</a>
+      <a href="#growth">局内成长</a>
+      <a href="#chapters">章节</a>
+      <a href="#accept">验收线</a>
+      <a href="#codex">图鉴</a>
+      <a href="#gaps">留空清单</a>
+    </div>
+  </nav>
+
+  <section class="panel" id="econ" aria-labelledby="econ-title">
+    <h2 id="econ-title">经济口径</h2>
+    <p class="hint">1 份 = 一局成功撤离的毛收入，2026-11-13 定为 <b>471 币</b>（<span class="mono">loot.lua:182-189</span>）。500 与 966 都不再作分母。</p>
+    <div class="stats">
+      <div class="stat teal"><div class="n">471<small>币</small></div><div class="lbl">1 份 = 一局均值</div></div>
+      <div class="stat amber"><div class="n">17.4<small>局</small></div><div class="lbl">满池周期（由残响反推）</div></div>
+      <div class="stat"><div class="n">15.90<small>份</small></div><div class="lbl">金币池 = 7,489 币</div></div>
+      <div class="stat orange"><div class="n">1.5<small>份</small></div><div class="lbl">金币线对残响的余量</div></div>
+    </div>
+
+    <h3 class="sh">三条线的瓶颈顺序</h3>
+    <div class="tw"><table>
+      <thead><tr><th>线</th><th>要买什么</th><th>需求</th><th>供给</th><th>折合</th><th>位置</th></tr></thead>
+      <tbody>
+        <tr><td>金币</td><td>船体 8.40 + 港口 7.50</td><td>15.90 份 = 7,489 币</td><td>≈1 份/局</td><td class="num">15.9 局</td><td>最松</td></tr>
+        <tr><td>渊盐</td><td>法师招募 + 通用层</td><td>71 枚</td><td>4.4 枚/局</td><td class="num">16.1 局</td><td>居中</td></tr>
+        <tr><td>残响</td><td>三系深层天赋</td><td>27 枚</td><td>1.55 枚/局</td><td class="num">17.4 局</td><td><b>唯一瓶颈</b></td></tr>
+      </tbody>
+    </table></div>
+    <p class="hint" style="margin-top:8px">从紧到松：<b>残响 17.4 &gt; 渊盐 16.1 &gt; 金币 15.9</b>。三条线相差不到 1.5 局，属于「基本齐平、残响略紧」。</p>
+
+    <h3 class="sh">1.5 份余量是怎么来的</h3>
+    <div class="formula">周期 = 27 枚残响 ÷ 1.55 枚/局 = 17.42 → 17.4 局</div>
+    <ul class="rules">
+      <li>17.4 不是拍的，是残响供给算出来的；所以残响是唯一瓶颈，金币不是。</li>
+      <li>金币池只要 <b>15.90 份</b>，<b>17.4 − 15.90 = 1.5</b>，这 1.5 份就是金币线的余量。</li>
+      <li>余量用来「防反超」：补给从金币里扣，扣太多金币会先见底。<span class="mono">1 − s ≥ 15.90 ÷ 17.4 = 0.914</span> → <b>s ≤ 0.086 份/局</b>，取 8%，留 0.6% 缓冲。</li>
+      <li>反解校验：<span class="mono">15.90 ÷ (1 − 0.086) = 17.4</span>，刚好追平残响；一旦超过 0.086，周期被拉到 31.8 局，金币变成唯一瓶颈。</li>
+      <li>每局买顶档深海整备（38 币）后，金币线降到 <b>15.1 份</b>，与残响差 2.3 局，余量反而变宽。</li>
+    </ul>
+    <div class="warnbar">三个历史数字不能混用：<b>8,400 币</b>与<b>16.8 局</b>已作废；<b>966</b> 只是满仓上限锚；<b>3,660 币</b>是现行代码全满价（7.77 份），不是总池。总池只有 <b>15.90 份</b>。</div>
+    <p class="srcnote">出处：<code>docs/spec/20261112_资源与船体部件化_规划.md</code> L16（1 份 = 471）、L250（s ≤ 0.086 的反解）、L274–280（三档补给情景与结论）、L292、L314–320（三线表与瓶颈顺序）、L336（余量 1.5 局）、L345–347（历史值作废）；<code>docs/spec/20261113_单局金币产出核算.md</code> L296–307；<code>docs/decisions.md</code> L28。</p>
+  </section>
+
+  <section class="panel" id="chests" aria-labelledby="chests-title">
+    <h2 id="chests-title">宝藏与柜型</h2>
+    <p class="hint">箱型只由 <span class="mono">poi.def.id</span> 区分；「档」是岛簇 <span class="mono">poi.tier</span>（1/2/3），不是箱型。每柜保底 1 件通货，藏品只从「附加位」出。</p>
+
+    <h3 class="sh">五种柜</h3>
+    <div class="tw"><table>
+      <thead><tr><th>柜型</th><th>占比</th><th>读条</th><th>通货件数</th><th>附加位</th><th>稀有度权重<br>常 / 少 / 孤</th><th>特有掉落</th></tr></thead>
+      <tbody>
+        <tr><td>补给柜</td><td class="num">32%</td><td class="num">2.5s</td><td class="num">1.2</td><td class="num">0.40</td><td class="num">85 / 14 / 1</td><td class="dim">补给为主</td></tr>
+        <tr><td>宝藏柜</td><td class="num">38%</td><td class="num">4.0s</td><td class="num">1.8</td><td class="num">0.35</td><td class="num">62 / 34 / 4</td><td class="dim">主力通货与货样</td></tr>
+        <tr><td>巢穴柜</td><td class="num">24%</td><td class="num">5.0s</td><td class="num">2.5</td><td class="num">0.50</td><td class="num">48 / 43 / 9</td><td>渊盐 0.4 枚/箱</td></tr>
+        <tr><td>沉船柜</td><td class="num">6%</td><td class="num">3.0s</td><td class="num">1.0</td><td class="num">0.15</td><td class="num">90 / 9 / 1</td><td>渊盐 0.05 枚/箱</td></tr>
+        <tr><td>Boss / 深海核心</td><td>必开</td><td class="num">3.0s</td><td class="num">3.0</td><td class="num">1.00</td><td class="num">20 / 55 / 25</td><td>渊盐 2.0 + 残响</td></tr>
+      </tbody>
+    </table></div>
+    <p class="hint" style="margin-top:8px">按 6.8 柜/局加权：通货 ≈ 11.8 件，附加位 ≈ 2.6 件，柜内渊盐 ≈ 0.8 枚。附加位出的是藏品；通货永远是货值件，只算海币。</p>
+
+    <h3 class="sh">死亡 / 超时 / 撤离</h3>
+    <div class="tw"><table>
+      <thead><tr><th>物品</th><th>撤离或击败 Boss</th><th>死亡</th><th>超时</th></tr></thead>
+      <tbody>
+        <tr><td>通货（货值件）</td><td>100% 折币</td><td>返还 20%，封顶最贵单件</td><td>返还 10%，封顶最贵单件</td></tr>
+        <tr><td>藏品 · 货样 / 碎片</td><td>登记</td><td>丢失</td><td>丢失</td></tr>
+        <tr><td>藏品 · 圣物</td><td>保留</td><td>丢失</td><td>丢失</td></tr>
+        <tr><td>渊盐 / 残响</td><td>入账</td><td>全失</td><td>全失</td></tr>
+        <tr><td>补给 / 图纸</td><td>已用即消耗</td><td>丢失</td><td>丢失</td></tr>
+      </tbody>
+    </table></div>
+    <p class="srcnote">设计稿里还有一行「藏品 · 生物：击杀即登记、死亡保留」，但本期明确不做生物类（藏品全部来自柜内），所以这里没有这一行。</p>
+
+    <h3 class="sh">两种宝物，两条去向</h3>
+    <div class="paths">
+      <div class="path">
+        <h3><i style="background:var(--r2)"></i>藏品 · 14 件</h3>
+        <p>开柜时走「藏品附加位」，拾取后不进货舱。撤离或击败 Boss 才登记；死亡 / 超时丢失。</p>
+        <span class="tagline">去向：登记簿 → 陈列柜</span>
+      </div>
+      <div class="path">
+        <h3><i style="background:var(--orange)"></i>货值件 · 3 档</h3>
+        <p>进的是货舱，占的是货舱格。撤离结算时按件折币；死亡只返还 20%，超时返还 10%。</p>
+        <span class="tagline">去向：货舱 → 卖成海币</span>
+      </div>
+    </div>
+    <ul class="rules">
+      <li><b>藏品不占货舱</b>：柜内按 1×1 显示，拾取后直接进本局藏品列表，不会触发满舱或替换。</li>
+      <li><b>孤品藏品 ≤ 1 件/局</b>，其中<b>圣物 ≤ 1 件/局</b>；触顶后降档为少见。</li>
+      <li class="warn"><b>货值件一律不能进展厅</b>；2×3 稀有件带出时会额外登记一枚海图碎片，但货本身仍然只能卖。</li>
+      <li>展厅溢出走「暂存」：登记照常，等本体升级后按首次获得顺序自动补位。</li>
+    </ul>
+    <p class="srcnote">出处：<code>docs/spec/20261112_宝箱产出物品体系_设计.md</code> §1.5 L95–99、§3.2 L169–175、§4.2 L213–219、§4.4 L240–247；<code>docs/spec/20261114_宝物藏品与陈列柜落地/spec.md</code> §3.1 L115–120、§5.2 L174–181。</p>
+  </section>
+
+  <section class="panel" id="museum" aria-labelledby="museum-title">
+    <h2 id="museum-title">展厅与收藏馆</h2>
+    <p class="hint">展厅不是「买展位」，是「把空位填满」；本体只决定上限，不单独卖钱。空位不产生游客。</p>
+    <div class="stats">
+      <div class="stat teal"><div class="n">5·8·11·14</div><div class="lbl">本体 Lv1–4 展位上限（Lv0 = 0）</div></div>
+      <div class="stat amber"><div class="n">1 / 2 / 4</div><div class="lbl">常见 / 少见 / 孤品 稀有度权重</div></div>
+      <div class="stat orange"><div class="n">40<small>币/日</small></div><div class="lbl">日净额封顶（≈0.085 份）</div></div>
+      <div class="stat"><div class="n">22 → 68</div><div class="lbl">起步 / 满配日毛收入；封顶后同为 40</div></div>
+    </div>
+
+    <h3 class="sh">四条公式</h3>
+    <div class="formula">游客 = min( round(S × 3 × r̄ × q), 展位上限 × 6 )　　q = 1 + 0.25 × (Lv − 1)</div>
+    <div class="formula">门票 = 游客 × 1 币　　　捐赠 = 少见件数 × 1 + 孤品件数 × 4</div>
+    <div class="formula">日净额 = clamp(门票 + 捐赠 − S × 2, 0, 40)　　离线 = min(floor(日净额 × 0.5), 25)，最多 12h</div>
+    <ul class="rules">
+      <li><b>S</b> = 占用展位数（藏品数与上限取小）；<b>r̄</b> = 已展出藏品的加权平均稀有度。</li>
+      <li>封顶项 <span class="mono">上限 × 6</span> 的作用：只升本体、不填展位，拿不到收益。</li>
+      <li>捐赠只算<b>已展出</b>的藏品；库房里的不计客流、不产生捐赠，也不收维护费。</li>
+      <li>按天结算、不按局：同一天连打十局不会多结；离线额度要手动「收账」。</li>
+    </ul>
+
+    <h3 class="sh">哪些货不值得陈列</h3>
+    <div class="tw"><table>
+      <thead><tr><th>方案</th><th>判定</th><th>结果</th></tr></thead>
+      <tbody>
+        <tr><td>A 按稀有度</td><td>少见 / 孤品货可陈列</td><td>破红线：0.32–1.26 份/件的卖价损失，约 4 局一件就吃光余量</td></tr>
+        <tr><td>B 按单件价阈值</td><td>≥ X 币可陈列</td><td>同样破红线；阈值越高越等于只放孤品，仍是 1.26 份/件</td></tr>
+        <tr><td><b>C 按品类（采用）</b></td><td><span class="mono">id ∈ loot.collectibles</span>（14 件）</td><td><b>金币损失 = 0</b>：藏品本无卖价，周期与瓶颈不动</td></tr>
+      </tbody>
+    </table></div>
+    <ul class="rules">
+      <li class="warn"><b>判定一句话</b>：能陈列的是「品类」，不是「价值」。货值件徽标「不值得陈列 · 建议卖掉」；藏品徽标「可陈列」。</li>
+      <li>失败结局（沉没 / 弃船 / 风暴）只允许卖出，否则可以故意沉船保货，绕过 20% / 10% 的惩罚。</li>
+      <li>展厅满不拒绝、不顶替：走「暂存（登记但不展出）」，本体升级后按首次获得顺序自动补位。</li>
+      <li>圣物可陈列，但<b>不计游客</b>、不参与消耗，所以它不推动上面任何一条收益公式。</li>
+    </ul>
+
+    <h3 class="sh">陈列柜 · 5 × 3</h3>
+    <p class="hint">按稀有度分三行，槽位 1→14 顺序解锁；第 15 格固定「未开放」。槽位号就是藏品登记号，柜内与展厅共用同一张表。</p>
+    <div class="cabinet" id="cabinet"></div>
+    <div class="caplegend">
+      <span><i style="background:var(--r1)"></i>Lv1 · 5 格</span>
+      <span><i style="background:var(--r2)"></i>Lv2 · 8 格</span>
+      <span><i style="background:var(--amber)"></i>Lv3 · 11 格</span>
+      <span><i style="background:var(--r3)"></i>Lv4 · 14 格</span>
+      <span>格子右上角 L1–L4 = 需要本体到该等级</span>
+    </div>
+    <p class="srcnote">出处：<code>docs/spec/20261113_收藏馆经济闭环与港口节点规则_设计.md</code> L20（展位 5/8/11/14）、L38（权重 1/2/4）、L47（游客公式）、L60（捐赠）、L61–62（维护与封顶）、L75（清坛）；<code>scripts/data/port.lua</code> L141–146（<span class="mono">museumCap = 2 + level × 3</span>）；<code>docs/spec/20261114_回港货舱处理与陈列分流/spec.md</code> §1.2 L53–60、§2 L70–80（A/B/C 判定）。</p>
+  </section>
+
+  <section class="panel" id="mages" aria-labelledby="mages-title">
+    <h2 id="mages-title">法师与技能</h2>
+    <p class="hint">三系定位（2026-11-12 制作人二次拍板：不是三系全群攻）：<b>雷清群、冰控场、火打厚的</b>。三者必须「同一时刻不可互相替代」。</p>
+    <div class="mages">
+      <div class="mage" style="--mc:#46e0c0">
+        <div class="mh"><span class="swatch"></span><div><h3>霆 · 群</h3><div class="role">雷系 · 链式清群</div></div></div>
+        <dl>
+          <dt>普攻</dt><dd>贯雷：70 伤害 / 3.4s / 射程 330 / 最多链 3 目标、链距 160</dd>
+          <dt>秘术</dt><dd>潮涌雷：延时落雷。L1 爆 55 + 14×5 跳（合计 207）/ 1.35s；L6 爆 270 + 59×10 跳（合计 860）；半径 120</dd>
+          <dt>代价</dt><dd>潮汐充能 2 格（L5 起 3 格），3.9s 回 1 格；枯竭时冷却 ×1.4、半径 ×0.8</dd>
+          <dt>定位</dt><dd>清杂主力。收益随目标数放大；打单体只有 20.6 DPS 的底噪</dd>
+          <dt>配色</dt><dd><b>#46E0C0 水青</b>，普攻 / 秘术 / 卡面同色，禁止暖黄与红</dd>
+        </dl>
+        <div class="mfoot">成长卡：入阵 / 引雷 / 爆心 / 雷首（线 id = <span class="mono">mine</span>）</div>
+      </div>
+      <div class="mage" style="--mc:#e8d8e8">
+        <div class="mh"><span class="swatch" style="background:linear-gradient(135deg,#e8d8e8,#c0508a)"></span><div><h3>烬 · 单</h3><div class="role">火系 · 单体斩杀</div></div></div>
+        <dl>
+          <dt>普攻</dt><dd>焚矢：L1 210 / 3.6s → L6 470 / 3.0s；射程 340；单体 DPS 58.3 → 156.7</dd>
+          <dt>秘术</dt><dd>燔祭：朝瞄准方向泼弹幕，越近越疼</dd>
+          <dt>代价</dt><dd>血契：每发扣 2% 当前血（不致死）；击杀回 1.5% 最大血，每秒最多 3 次</dd>
+          <dt>保命</dt><dd>生命 &lt; 35% 止血（停火、移速 +10%），回到 50% 复火</dd>
+          <dt>定位</dt><dd>打精英与 Boss。无溅射、无穿透，对群不放大</dd>
+          <dt>配色</dt><dd><b>#E8D8E8 骨白 + #C0508A 冷玫</b>，禁止橙红（撞杂兵）与紫（撞 Boss）</dd>
+        </dl>
+        <div class="mfoot">成长卡：入阵 / 跳焰 / 过载 / 线圈（线 id = <span class="mono">chain</span>）</div>
+      </div>
+      <div class="mage" style="--mc:#5b6cff">
+        <div class="mh"><span class="swatch"></span><div><h3>凝 · 控</h3><div class="role">冰系 · 减速与短冻结</div></div></div>
+        <dl>
+          <dt>普攻</dt><dd>霜咬：L1 58 / 4.2s / 半径 90 / 减速 22% → L6 110 / 3.6s / 半径 120 / 减速 30%</dd>
+          <dt>秘术</dt><dd>霜原：无槽霜域。L6 每 2.2s 脉冲 70 伤、半径 180、减速 30%，每 6s 判一次冻结 1.4s</dd>
+          <dt>代价</dt><dd>霜层 3 层；冻结耗 1 层，击杀回 1 层（每秒最多 2 层）；0 层时冷却 ×1.5</dd>
+          <dt>规则</dt><dd>杂兵吃满冻结；精英单次 ≤ 1.0s 且 3.5s 免疫；Boss 首冻 0.8s，之后 ×0.7 递减，下限 0.2s</dd>
+          <dt>定位</dt><dd>控场与团队乘区。单体 DPS 13.8 → 30.6，三系最低</dd>
+          <dt>配色</dt><dd><b>#5B6CFF 靛蓝</b>，禁止青绿（撞霆）与紫（撞 Boss）</dd>
+        </dl>
+        <div class="mfoot">成长卡：入阵 / 霜核 / 霜心 / 霜环（线 id = <span class="mono">jian</span>）</div>
+      </div>
+    </div>
+    <div class="warnbar">书内冲突：<code>docs/spec/三法师技能设定.md</code> §1.1 L45–47 把三系写成 <b>Area 潮涌雷 / Projectile 燔祭 / Bounce 低语链</b>；代码 <code>scripts/data/mages.lua</code> L11–15（2026-11-12 二次定位）是 <b>群·贯雷 / 单·焚矢 / 控·霜咬 + 霜原</b>。本页以代码为准。</div>
+    <p class="srcnote">出处：<code>scripts/data/mages.lua</code> L11–18（定位）、L28–72（普攻与秘术数值）、L79–108（施法代价）、L117–132（霜原）；<code>docs/art.md</code> L74–82（三系主色 / 辅色 / 禁区）、L190–192（P20–P22 专属色）；图标按系分色见 <code>scripts/data/skill_icons.lua</code>（<span class="mono">sk_lan_* / sk_jin_* / sk_jian_*</span>）。</p>
+  </section>
+
+  <section class="panel" id="growth" aria-labelledby="growth-title">
+    <h2 id="growth-title">局内成长</h2>
+    <p class="hint">三选一，13 次选择（Lv2 → Lv14）；卡池 22 张常驻 + 3 张补给兜底 = 25 张。</p>
+    <div class="stats">
+      <div class="stat teal"><div class="n">13<small>次</small></div><div class="lbl">22s → 176s，按等级插值</div></div>
+      <div class="stat amber"><div class="n">22+3<small>张</small></div><div class="lbl">常驻池 + 补给兜底</div></div>
+      <div class="stat"><div class="n">2 / 1</div><div class="lbl">免费重掷 / 每局禁卡</div></div>
+      <div class="stat orange"><div class="n">6<small>点</small></div><div class="lbl">天赋树满点：6 节点 × 1 点</div></div>
+    </div>
+
+    <h3 class="sh">选择节奏</h3>
+    <div class="tw"><table>
+      <thead><tr><th>时段</th><th>0–30s</th><th>30–60s</th><th>60–90s</th><th>90–120s</th><th>120–150s</th><th>150–180s</th></tr></thead>
+      <tbody><tr><td>抽卡次数</td><td class="num">2</td><td class="num">2</td><td class="num">2</td><td class="num">2</td><td class="num">3</td><td class="num">2</td></tr></tbody>
+    </table></div>
+    <p class="hint" style="margin-top:8px">合计 13 次；实际时点由等级曲线插值（约 8 秒/级），不是固定秒表。</p>
+
+    <h3 class="sh">池子结构</h3>
+    <div class="tw"><table>
+      <thead><tr><th>类别</th><th>张数</th><th>作用</th></tr></thead>
+      <tbody>
+        <tr><td>解锁 / 线卡</td><td class="num">7</td><td>前置条件型，开后续卡与机制</td></tr>
+        <tr><td>舰炮</td><td class="num">3</td><td>船体武器，与法师并行</td></tr>
+        <tr><td>霆 / 烬 / 凝</td><td class="num">3 + 3 + 3</td><td>各系的增强卡，同系同色</td></tr>
+        <tr><td>通用</td><td class="num">3</td><td>不挑系，任何构筑可用</td></tr>
+        <tr><td>补给兜底</td><td class="num">3</td><td>池子抽空或被禁光时补位</td></tr>
+      </tbody>
+    </table></div>
+    <ul class="rules">
+      <li>同屏 3 张互不重复；每屏至少 1 张「线卡」，避免纯数值屏。</li>
+      <li>重掷 2 次/局、禁卡 1 张/局；禁掉的卡本局不再出现。</li>
+      <li>Lv2 首屏固定给 3 张入阵卡，先定阵容再谈构筑。</li>
+      <li class="warn"><b>提案未落地</b>：主系 L4 保底、上屏硬排除、入阵推迟到第 5 / 8 抽、第 7 / 12 抽兜底、池子收成 19+3。目标是重复率 33.8% → 2.1%，代码仍是 22+3 的现行方案。</li>
+    </ul>
+
+    <h3 class="sh">天赋共用树 · 6 节点（当前数值）</h3>
+    <div class="tree">
+      <div class="node"><div class="tier">TIER 1</div><div class="tn">元素射程</div><div class="tv">+8%</div><div class="td">三个法系共用；单点，不是每级叠加</div></div>
+      <div class="node"><div class="tier">TIER 1</div><div class="tn">元素蓄爆</div><div class="tv">125%</div><div class="td">每 8s 一发必暴；暴击倍率 1.25（已从 1.40 下调）</div></div>
+      <div class="node"><div class="tier">TIER 2</div><div class="tn">破甲共鸣</div><div class="tv">+5%</div><div class="td">对 Boss / 精英增伤，占 Boss 血量约 0.85%</div></div>
+      <div class="node"><div class="tier">TIER 2</div><div class="tn">元素猎杀</div><div class="tv">+4%</div><div class="td">对减速 / 冻结 / 标记目标增伤，占血量约 0.34%</div></div>
+      <div class="node"><div class="tier">TIER 3</div><div class="tn">三相共鸣</div><div class="tv">+0%</div><div class="td">每位入阵法师的加成为 0：刻意留空，避免三人阵白嫖</div></div>
+      <div class="node"><div class="tier">TIER 3</div><div class="tn">元素锋刃</div><div class="tv">+2%</div><div class="td">普攻增伤，局内 DPS 约 +3.56%</div></div>
+    </div>
+    <ul class="rules">
+      <li>熟练度门槛 <b>80 / 200 / 380 / 620 / 920 / 1,280</b> → Lv2–Lv7，每级 1 点，6 点刚好点满。</li>
+      <li>单局熟练度：入阵 20 + 每位 8 + 3 × 等级 + 10/分钟（上限 30）+ Boss 20，封顶 120。</li>
+      <li>跨局保留；换系不重置（通用层挂账号，不挂法师）。</li>
+    </ul>
+    <p class="srcnote">出处：<code>scripts/data/talents.lua</code>（6 节点的 <span class="mono">value.mult</span> 与 <span class="mono">xp_thresholds</span>）；<code>docs/spec/20261113_局内成长与出卡规则_设计.md</code> §1.1 L21–31（13 次与时段）、§1.2 L32–55（22+3 池）、§3.2–3.4 L148–212（抽取顺序、权重、保底）、§3.6 L224–238（入阵时机）；<code>docs/spec/20261114_法师通用天赋树_设计/spec.md</code>（6 节点与单局熟练度）。</p>
+  </section>
+
+  <section class="panel" id="chapters" aria-labelledby="chapters-title">
+    <h2 id="chapters-title">章节与单局变化</h2>
+    <p class="hint">一章 = 1 份章节配置 + 1 条独立波次曲线 + 1 套增量皮肤包 + 1 条环境机制 + 1 个 Boss 专属技能组。配置为主、资产为辅，约 <b>8 : 2</b>；地图骨架、经济池、局外系统都不复制。</p>
+    <div class="stats">
+      <div class="stat teal"><div class="n">8 : 2</div><div class="lbl">配置 / 资产的比例</div></div>
+      <div class="stat amber"><div class="n">18<small>项</small></div><div class="lbl">单局变化点（9 项建议加）</div></div>
+      <div class="stat"><div class="n">1 / 1 / 2 / 1</div><div class="lbl">负向 / 正向 / 小抖动 / Boss 变体 的上限</div></div>
+      <div class="stat orange"><div class="n">74<small>%</small></div><div class="lbl">第二章现状通关率（B1 未落地）</div></div>
+    </div>
+
+    <h3 class="sh">第二章的差异做法</h3>
+    <div class="tw"><table>
+      <thead><tr><th>维度</th><th>第一章「雾港近海」</th><th>第二章「风暴航路」</th><th>手段</th></tr></thead>
+      <tbody>
+        <tr><td>海面</td><td>暗青毡底 + 亮青毡带 + 暖泡沫</td><td>铅灰铁蓝 + 冷白浪脊 + 低饱和泡沫</td><td>代码叠色，0MB</td></tr>
+        <tr><td>雾 / 天光</td><td>暖灰雾，浓度 1.0</td><td>冷灰雾 1.15，雨丝 + 每 8s 一次远处雷光</td><td>代码 FX</td></tr>
+        <tr><td>岛</td><td>沙洲 + 棕榈 + 暖沙</td><td>黑礁断崖 + 冷苔 + 碎礁</td><td>5 张岛皮 ≈0.45MB</td></tr>
+        <tr><td>精英时刻</td><td>60 / 110 / 155</td><td><b>50 / 85 / 135</b></td><td>配置</td></tr>
+        <tr><td>精英血量 / 密度</td><td>1.0× / 1.00×</td><td><b>1.2× / 1.12×</b></td><td>配置</td></tr>
+        <tr><td>Boss 入场 / 血量</td><td>180s / 6,000（TTK ≈10s）</td><td><b>165s / 9,000（TTK ≈23s）</b></td><td>配置</td></tr>
+        <tr><td>Boss 身份</td><td>潮汐领主：扇 / 环 / 召唤 / 布雷</td><td>风暴领主：雷击标记 + 风推 + 环弹</td><td>现状仍是 <span class="mono">tide_lord</span> 同 id，只改了血量</td></tr>
+        <tr><td>环境 / 撤离</td><td>洋流只提示；直线返航</td><td>洋流真实生效 + 雨幕；逆流返航</td><td>配置 + FX</td></tr>
+      </tbody>
+    </table></div>
+    <p class="srcnote">第一章 0–60s：只有 <span class="mono">skiff</span>，岛 A 30s 开，精英 60s；第二章 0s 就是 <span class="mono">skiff + diver</span> 混编，25s 炮手首现、岛 A 25s 开、50s 精英 1、60s 内雨幕/侧推洋流开始。怪表权重从 <span class="mono">0.55 / 0.45</span> 变为 <span class="mono">0.45 / 0.45 / 0.10</span>，变化 ≥30%。</p>
+
+    <h3 class="sh">8 条不变量（任何章节都不能改）</h3>
+    <ul class="rules">
+      <li>世界 1080×3840 与三层结构；10 个战利品位（补给 3 / 宝藏 3 / 巢穴 3 + 目标 1）。</li>
+      <li>唯一撤离点 = 出发港口；A/B/C 只作货值加成窗。</li>
+      <li>单局 180s 结构，Boss 160–180s 入场，击杀即通关。</li>
+      <li>单局期望 471 币、总池 15.90 份 / 17.4 局；每格货值可重定价，期望与总池不变。</li>
+      <li>第一关 6000 血 / 85.3% 通关 / 96.0% 存活 / P10 68.5。</li>
+      <li>红白弹幕可读性契约：敌弹独占红白，不被海面吞。</li>
+      <li>港口、收藏馆、天赋、存档 schema 不随章节分叉。</li>
+      <li>掉落 / 经验倍率（1.40 / 0.812）是全局值，章节不覆写。</li>
+    </ul>
+
+    <h3 class="sh">18 项单局变化点 · 取舍</h3>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>变化点</th><th>现状</th><th>建议</th><th>幅度</th><th>撞线</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>种子入口</td><td>隐式 <span class="mono">os.time</span>，不展示</td><td>写入 <span class="mono">run.seed</span>，结算可复现</td><td>无</td><td class="dim">无</td></tr>
+        <tr><td class="num">2</td><td>岛屿摆位</td><td>x 微抖、y 固定</td><td>簇内 x±40 / y±40</td><td>中</td><td class="dim">经·验</td></tr>
+        <tr><td class="num">3</td><td>岛型抽签</td><td>完全固定</td><td>同配比抽签 + 每层保底</td><td>中</td><td class="dim">经·验</td></tr>
+        <tr><td class="num">4</td><td>柜内容</td><td>件数 / 空柜 / 货档已随机</td><td>保持；可加 ±10% 密度</td><td>小</td><td class="dim">经</td></tr>
+        <tr><td class="num">5</td><td>精英出现</td><td>时刻固定，仅方位随机</td><td>2 个技能变体按种子选</td><td>中</td><td class="dim">验</td></tr>
+        <tr><td class="num">6</td><td>Boss 变体</td><td>固定 3 阶段</td><td>每章 2 个变体（弹幕顺序 / 召唤物）</td><td>中高</td><td class="dim">验</td></tr>
+        <tr><td class="num">7</td><td>天气 / 能见度</td><td>无</td><td>1 类按时段（雾墙 / 暴雨），10–15s</td><td>中</td><td class="dim">验</td></tr>
+        <tr><td class="num">8</td><td>洋流</td><td>只有 toast，无效果</td><td>3 区 ±20% 移速，120s 变向</td><td>中</td><td class="dim">验·经</td></tr>
+        <tr><td class="num">9</td><td>随机事件</td><td>无</td><td>漂流货 / 雾墙 / 鲸群，2–3 次</td><td>中</td><td class="dim">经·验</td></tr>
+        <tr><td class="num">10</td><td>开岛时刻</td><td>固定</td><td>±5s 抖动（Boss 前 45s 不抖）</td><td>小</td><td class="dim">验</td></tr>
+        <tr><td class="num">11</td><td>撤离点位置</td><td>唯一固定港口</td><td>首发不动；二章可做逆流返航</td><td>大</td><td class="dim">经·验·读</td></tr>
+        <tr><td class="num">12</td><td>货值倍率</td><td>固定</td><td><b>禁止</b>章节加乘区</td><td>大</td><td class="dim">经</td></tr>
+        <tr><td class="num">13</td><td>刷怪密度</td><td>一关 / 二关各一条曲线</td><td>每章 ±10% 内实测</td><td>中</td><td class="dim">验</td></tr>
+        <tr><td class="num">14</td><td>Boss 血量 / 入场</td><td>6000 / 180s；9000 / 165s</td><td>按章配置（入场时刻 / 血量 / 换阶段无敌）</td><td>中</td><td class="dim">验</td></tr>
+        <tr><td class="num">15</td><td>单局时长</td><td>固定 180s</td><td>守 180s，不做 240s</td><td>大</td><td class="dim">经·验</td></tr>
+        <tr><td class="num">16</td><td>掉落 / 经验倍率</td><td>全局 1.40 / 0.812</td><td><b>章节不覆写</b></td><td>大</td><td class="dim">经</td></tr>
+        <tr><td class="num">17</td><td>出生点 / 港口 / 灯塔</td><td>固定</td><td><b>不动</b>（导航与撤离唯一性）</td><td>大</td><td class="dim">验·读</td></tr>
+        <tr><td class="num">18</td><td>出航补给</td><td>玩家自选档位</td><td>不是随机项；可加「本章推荐档」提示</td><td>无</td><td class="dim">无</td></tr>
+      </tbody>
+    </table></div>
+    <p class="hint" style="margin-top:8px">撞线口径：<b>经</b> = 经济红线（471 / 17.4），<b>验</b> = 三条验收线，<b>读</b> = 可读性 / 性能。</p>
+
+    <h3 class="sh">变化预算（防止「运气局」）</h3>
+    <div class="tw"><table>
+      <thead><tr><th>类型</th><th>每局上限</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>负向环境</td><td class="num">1</td><td>雾墙 / 暴雨 / 逆流 三选一</td></tr>
+        <tr><td>正向事件</td><td class="num">1</td><td>漂流货 / 鲸群 二选一</td></tr>
+        <tr><td>小抖动</td><td class="num">2</td><td>岛型抽签、开岛时刻、精英方位</td></tr>
+        <tr><td>Boss 变体</td><td class="num">1</td><td>按种子固定，局内不换</td></tr>
+      </tbody>
+    </table></div>
+    <ul class="rules">
+      <li>Boss 前 45s 不抽负向事件；精英出现前后 15s 不抽能见度事件。</li>
+      <li>同类事件一局最多 1 次；连续 2 局抽到同一负向事件，第 3 局强制换池。</li>
+    </ul>
+    <div class="warnbar">现状提醒：第二章仍是 <span class="mono">tide_lord</span> 同 id、只把血量改到 9,000，<b>B1 的「风暴领主 + 环境机制」尚未落地</b>；上面「风暴航路」的差异是设计目标，不是已完成状态。章节数据 <span class="mono">data/chapters.lua</span> 也还没有。</div>
+    <p class="srcnote">出处：<code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §3.2 L210–228（一章 = 什么、8:2）、§3.3 L230–239（8 条不变量）、§3.4 L241–247（B1 交付物）、§5.1 L421–444（18 项全量清单）、§5.2 L446–461（变化预算与硬规则）、§6.1 L497–505（第一眼）、§6.2 L507–516（第一分钟）、§6.3 L518–531（整局差异）。</p>
+  </section>
+
+  <section class="panel" id="accept" aria-labelledby="accept-title">
+    <h2 id="accept-title">验收线</h2>
+    <p class="hint">三项基线来自 <span class="mono">docs/balance-master.md</span> §0-8；门槛是「存活 ≥ 85% 且 P10surv ≥ 60」。</p>
+    <div class="stats">
+      <div class="stat teal"><div class="n">96.0<small>%</small></div><div class="lbl">存活 · 144 / 150</div></div>
+      <div class="stat amber"><div class="n">68.5</div><div class="lbl">P10surv（最差 10% 的平均存活秒）</div></div>
+      <div class="stat"><div class="n">85.3<small>%</small></div><div class="lbl">通关 · 128 / 150</div></div>
+      <div class="stat red"><div class="n">2<small>项</small></div><div class="lbl">不达标：TTK、二关通关率</div></div>
+    </div>
+    <ul class="rules">
+      <li>历史记录值 <b>98.7 / 72.2 / 88.0</b> 是旧口径，不许当现状引用。</li>
+      <li>第二关（Boss 9,000 血）：存活 98.0%、通关 74.0%、Boss TTK 23s、入场中位血量 130。</li>
+      <li>兜底红线：单局 471 币、周期 17.4 局，验收时不能动。</li>
+    </ul>
+    <div class="warnbar"><b>TTK 门槛当前口径存疑，如实标注：</b>目标是 25–40s。<code>docs/issues.md</code> I-05 的权威口径是 <b>Boss 20,000 血、清杂单体、180s 配装 → 中位 21.1s</b>（分布 10.6–38.4s），结论「仍低于目标，但血量按制作人指令冻结在 20,000」；而第一关 6,000 血在 <code>docs/balance.md</code> L289 记的是 <b>9.5–9.9s</b>。两者血量、配装、是否清杂都不同，<b>不能混用</b>，所以本页不给单一的「TTK 达标」结论。</div>
+    <p class="srcnote">出处：<code>docs/balance-master.md</code> §0-8（三项基线）、验收门槛一节；<code>docs/balance.md</code> L289（第一关 TTK 9.5–9.9s）；<code>docs/issues.md</code> I-05（L39 起，权威口径与作废口径）。</p>
+  </section>
+
+  <div class="toolbar" role="region" aria-label="筛选">
+    <div class="toolbar-inner">
+      <div class="filter-row">
+        <span class="flabel">稀有度</span>
+        <div class="filters" id="rarityChips"></div>
+      </div>
+      <div class="filter-row">
+        <span class="flabel">海域</span>
+        <div class="filters" id="seaChips"></div>
+      </div>
+      <div class="toolbar-foot">
+        <span id="count">显示 14 / 14 件藏品</span>
+        <span id="cargoCount">货值件 3 / 3 档</span>
+        <span>点任意卡片看详情</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="codex" aria-labelledby="col-title">
+    <div class="sec-head">
+      <div>
+        <h2 id="col-title">图鉴 · 14 件藏品</h2>
+        <p>这 14 件才进得了展厅。卡片按陈列柜槽位排序，点任意一张看详情。</p>
+      </div>
+      <span class="sec-num" id="colNum">14 件</span>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty">当前筛选下没有藏品。换一个稀有度或海域试试。</div>
+  </section>
+
+  <section aria-labelledby="cargo-title">
+    <div class="sec-head">
+      <div>
+        <h2 id="cargo-title">岛上宝藏 / 货值件 · 3 档</h2>
+        <p>按稀有度分区。单件均值 = 每格区间中值 × 占格，是推导值，不是保底。</p>
+      </div>
+      <span class="sec-num" id="cargoNum">3 档</span>
+    </div>
+    <div class="grid cargo-grid" id="cargoGrid"></div>
+    <ul class="rules" style="margin-top:14px">
+      <li>柜型不限制档位：补给 / 宝藏 / 巢穴 / 沉船都可能出三档，差别在<b>每柜件数</b>（1.2 / 1.8 / 2.5 / 1.0，Boss 3.0）。</li>
+      <li>档位由海域权重决定：近海 82/17/1，中层 35/50/15，深海 5/30/65。</li>
+      <li class="warn">深海整备（38 币）只作用于深海柜：不出 1 档，权重改为 0/15/85，每格货值 ×1.25。</li>
+      <li><b>货值件没有「展厅容量归属」</b>——不是容量不够，而是类别不允许。只有上面 14 件藏品会被登记。</li>
+    </ul>
+  </section>
+
+  <section class="panel" id="gaps" aria-labelledby="gaps-title">
+    <h2 id="gaps-title">留空清单 · 仓库里找不到出处</h2>
+    <p class="hint">以下内容要么代码 / 文档未落地，要么没有唯一权威口径。本页没有用估算或常识把它们填满。</p>
+    <ul class="rules">
+      <li><b>三位法师的人物属性</b>：生命、护甲、移速、初始血量——<span class="mono">mages.lua</span> 只有攻击与施法参数，没有人物面板字段。页面写的「属性」只到攻击参数为止。</li>
+      <li><b>章节的正式命名与资源</b>：章节 id、皮肤包名、Boss <span class="mono">storm_lord</span> 的数值与招式组，设计稿里是示意，<span class="mono">chapters.lua</span> 未落地；代码里第二章仍是 <span class="mono">tide_lord</span> 9,000 血。</li>
+      <li><b>14 件藏品的代码表</b>：<span class="mono">M.collectibles</span> 尚未写进 <span class="mono">loot.lua</span>，14 件来自「待批准」规格，批准前没有任何实测。</li>
+      <li><b>三相共鸣的预期收益</b>：<span class="mono">talents.lua</span> 里 <span class="mono">mult = 0</span>，文档只写「刻意留空」，没给未来该值多少。</li>
+      <li><b>单件均值与展厅日收益的实测</b>：页面引的是文档读数与「区间中值 × 占格」的推导值，本轮没有复跑 harness。</li>
+      <li><b>TTK 门槛</b>：不是缺失，是没有唯一口径——I-05 的 20,000 血 / 21.1s 与第一关 6,000 血 / 9.5–9.9s 不可混用，页面因此不给达标结论。</li>
+    </ul>
+    <p class="srcnote">核对方式：对 <code>scripts/</code> 全仓 grep <span class="mono">collectibles</span>、<span class="mono">chapters</span>、<span class="mono">storm_lord</span> 等标识；未命中的不填。</p>
+  </section>
+
+  <footer>
+    <h2>数据来源与口径</h2>
+    <p><b>经济口径</b><br>
+      <code>docs/spec/20261112_资源与船体部件化_规划.md</code> L16（1 份 = 471）、L250（s ≤ 0.086 反解）、L274–280（三档补给情景）、L292、L314–320（三线表 / 瓶颈顺序）、L336（余量 1.5 局）、L345–347（历史值作废）；<code>docs/spec/20261113_单局金币产出核算.md</code> L296–307；<code>docs/decisions.md</code> L28；<code>scripts/data/loot.lua</code> L182–190。</p>
+    <p><b>柜型与掉落</b><br>
+      <code>docs/spec/20261112_宝箱产出物品体系_设计.md</code> §1.5 L95–99、§3.2 L169–175、§3.3 L177–185、§4.2 L213–219、§4.4 L240–247。</p>
+    <p><b>展厅与收藏馆</b><br>
+      <code>docs/spec/20261113_收藏馆经济闭环与港口节点规则_设计.md</code> L20（展位）、L38（权重）、L47（游客）、L60（捐赠）、L61–62（维护与封顶）、L75（清坛）；<code>docs/spec/20261114_回港货舱处理与陈列分流/spec.md</code> §1.2 L53–60、§2 L70–80；<code>scripts/data/port.lua</code> L141–146。</p>
+    <p><b>法师与技能</b><br>
+      <code>scripts/data/mages.lua</code> L11–18、L28–72、L79–108、L117–132；<code>docs/art.md</code> L74–82、L190–192；<code>docs/spec/三法师技能设定.md</code> §1.1 L45–47（与代码冲突，页面以代码为准）。</p>
+    <p><b>局内成长</b><br>
+      <code>scripts/data/talents.lua</code>；<code>docs/spec/20261113_局内成长与出卡规则_设计.md</code> §1.1 L21–31、§1.2 L32–55、§3.2–3.4 L148–212、§3.6 L224–238；<code>docs/spec/20261114_法师通用天赋树_设计/spec.md</code>。</p>
+    <p><b>章节与单局变化</b><br>
+      <code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §3.2 L210–228、§3.3 L230–239、§5.1 L421–444、§5.2 L446–461、§6.1 L497–505、§6.2 L507–516、§6.3 L518–531。</p>
+    <p><b>验收线</b><br>
+      <code>docs/balance-master.md</code> §0-8（三项基线）、验收门槛一节；<code>docs/balance.md</code> L289（第一关 TTK 9.5–9.9s）；<code>docs/issues.md</code> I-05（L39 起）。</p>
+    <p><b>藏品表（14 件、稀有度、海域、品类、产出柜型）</b><br>
+      <code>docs/spec/20261114_宝物藏品与陈列柜落地/spec.md</code> §2 唯一 ID 表 L56–69；池子非空校验 L71–77；稀有度色 / 权重 / 海域乘数 L89–110；附加位与上限 L115–120；陈列柜 5×3 与槽位 L210–215；容量与溢出 L231–234。</p>
+    <p><b>货值三档、每格价值、占格、档位权重</b><br>
+      <code>scripts/data/loot.lua</code> L21–51（三档每格 25–60 / 55–95 / 105–175，占格 1×1 / 1×2 / 2×2，珍贵货 12% 出 2×3）；L57–61（海域档位权重）；L68–71（深海整备）；L73–79（单件价值 = 每格值 × 占格）；L199（1 份 = 471 币）。</p>
+    <p><b>柜型与每柜件数</b><br>
+      <code>docs/spec/20261112_宝箱产出物品体系_设计.md</code> §1.5 合法组合 L95–99；§3.2 箱型权重 L169–175；§4.2 产出表 L213–219；§4.4 死亡 / 超时损失 L240–247。</p>
+    <p><b>展厅经济</b><br>
+      <code>docs/spec/20261113_收藏馆经济闭环与港口节点规则_设计.md</code> 展位 5/8/11/14 L20；稀有度权重 1/2/4 L38；客流公式 L47；捐赠 L60；维护与 40 币封顶 L61–62。<br>
+      <code>scripts/data/port.lua</code> L141–146（<span class="mono">museumCap = 2 + level × 3</span>）。</p>
+    <p><b>藏品不占货舱 / 柜内占 1×1</b><br>
+      <code>docs/spec/20261114_宝物藏品与陈列柜落地/spec.md</code> §5.2 L178–180（附加位 <span class="mono">fw=1, fh=1</span>，拾取不调用 <span class="mono">cargoMod.add</span>）。</p>
+    <div class="warnbar"><b>四条已知口径提醒：</b><br>
+      1. 14 件藏品表来自「待批准」规格，代码尚未落地 <span class="mono">M.collectibles</span>；货值三档与展厅容量来自现有代码。<br>
+      2. 三法师定位：设计稿写 Area / Projectile / Bounce，代码（2026-11-12 二次拍板）是群 / 单 / 控，本页以代码为准。<br>
+      3. 「深潜者鳞片」：<code>宝箱设计 §1.4 L85</code> 示例写<b>常见</b>，14 件唯一 ID 表（<code>spec.md L61</code>）写<b>少见</b>，本页以唯一 ID 表为准。<br>
+      4. TTK：<code>issues.md</code> I-05 的 20,000 血 / 21.1s 与第一关 6,000 血 / 9.5–9.9s 口径不同，不混用。<br>
+      另外，货值单件均值是按区间中值与占格推导，未跑经济 harness。</div>
+  </footer>
+
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="藏品详情"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  var SEA = {1:'近海',2:'中层',3:'深海'};
+
+  var RARITY = {
+    1:{name:'常见',color:'#8fb8c9',w:1,visit:3,donate:0},
+    2:{name:'少见',color:'#5fd0c8',w:2,visit:6,donate:1},
+    3:{name:'孤品',color:'#e0533f',w:4,visit:12,donate:4}
+  };
+
+  var POOL = {
+    1:{1:2,2:1,3:0},
+    2:{1:2,2:2,3:1},
+    3:{1:1,2:2,3:3}
+  };
+
+  var ITEMS = [
+    {id:'sample_shell',name:'潮间带贝饰',short:'贝饰',rarity:1,sea:1,kind:'货样',source:'近海任意柜',slot:1,art:'shell',
+      note:'撤离或击败 Boss 才登记；死亡与超时都会丢失。'},
+    {id:'sample_bell',name:'锈蚀船钟',short:'船钟',rarity:1,sea:1,kind:'货样',source:'近海任意柜',slot:2,art:'bell',
+      note:'撤离或击败 Boss 才登记；死亡与超时都会丢失。'},
+    {id:'sample_kelp',name:'夜光藻团',short:'藻团',rarity:1,sea:2,kind:'货样',source:'中层任意柜',slot:3,art:'kelp',
+      note:'撤离或击败 Boss 才登记；死亡与超时都会丢失。'},
+    {id:'sample_coral',name:'珊瑚标本',short:'珊瑚',rarity:1,sea:2,kind:'货样',source:'中层任意柜',slot:4,art:'coral',
+      note:'撤离或击败 Boss 才登记；死亡与超时都会丢失。'},
+    {id:'sample_fang',name:'深海鱼牙',short:'鱼牙',rarity:1,sea:3,kind:'货样',source:'深海任意柜',slot:5,art:'fang',
+      note:'撤离或击败 Boss 才登记；死亡与超时都会丢失。'},
+    {id:'sample_scale',name:'深潜者鳞片',short:'鳞片',rarity:2,sea:1,kind:'货样',source:'近海任意柜',slot:6,art:'scale',
+      note:'少见货样；撤离或击败 Boss 才登记，死亡与超时丢失。'},
+    {id:'sample_amber',name:'琥珀货样',short:'琥珀',rarity:2,sea:2,kind:'货样',source:'中层任意柜',slot:7,art:'amber',
+      note:'少见货样；撤离或击败 Boss 才登记，死亡与超时丢失。'},
+    {id:'sample_bone',name:'鲸骨货样',short:'鲸骨',rarity:2,sea:2,kind:'货样',source:'中层任意柜',slot:8,art:'bone',
+      note:'少见货样；撤离或击败 Boss 才登记，死亡与超时丢失。'},
+    {id:'sample_pearl',name:'深海珍珠',short:'珍珠',rarity:2,sea:3,kind:'货样',source:'深海任意柜',slot:9,art:'pearl',
+      note:'少见货样；撤离或击败 Boss 才登记，死亡与超时丢失。'},
+    {id:'sample_relic_part',name:'船首像残件',short:'残件',rarity:2,sea:3,kind:'货样',source:'深海任意柜',slot:10,art:'figurehead',
+      note:'少见货样；撤离或击败 Boss 才登记，死亡与超时丢失。'},
+    {id:'frag_mid',name:'海图碎片·中层',short:'图中',rarity:3,sea:2,kind:'碎片',source:'中层孤品位',slot:11,art:'map',
+      note:'孤品碎片：只从中层孤品位开出。撤离或击败 Boss 才登记；死亡与超时丢失。'},
+    {id:'frag_deep',name:'海图碎片·深海',short:'图深',rarity:3,sea:3,kind:'碎片',source:'深海孤品位',slot:12,art:'mapdeep',
+      note:'孤品碎片：只从深海孤品位开出。撤离或击败 Boss 才登记；死亡与超时丢失。'},
+    {id:'relic_tideheart',name:'潮汐之心',short:'潮心',rarity:3,sea:3,kind:'圣物',source:'深海孤品位 / Boss',slot:13,art:'heart',relic:true,
+      note:'圣物：可陈列、提供跨局效果；不计游客、不参与消耗。撤离或击败 Boss 才登记；死亡与超时丢失。每局圣物 ≤ 1 件，孤品 ≤ 1 件。'},
+    {id:'relic_crown',name:'沉没王冠',short:'王冠',rarity:3,sea:3,kind:'圣物',source:'深海孤品位 / Boss',slot:14,art:'crown',relic:true,
+      note:'圣物：可陈列、提供跨局效果；不计游客、不参与消耗。撤离或击败 Boss 才登记；死亡与超时丢失。每局圣物 ≤ 1 件，孤品 ≤ 1 件。'}
+  ];
+
+  var CARGO = [
+    {rarity:1,tier:1,name:'普通货',art:'crate',per:'25–60',meanCell:'42.5',fp:'1×1',meanItem:'42.5',
+      seaText:'近海 82% · 中层 35% · 深海 5%',chest:'任意柜型',
+      note:'每柜保底 1 件通货；死亡返还 20%，超时返还 10%，均封顶最贵单件。'},
+    {rarity:2,tier:2,name:'精良货',art:'barrel',per:'55–95',meanCell:'75',fp:'1×2（可旋转 2×1）',meanItem:'150',
+      seaText:'近海 17% · 中层 50% · 深海 30%',chest:'任意柜型',
+      note:'2 格中件，单件均值 = 75 × 2 = 150 币。死亡返还 20%，超时返还 10%。'},
+    {rarity:3,tier:3,name:'珍贵货',art:'chest',per:'105–175',meanCell:'140',fp:'2×2（12% 出 2×3）',meanItem:'594',
+      seaText:'近海 1% · 中层 15% · 深海 65%',chest:'任意柜型',
+      note:'2×2 单件 560 币；12% 的 2×3 稀有件 840 币，加权后单件约 594 币。2×3 带出时同时登记一枚海图碎片，但货本身仍只能卖。'}
+  ];
+
+  function capFor(slot){
+    if(slot<=5) return {lv:1,cap:5};
+    if(slot<=8) return {lv:2,cap:8};
+    if(slot<=11) return {lv:3,cap:11};
+    return {lv:4,cap:14};
+  }
+
+  var SHAPES = {
+    shell:'<path d="M60 90C40 86 31 68 35 50c7 7 13 8 17 3 4 9 8 12 8 12s4-3 8-12c4 5 10 4 17-3 4 18-5 36-25 40Z" fill="#d9c3a5" stroke="#8a6f52" stroke-width="2.5" stroke-linejoin="round"/><path d="M60 65v24M47 57l5 30M73 57l-5 30" stroke="#8a6f52" stroke-width="2" stroke-linecap="round" opacity=".8"/><path d="M42 45c6 4 12 5 18 5s12-1 18-5" fill="none" stroke="#f2ead9" stroke-width="2" opacity=".35"/>',
+    bell:'<path d="M60 35v-7" stroke="#e0b45f" stroke-width="4" stroke-linecap="round"/><path d="M44 78c0-20 6-30 16-32 10 2 16 12 16 32Z" fill="#b39a72" stroke="#7c6547" stroke-width="2.5"/><rect x="39" y="77" width="42" height="9" rx="4.5" fill="#8d7654"/><circle cx="60" cy="91" r="5" fill="#e0b45f"/><circle cx="50" cy="60" r="4" fill="#8a5a3f" opacity=".7"/><circle cx="70" cy="68" r="3" fill="#8a5a3f" opacity=".6"/>',
+    kelp:'<ellipse cx="50" cy="64" rx="19" ry="15" fill="#3f8f7f"/><ellipse cx="70" cy="55" rx="15" ry="13" fill="#54b8a2"/><ellipse cx="68" cy="76" rx="17" ry="13" fill="#2d6d61"/><circle cx="54" cy="58" r="3" fill="#d8ffe8"/><circle cx="66" cy="50" r="2.5" fill="#d8ffe8"/><circle cx="72" cy="70" r="2.5" fill="#d8ffe8"/><circle cx="46" cy="70" r="2" fill="#d8ffe8"/><path d="M48 82c4-4 8-5 12-4" stroke="#1f4f45" stroke-width="2" fill="none" opacity=".7"/>',
+    coral:'<path d="M60 92V64M60 73c-11-2-15-11-13-21M60 68c11-2 15-11 13-21M60 82c-7-2-11-7-11-14M60 78c7-2 11-8 11-15" stroke="#d07a6a" stroke-width="8" stroke-linecap="round" fill="none"/><path d="M60 92V64M60 73c-11-2-15-11-13-21M60 68c11-2 15-11 13-21" stroke="#e8a08c" stroke-width="3" stroke-linecap="round" fill="none" opacity=".7"/><ellipse cx="60" cy="93" rx="18" ry="4" fill="#8a4a3a" opacity=".5"/>',
+    fang:'<path d="M47 34c9 11 16 24 16 37 0 12-6 20-12 23-2-14-7-30-13-43 4-6 6-12 9-17Z" fill="#eadfc6" stroke="#b9a98c" stroke-width="2.5" stroke-linejoin="round"/><path d="M52 48c3 9 5 18 4 28" stroke="#c9b99a" stroke-width="2" fill="none"/><path d="M44 36c-3 4-5 9-6 14" stroke="#b9a98c" stroke-width="2" fill="none"/>',
+    scale:'<path d="M60 33c20 8 28 24 24 40-4 12-14 18-24 18s-20-6-24-18c-4-16 4-32 24-40Z" fill="#5f9fb3" stroke="#356b7c" stroke-width="2.5"/><path d="M60 44c12 6 18 18 15 28" stroke="#bfe6ee" stroke-width="2.5" fill="none" opacity=".7"/><path d="M60 52c8 5 12 13 10 21" stroke="#bfe6ee" stroke-width="2" fill="none" opacity=".5"/><path d="M43 48l34 34" stroke="#356b7c" stroke-width="1.5" opacity=".4"/>',
+    amber:'<path d="M41 63 52 42l23 3 9 22-15 18-23-4Z" fill="#d99a4e" stroke="#8a5a2f" stroke-width="2.5" stroke-linejoin="round"/><path d="M48 60l17 2 6 11" stroke="#f0c06a" stroke-width="3" fill="none" opacity=".8"/><circle cx="58" cy="59" r="4" fill="#8a5a2f" opacity=".7"/><circle cx="67" cy="70" r="2.5" fill="#8a5a2f" opacity=".6"/>',
+    bone:'<path d="M42 43a8 8 0 1 0-3 14l19 19a8 8 0 1 0 14 3 8 8 0 1 0 3-14L56 46a8 8 0 1 0-14-3Z" fill="#e6dcc6" stroke="#b9ab90" stroke-width="2.5" stroke-linejoin="round"/><path d="M47 50l20 20" stroke="#c9bda4" stroke-width="2" fill="none"/>',
+    pearl:'<path d="M33 70c0-9 12-14 27-14s27 5 27 14c0 10-12 17-27 17S33 80 33 70Z" fill="#8f7a8f" stroke="#5f4f5f" stroke-width="2.5"/><path d="M38 68c6-6 14-8 22-8s16 2 22 8" stroke="#b9a3b9" stroke-width="2" fill="none" opacity=".8"/><circle cx="60" cy="65" r="14" fill="#f0e6ef"/><circle cx="55" cy="60" r="4" fill="#fff" opacity=".9"/><path d="M33 70c4 4 10 6 27 6s23-2 27-6" stroke="#5f4f5f" stroke-width="2" fill="none" opacity=".4"/>',
+    figurehead:'<path d="M43 88l3-36c0-11 9-18 18-15 12 4 15 18 8 28l4 23Z" fill="#b08a62" stroke="#7a5f4b" stroke-width="2.5" stroke-linejoin="round"/><path d="M52 48c6-3 12 0 13 6" stroke="#4a3526" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="55" cy="59" r="2" fill="#4a3526"/><circle cx="66" cy="59" r="2" fill="#4a3526"/><path d="M58 66c3 2 6 2 9 0" stroke="#4a3526" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M47 76h20" stroke="#8a6a4a" stroke-width="2" opacity=".6"/>',
+    map:'<path d="M34 42l36-7 16 13-4 36-31 6-14-12Z" fill="#d8c9a3" stroke="#8f7a55" stroke-width="2.5" stroke-linejoin="round"/><path d="M46 53c9-4 15 5 23 0M47 68c9-4 15 6 23 1" stroke="#8f7a55" stroke-width="2" stroke-dasharray="4 4" fill="none"/><circle cx="70" cy="61" r="4" fill="#e0533f"/><path d="M70 61l8-8" stroke="#e0533f" stroke-width="2"/>',
+    mapdeep:'<path d="M34 42l36-7 16 13-4 36-31 6-14-12Z" fill="#b9cdd2" stroke="#5f8794" stroke-width="2.5" stroke-linejoin="round"/><path d="M45 55c8-5 16 5 24-1M48 70c8-5 14 4 21 0" stroke="#5f8794" stroke-width="2" stroke-dasharray="4 4" fill="none"/><circle cx="69" cy="61" r="4" fill="#e0533f"/><path d="M69 61l-9-9" stroke="#e0533f" stroke-width="2"/><path d="M41 79l38-38" stroke="#e0533f" stroke-width="1.5" opacity=".35"/>',
+    heart:'<path d="M60 90C37 74 30 58 37 46c6-11 19-9 23 3 4-12 17-14 23-3 7 12 0 28-23 44Z" fill="#d9534f" stroke="#8a2f2f" stroke-width="2.5" stroke-linejoin="round"/><path d="M60 47v35M60 55l-8 8M60 63l8 8" stroke="#f3b0a0" stroke-width="2.5" stroke-linecap="round" opacity=".8"/><path d="M44 48c-4 7-3 15 2 22" stroke="#f3b0a0" stroke-width="2.5" fill="none" opacity=".5"/>',
+    crown:'<path d="M34 77 30 42l18 14 12-22 12 22 18-14-4 35Z" fill="#e0b04f" stroke="#a87822" stroke-width="2.5" stroke-linejoin="round"/><rect x="32" y="77" width="56" height="11" rx="5" fill="#b8862f"/><circle cx="60" cy="52" r="4" fill="#e0533f"/><circle cx="43" cy="52" r="3" fill="#f2ead9"/><circle cx="77" cy="52" r="3" fill="#f2ead9"/><path d="M38 70h44" stroke="#f2ead9" stroke-width="2" opacity=".35"/>',
+    crate:'<rect x="33" y="46" width="54" height="42" rx="8" fill="#a98a63" stroke="#6f563f" stroke-width="2.5"/><path d="M33 58h54M52 46v42M68 46v42" stroke="#7a5f4b" stroke-width="3"/><path d="M38 50l44 34" stroke="#c9a878" stroke-width="2" opacity=".5"/>',
+    barrel:'<path d="M45 38c-9 15-9 35 0 50h30c9-15 9-35 0-50Z" fill="#b08a62" stroke="#6f563f" stroke-width="2.5"/><path d="M42 52h36M42 74h36" stroke="#6f563f" stroke-width="4"/><path d="M45 38c8 4 22 4 30 0" stroke="#8a6a4a" stroke-width="2" fill="none" opacity=".7"/>',
+    chest:'<rect x="30" y="54" width="60" height="34" rx="6" fill="#8a4a3a" stroke="#5f2f26" stroke-width="2.5"/><path d="M30 60c0-14 60-14 60 0v4H30Z" fill="#a05a44" stroke="#5f2f26" stroke-width="2.5"/><rect x="54" y="60" width="12" height="16" rx="3" fill="#e0b04f"/><circle cx="60" cy="67" r="2" fill="#5f2f26"/><path d="M36 66h12M72 66h12" stroke="#c98a6a" stroke-width="2" opacity=".6"/>'
+  };
+
+  function artSVG(key, rarity){
+    var c = RARITY[rarity].color;
+    var inner = SHAPES[key] || SHAPES.shell;
+    return '<svg viewBox="0 0 120 120" aria-hidden="true">'
+      + '<rect x="4" y="4" width="112" height="112" rx="24" fill="#0a2029"/>'
+      + '<circle cx="60" cy="56" r="38" fill="' + c + '" opacity=".07"/>'
+      + inner
+      + '<rect x="5.5" y="5.5" width="109" height="109" rx="22.5" fill="none" stroke="' + c + '" stroke-opacity=".5" stroke-width="2" stroke-dasharray="5 7"/>'
+      + '</svg>';
+  }
+
+  var state = {rarity:0, sea:0};
+
+  var gridEl = document.getElementById('grid');
+  var cargoGridEl = document.getElementById('cargoGrid');
+  var countEl = document.getElementById('count');
+  var cargoCountEl = document.getElementById('cargoCount');
+  var emptyEl = document.getElementById('empty');
+  var colNumEl = document.getElementById('colNum');
+  var cargoNumEl = document.getElementById('cargoNum');
+  var modalEl = document.getElementById('modal');
+
+  function rarityChip(label, val){
+    var color = val ? RARITY[val].color : '#9fb4ba';
+    return '<button class="chip" type="button" data-r="' + val + '" aria-pressed="false">'
+      + (val ? '<span class="dot" style="background:' + color + '"></span>' : '')
+      + label + '</button>';
+  }
+  function seaChip(label, val){
+    return '<button class="chip" type="button" data-s="' + val + '" aria-pressed="false">' + label + '</button>';
+  }
+
+  document.getElementById('rarityChips').innerHTML =
+    rarityChip('全部', 0) + rarityChip('常见', 1) + rarityChip('少见', 2) + rarityChip('孤品', 3);
+  document.getElementById('seaChips').innerHTML =
+    seaChip('全部', 0) + seaChip('近海', 1) + seaChip('中层', 2) + seaChip('深海', 3);
+
+  function syncChips(){
+    var rs = document.querySelectorAll('#rarityChips .chip');
+    for(var i=0;i<rs.length;i++){
+      rs[i].setAttribute('aria-pressed', String(Number(rs[i].getAttribute('data-r')) === state.rarity));
+    }
+    var ss = document.querySelectorAll('#seaChips .chip');
+    for(var j=0;j<ss.length;j++){
+      ss[j].setAttribute('aria-pressed', String(Number(ss[j].getAttribute('data-s')) === state.sea));
+    }
+  }
+
+  function itemCard(it){
+    var r = RARITY[it.rarity];
+    var cap = capFor(it.slot);
+    var valueFact = it.relic ? '展厅不计游客' : '展厅 +' + r.visit + ' 客流/日';
+    return '<article class="card" data-id="' + it.id + '" tabindex="0" role="button" aria-label="' + it.name + ' 详情" style="--accent:' + r.color + '">'
+      + '<div class="art">' + artSVG(it.art, it.rarity) + '</div>'
+      + '<div class="body">'
+        + '<div class="top"><span class="badge" style="color:' + r.color + ';border-color:' + r.color + '66;background:' + r.color + '14">' + r.name + '</span><span class="slot">#' + it.slot + '</span></div>'
+        + '<h3>' + it.name + '</h3>'
+        + '<div class="sub">' + SEA[it.sea] + ' · ' + it.kind + '</div>'
+        + '<div class="facts"><span class="fact">' + valueFact + '</span><span class="fact">柜内 1×1</span><span class="fact">L' + cap.lv + ' · ' + cap.cap + ' 格</span></div>'
+        + '<div class="src">' + it.source + '</div>'
+      + '</div>'
+    + '</article>';
+  }
+
+  function cargoCard(c){
+    var r = RARITY[c.rarity];
+    return '<article class="card cargo-card" data-cargo="' + c.rarity + '" tabindex="0" role="button" aria-label="' + c.name + ' 详情" style="--accent:' + r.color + '">'
+      + '<div class="art">' + artSVG(c.art, c.rarity) + '</div>'
+      + '<div class="body">'
+        + '<div class="top"><span class="badge" style="color:' + r.color + ';border-color:' + r.color + '66;background:' + r.color + '14">' + r.name + '</span><span class="slot">' + c.tier + ' 档</span></div>'
+        + '<h3>' + c.name + '</h3>'
+        + '<div class="big">≈ ' + c.meanItem + ' <small>币 / 件</small></div>'
+        + '<div class="sub">每格 ' + c.per + ' · 占 ' + c.fp + '</div>'
+        + '<div class="facts"><span class="fact">' + c.seaText + '</span><span class="fact no">不能进展厅</span></div>'
+        + '<div class="src">' + c.chest + '；单件均值按每格中值 × 占格推导</div>'
+      + '</div>'
+    + '</article>';
+  }
+
+  function render(){
+    var list = ITEMS.filter(function(it){
+      return (!state.rarity || it.rarity === state.rarity) && (!state.sea || it.sea === state.sea);
+    });
+    gridEl.innerHTML = list.map(itemCard).join('');
+    emptyEl.style.display = list.length ? 'none' : 'block';
+    countEl.innerHTML = '显示 <b>' + list.length + '</b> / 14 件藏品';
+    colNumEl.textContent = list.length + ' / 14 件';
+
+    var clist = CARGO.filter(function(c){ return !state.rarity || c.rarity === state.rarity; });
+    cargoGridEl.innerHTML = clist.map(cargoCard).join('');
+    cargoCountEl.innerHTML = '货值件 <b>' + clist.length + '</b> / 3 档';
+    cargoNumEl.textContent = clist.length + ' / 3 档';
+    syncChips();
+  }
+
+  function row(k, v){
+    return '<div class="drow"><span class="k">' + k + '</span><span class="v">' + v + '</span></div>';
+  }
+
+  function openItem(id){
+    var it = null;
+    for(var i=0;i<ITEMS.length;i++){ if(ITEMS[i].id === id){ it = ITEMS[i]; break; } }
+    if(!it) return;
+    var r = RARITY[it.rarity];
+    var cap = capFor(it.slot);
+    var poolN = POOL[it.sea][it.rarity];
+    var html = '<div class="modal-card" role="document">'
+      + '<button class="modal-close" type="button" aria-label="关闭">✕</button>'
+      + '<div class="dhead">'
+        + '<div class="dart">' + artSVG(it.art, it.rarity) + '</div>'
+        + '<div><span class="badge" style="color:' + r.color + ';border-color:' + r.color + '66;background:' + r.color + '14">' + r.name + ' · ' + it.kind + '</span>'
+        + '<h2>' + it.name + '</h2>'
+        + '<p class="dsub">' + SEA[it.sea] + ' · ' + it.source + '</p></div>'
+      + '</div>'
+      + '<div class="dtable">'
+        + row('稀有度', r.name + '（权重 ' + r.w + '）')
+        + row('品类', it.kind)
+        + row('产出海域', SEA[it.sea] + '（同海域同档池 ' + poolN + ' 件）')
+        + row('产出柜型', it.source)
+        + row('展厅槽位', '#' + it.slot + '（第 ' + Math.ceil(it.slot/5) + ' 行）')
+        + row('展厅容量', '需本体 Lv' + cap.lv + '（上限 ' + cap.cap + ' 格）')
+        + (it.relic
+            ? row('展厅价值', '<b>不计游客</b> · 可陈列，提供跨局效果')
+            : row('展厅价值', '<b>+' + r.visit + ' 客流/日</b> · 捐赠 +' + r.donate + ' 币/日'))
+        + row('占格', '柜内 1×1 · 货舱 0 · 展位 1')
+        + row('能否卖', '否 · 藏品不可卖、不折币')
+        + row('能否陈列', '是 · 登记后进入陈列柜')
+        + (it.rarity === 3 ? row('每局上限', '孤品 ≤ 1/局；圣物 ≤ 1/局') : '')
+      + '</div>'
+      + '<p class="dnote">' + it.note + '</p>'
+      + '<p class="dsrc">数据：spec.md §2 L56–69、§3 L89–110、§6.1 L210–215、§6.3 L231–234；展厅经济 收藏馆设计 L38 / L47 / L60；容量 port.lua L141–146。</p>'
+    + '</div>';
+    modalEl.innerHTML = html;
+    modalEl.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    var closeBtn = modalEl.querySelector('.modal-close');
+    if(closeBtn) closeBtn.focus();
+  }
+
+  function openCargo(rarity){
+    var c = null;
+    for(var i=0;i<CARGO.length;i++){ if(CARGO[i].rarity === rarity){ c = CARGO[i]; break; } }
+    if(!c) return;
+    var r = RARITY[c.rarity];
+    var html = '<div class="modal-card" role="document">'
+      + '<button class="modal-close" type="button" aria-label="关闭">✕</button>'
+      + '<div class="dhead">'
+        + '<div class="dart">' + artSVG(c.art, c.rarity) + '</div>'
+        + '<div><span class="badge" style="color:' + r.color + ';border-color:' + r.color + '66;background:' + r.color + '14">' + r.name + ' · 货值件</span>'
+        + '<h2>' + c.name + '</h2>'
+        + '<p class="dsub">' + c.tier + ' 档 · ' + c.fp + '</p></div>'
+      + '</div>'
+      + '<div class="dtable">'
+        + row('稀有度档', r.name)
+        + row('货值档', c.tier + ' 档 · ' + c.name)
+        + row('每格价值', c.per + ' 币（中值 ' + c.meanCell + '）')
+        + row('典型占格', c.fp)
+        + row('单件均值', '<b>≈ ' + c.meanItem + ' 币</b>（推导）')
+        + row('出现海域', c.seaText)
+        + row('柜型', '任意柜型；每柜通货件数 补给 1.2 / 宝藏 1.8 / 巢穴 2.5 / 沉船 1.0 / Boss 3.0')
+        + row('能否陈列', '<b>否 · 只能卖</b>')
+        + row('死亡 / 超时', '返还 20% / 10%，均封顶最贵单件')
+      + '</div>'
+      + '<p class="dnote">' + c.note + '</p>'
+      + '<p class="dsrc">数据：loot.lua L21–51、L57–61、L68–71、L73–79、L199；宝箱设计 §1.5 L95–99、§3.2 L169–175、§4.2 L213–219、§4.4 L240–247。</p>'
+    + '</div>';
+    modalEl.innerHTML = html;
+    modalEl.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    var closeBtn = modalEl.querySelector('.modal-close');
+    if(closeBtn) closeBtn.focus();
+  }
+
+  function closeModal(){
+    modalEl.classList.remove('open');
+    modalEl.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('rarityChips').addEventListener('click', function(e){
+    var btn = e.target.closest('.chip');
+    if(!btn) return;
+    state.rarity = Number(btn.getAttribute('data-r')) || 0;
+    render();
+  });
+  document.getElementById('seaChips').addEventListener('click', function(e){
+    var btn = e.target.closest('.chip');
+    if(!btn) return;
+    state.sea = Number(btn.getAttribute('data-s')) || 0;
+    render();
+  });
+
+  gridEl.addEventListener('click', function(e){
+    var card = e.target.closest('[data-id]');
+    if(card) openItem(card.getAttribute('data-id'));
+  });
+  gridEl.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter' && e.key !== ' ') return;
+    var card = e.target.closest('[data-id]');
+    if(card){ e.preventDefault(); openItem(card.getAttribute('data-id')); }
+  });
+  cargoGridEl.addEventListener('click', function(e){
+    var card = e.target.closest('[data-cargo]');
+    if(card) openCargo(Number(card.getAttribute('data-cargo')));
+  });
+  cargoGridEl.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter' && e.key !== ' ') return;
+    var card = e.target.closest('[data-cargo]');
+    if(card){ e.preventDefault(); openCargo(Number(card.getAttribute('data-cargo'))); }
+  });
+
+  modalEl.addEventListener('click', function(e){
+    if(e.target === modalEl || e.target.closest('.modal-close')) closeModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && modalEl.classList.contains('open')) closeModal();
+  });
+
+  function buildCabinet(){
+    var rows = [
+      {r:1,label:'常见',range:'槽 1–5'},
+      {r:2,label:'少见',range:'槽 6–10'},
+      {r:3,label:'孤品',range:'槽 11–14'}
+    ];
+    var out = '';
+    for(var i=0;i<rows.length;i++){
+      var rowDef = rows[i];
+      out += '<div class="cab-row"><div class="cab-meta"><b style="color:' + RARITY[rowDef.r].color + '">' + rowDef.label + '</b><span>' + rowDef.range + '</span></div><div class="cab-cells">';
+      for(var s=1;s<=5;s++){
+        var slot = i*5 + s;
+        if(slot === 15){
+          out += '<div class="cab-cell locked" title="第 15 格未开放"><span class="n">15</span><span class="nm">未开放</span></div>';
+          continue;
+        }
+        var item = null;
+        for(var k=0;k<ITEMS.length;k++){ if(ITEMS[k].slot === slot){ item = ITEMS[k]; break; } }
+        if(!item) continue;
+        var cap = capFor(slot);
+        var color = RARITY[item.rarity].color;
+        out += '<div class="cab-cell" title="' + item.name + ' · 需展厅 Lv' + cap.lv + '（' + cap.cap + ' 格）" style="border-color:' + color + '55">'
+          + '<span class="lv">L' + cap.lv + '</span>'
+          + '<span class="n">#' + slot + '</span>'
+          + '<span class="nm">' + item.short + '</span>'
+          + '</div>';
+      }
+      out += '</div></div>';
+    }
+    document.getElementById('cabinet').innerHTML = out;
+  }
+
+  buildCabinet();
+  render();
+})();
+</script>
+</body>
+</html>
