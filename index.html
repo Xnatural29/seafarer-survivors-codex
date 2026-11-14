@@ -446,7 +446,7 @@
       <div class="stat teal"><div class="n">471<small>币</small></div><div class="lbl">单局期望 = 1 份</div></div>
       <div class="stat amber"><div class="n">17.4<small>局</small></div><div class="lbl">满池周期（残响瓶颈）</div></div>
       <div class="stat"><div class="n">96.0<small>%</small></div><div class="lbl">存活基线（门槛 85%）</div></div>
-      <div class="stat orange"><div class="n">2.20<small>×</small></div><div class="lbl">第二章 Boss 血系数（未复跑）</div></div>
+      <div class="stat orange"><div class="n">2.20<small>×</small></div><div class="lbl">第二章 Boss 血系数（B 档通关 80.7%）</div></div>
     </div>
 
     <h3 class="sh">1. 核心循环</h3>
@@ -555,8 +555,20 @@
     </table></div>
     <ul class="rules">
       <li><b>Boss 系数推导</b>：<span class="mono">boss_hp = floor(boss_base.hp × boss_coeff.hp + 0.5)</span>。基线是第一章 6,000 血 / 55 速 / 20 接触 / 12 弹伤；第二章系数 hp 2.20、speed 1.13、contact 1.20、bullet 1.00 → 13,200 血 / 62 速 / 24 接触伤。系数是为了让第二章 TTK 落进 20–25s。</li>
-      <li><b>实测</b>：第一章 6,000 血通关 86.7%（定档），HEAD 85.3% / 存活 96.0% / TTK 中位 10.5s；第二章 9,000 血旧读数 74.0% 通关、TTK 23s、入场中位血量 130。<b>13,200 血未复跑</b>。</li>
-      <li class="warn"><b>冲突</b>：<span class="mono">chapters.lua</span> 第二章通关带是 <b>70–80%</b>，怪物池 spec 写「守住 B 档 78–82%」。本总纲以代码 70–80% 为运行时校验口径，78–82% 记为设计目标，待统一。</li>
+      <li><b>第一章实测</b>：6,000 血通关 86.7%（定档），HEAD 85.3% / 存活 96.0% / TTK 中位 10.5s。</li>
+      <li><b>第二章 13,200 血（系数 2.20）已复跑</b>：A/B/C 三档各 150 局（seeds 71–220，提交 <span class="mono">341f762</span>）。</li>
+    </ul>
+    <div class="tw"><table>
+      <thead><tr><th>档</th><th>存活</th><th>通关</th><th>P10 进 Boss 血量</th><th>kill-only TTK 中位</th></tr></thead>
+      <tbody>
+        <tr><td>A 裸档</td><td class="num">92.7%</td><td class="num">24.7%</td><td class="num">48</td><td class="num">18.2s</td></tr>
+        <tr><td>B 通关两次积累</td><td class="num">100%</td><td class="num"><b>80.7%</b></td><td class="num">71</td><td class="num">27.2s<br><span class="dim">P25 13.8 / P75 41.8</span></td></tr>
+        <tr><td>C 满成长</td><td class="num">100%</td><td class="num">82.7%</td><td class="num">74</td><td class="num">16.4s</td></tr>
+      </tbody>
+    </table></div>
+    <ul class="rules">
+      <li><b>对照目标</b>：B 通关 80.7% 落在 78–82% 内（达标），B P10 71 ≥68.5（达标），B TTK 27.2s 超上限 <b>2.2s（未达）</b>；C 通关 82.7% 低于 85–92% 目标 <b>2.3pp（未达）</b>。</li>
+      <li class="warn"><b>冲突</b>：<span class="mono">chapters.lua</span> 第二章通关带是 <b>70–80%</b>，这是运行时校验值，以它为准；怪物池 spec 的「78–82%」是给<b>扩充后</b>定的目标区间，不描述现状。</li>
     </ul>
     <p class="srcnote">出处：<span class="mono">chapters.lua</span> L8-9 / L138-375 / L433-447；<span class="mono">balance-master.md</span> §1.7i；<span class="mono">balance.md</span> L289；<span class="mono">20261113_夜间工作清单.md</span> L117。</p>
 
@@ -567,7 +579,7 @@
         <tr><td>存活率</td><td><b>96.0%（144/150）</b></td><td>98.7%（148/150）</td><td><b>≥85%</b></td></tr>
         <tr><td>P10surv</td><td><b>68.5</b></td><td>72.2</td><td><b>≥60</b></td></tr>
         <tr><td>整体通关率</td><td><b>85.3%（128/150）</b></td><td>88.0%（132/150）</td><td>随存活同批报，不单列</td></tr>
-        <tr><td>Boss TTK 中位</td><td>10.5s（第一章）</td><td>—</td><td>第一章 8–12s / 第二章 20–25s</td></tr>
+        <tr><td>Boss TTK 中位</td><td>10.5s（第一章）；27.2s（第二章 B 档）</td><td>—</td><td>第一章 8–12s / 第二章 20–25s</td></tr>
       </tbody>
     </table></div>
     <ul class="rules">
@@ -595,7 +607,7 @@
       <li><b>抽取规则</b>：两级抽取（先抽物种集合，再按编队 mix_scale 归一化配比）+ 物种 tag 约束章节主题 + 精英/Boss 改袋抽、3 局内不重复。</li>
       <li><b>验收</b>：构成重复率 ≤5%、首见率 ≥60%、池覆盖率 100%、精英/Boss 重复间隔 ≥2 局；同时守住第二章通关带、TTK 20–25s、第一章 <span class="mono">TOTAL_DIFF = 0</span>。</li>
       <li class="warn"><b>风险</b>：池子稀释会让第二章变轻；上线前必须重跑 A/B/C，跌出区间<b>回收权重</b>，不要加 Boss 血量。</li>
-      <li><b>未落地</b>：船体部件化 8.40 份（无代码表）；第二章 13,200 血（无复跑读数）；三相共鸣 roster 值 0.00（刻意留空）；剑圣（仓库检索不到，全新提案）；展厅收益量级（代码 192 币/h vs 文档 40 币/日）。</li>
+      <li><b>未落地</b>：船体部件化 8.40 份（无代码表）；三相共鸣 roster 值 0.00（刻意留空）；剑圣（仓库检索不到，全新提案）；展厅收益量级（代码 192 币/h vs 文档 40 币/日）。</li>
       <li><b>挂起待确认</b>：D1 第二章 B1/B2 · D2 整表重定价 · D3 TTK 口径 · D4 云存档/排行榜 · D5 广告 · D6 每局随机组成 · D7 怪物池批 1 · D8 特效三条 · D9 装货先横放 · D10 天赋入口 · D11 mage_roster · D12 剑圣。</li>
     </ul>
     <p class="srcnote">出处：<span class="mono">docs/spec/20261114_怪物池扩充_设计/spec.md</span> §2.2 / §3 / §4 / §5–§7；<span class="mono">docs/spec/20261114_三系特效与实体受击反馈_规划/spec.md</span> L17-31 / L183-224；待确认条目见本页「待确认」节。</p>
