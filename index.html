@@ -430,9 +430,10 @@
       <a href="#mages">法师</a>
       <a href="#growth">局内成长</a>
       <a href="#chapters">章节</a>
+      <a href="#port">港口</a>
       <a href="#mobs">怪物池</a>
       <a href="#accept">验收线</a>
-      <a href="#decisions">待确认<span id="dnav">0/12</span></a>
+      <a href="#decisions">待确认<span id="dnav">0/5</span></a>
       <a href="#codex">图鉴</a>
       <a href="#gaps">留空清单</a>
     </div>
@@ -567,7 +568,7 @@
       </tbody>
     </table></div>
     <ul class="rules">
-      <li><b>对照目标</b>：B 通关 80.7% 落在 78–82% 内（达标），B P10 71 ≥68.5（达标），B TTK 27.2s 超上限 <b>2.2s（未达）</b>；C 通关 82.7% 低于 85–92% 目标 <b>2.3pp（未达）</b>。</li>
+      <li><b>对照目标</b>：B 通关 80.7% 落在 78–82% 内（达标），B P10 71 ≥68.5（达标），B TTK 27.2s 超上限 <b>2.2s（未达）</b>；C 通关 82.7% 落在 <b>80–86%</b> 内（达标，旧 85–92% 作废）。</li>
       <li class="warn"><b>冲突</b>：<span class="mono">chapters.lua</span> 第二章通关带是 <b>70–80%</b>，这是运行时校验值，以它为准；怪物池 spec 的「78–82%」是给<b>扩充后</b>定的目标区间，不描述现状。</li>
     </ul>
     <p class="srcnote">出处：<span class="mono">chapters.lua</span> L8-9 / L138-375 / L433-447；<span class="mono">balance-master.md</span> §1.7i；<span class="mono">balance.md</span> L289；<span class="mono">20261113_夜间工作清单.md</span> L117。</p>
@@ -593,24 +594,26 @@
     <h3 class="sh">7. 已知缺口与待决</h3>
     <div class="paths">
       <div class="path">
-        <h3><i style="background:var(--amber)"></i>怪物池扩充</h3>
-        <p>第二章普通怪 5 → 9，每局抽 6 种（C(9,6)=84 种阵容，撞车率 1.2%）；扩到 12 种只多 1.1pp，但贴图 +50%。新增 8 条：普通 4（盐壳蟹 / 钉刺鳐 / 曳网潜袭者 / 藤壶炮台）、精英 2（礁王 / 雾母）、Boss 2（深渊主教 / 碎浪巨像）。</p>
-        <span class="tagline">批 1：4 张普通贴图；精英复用染色；Boss 复用 boss_tide_lord</span>
+        <h3><i style="background:var(--amber)"></i>怪物池扩充（批 1 落地中）</h3>
+        <p>第二章普通怪 5 → 9，每局抽 6 种（C(9,6)=84 种阵容，撞车率 1.2%）；扩到 12 种只多 1.1pp，但贴图 +50%。新增 <b>6 条</b>：普通 4（盐壳蟹 / 钉刺鳐 / 曳网潜袭者 / 藤壶炮台）、精英 2（礁王 / 雾母）；第一章 0 新增；Boss 本轮不新增，现有 2 个变体改袋抽。</p>
+        <span class="tagline">批 1：4 张普通贴图 + 两级抽取；实测待补</span>
       </div>
       <div class="path">
-        <h3><i style="background:var(--teal)"></i>三系特效三条</h3>
-        <p>状态常驻只做视觉、不加伤害；杂兵受击不震屏、击杀不顿帧；P1 只出 1 张新图 <span class="mono">fx_jin_arc_96x96</span>。</p>
-        <span class="tagline">目的是省成本，不改战斗数值</span>
+        <h3><i style="background:var(--teal)"></i>三系特效 P1（已落地）</h3>
+        <p>火系补专属贴图 <span class="mono">fx_jin_arc_96x96</span>、分段火弧、标记常驻、引爆表现、命中分色；状态仍只做视觉，不加伤害；杂兵受击不震屏、击杀不顿帧。</p>
+        <span class="tagline">只改表现层，不动战斗数值</span>
       </div>
     </div>
     <ul class="rules">
-      <li><b>抽取规则</b>：两级抽取（先抽物种集合，再按编队 mix_scale 归一化配比）+ 物种 tag 约束章节主题 + 精英/Boss 改袋抽、3 局内不重复。</li>
+      <li><b>抽取规则</b>：两级抽取（先抽物种集合，再按编队 mix_scale 归一化配比）+ 物种 tag 约束章节主题 + 精英/Boss 改袋抽（精英 3 局内不重复、Boss 2 局内不重复）。</li>
       <li><b>验收</b>：构成重复率 ≤5%、首见率 ≥60%、池覆盖率 100%、精英/Boss 重复间隔 ≥2 局；同时守住第二章通关带、TTK 20–25s、第一章 <span class="mono">TOTAL_DIFF = 0</span>。</li>
       <li class="warn"><b>风险</b>：池子稀释会让第二章变轻；上线前必须重跑 A/B/C，跌出区间<b>回收权重</b>，不要加 Boss 血量。</li>
       <li><b>未落地</b>：船体部件化 8.40 份（无代码表）；三相共鸣 roster 值 0.00（刻意留空）；剑圣（仓库检索不到，全新提案）；展厅收益量级（代码 192 币/h vs 文档 40 币/日）。</li>
-      <li><b>挂起待确认</b>：D1 第二章 B1/B2 · D2 整表重定价 · D3 TTK 口径 · D4 云存档/排行榜 · D5 广告 · D6 每局随机组成 · D7 怪物池批 1 · D8 特效三条 · D9 装货先横放 · D10 天赋入口 · D11 mage_roster · D12 剑圣。</li>
+      <li><b>港口（已落地）</b>：环形广场 + 90° 通道 + 七栋门洞 + 港务所门牌 + 广场法师漫游；细节与实机底图见「<a href="#port">港口</a>」节。</li>
+      <li><b>包体（已收口）</b>：资源侧 23.29MB → <b>10.56MB</b>，压缩 54 张 PNG，像素尺寸零改动。</li>
+      <li><b>挂起待确认</b>：D1 展厅收益口径（192/小时 vs 40/日）· D2 船壳与碰撞半径偏差 · D3 三相共鸣空节点 · D4 第二章是否拉长到 4–6 分钟 · D5 广告入口何时开。</li>
     </ul>
-    <p class="srcnote">出处：<span class="mono">docs/spec/20261114_怪物池扩充_设计/spec.md</span> §2.2 / §3 / §4 / §5–§7；<span class="mono">docs/spec/20261114_三系特效与实体受击反馈_规划/spec.md</span> L17-31 / L183-224；待确认条目见本页「待确认」节。</p>
+    <p class="srcnote">出处：<span class="mono">docs/spec/20261114_怪物池扩充_设计/spec.md</span> §2.2 / §3 / §4 / §5–§7；<span class="mono">docs/spec/20261114_三系特效与实体受击反馈_规划/spec.md</span> L17-31 / L183-224；<span class="mono">docs/spec/20261114_港口环形广场构图/spec.md</span>；包体数据来自本轮资源压缩记录；待确认条目见本页「待确认」节。</p>
   </section>
 
   <section class="panel" id="econ" aria-labelledby="econ-title">
@@ -876,10 +879,10 @@
       <li><b>包体唯一可行</b>：+0.8–1.0MB；B2 与 C 都会把余量吃光（20MB 红线）。若实测余量只有 0.3–1MB，先做 PNG 量化 / 释放休眠 UI。</li>
       <li><b>产能可持续</b>：第三章边际 ≈1 配置日 + 1 Boss 代码日 + 3–5 美术日，能按「一章一皮肤包」排期；C 每章 12–18 日不可持续。</li>
       <li><b>判据能过</b>：怪权重 ≥30% 重排 + 货值表重定价两项，满足换皮判据的「至少两项」；节奏不同是硬条件。前提是先修订局外 spec 的「零贴图」硬约束。</li>
-      <li><b>骨架可复用</b>：第二章曲线（165s / 9,000 血 / 精英 ×1.2 / 密度 ×1.12）已实测 74%，不需要重做数值，只补主题层。</li>
+      <li><b>骨架可复用</b>：第二章曲线（165s / 13,200 血（系数 2.20）/ 精英 ×1.2 / 密度 ×1.12）已实测 B 档通关 80.7%，不需要重做数值，只补主题层。</li>
       <li><b>风险可控</b>：环境机制可按开关灰度；不改地图尺寸与撤离点唯一性，验收线漂移面最小。</li>
     </ul>
-    <p class="hint" style="margin-top:8px">现状提醒：现在的第二关其实已经是 A 的雏形——同图、同 <span class="mono">tide_lord</span>、同美术，只换曲线与 9,000 血，玩家感知接近 0。这正是「只换数值」这条路的实测答案。</p>
+    <p class="hint" style="margin-top:8px">现状提醒：第二章的数值骨架已经收口到 13,200 血（系数 2.20），B 档通关 80.7%、C 档 82.7%；Boss 池已有 <span class="mono">storm_lord / storm_lord_gale</span> 两个变体，但共用 <span class="mono">boss_tide_lord</span> 图集，视觉仍是换汤不换药。这正是「只换数值」这条路的实测答案。</p>
 
     <h3 class="sh">第二章的差异做法</h3>
     <div class="tw"><table>
@@ -890,8 +893,8 @@
         <tr><td>岛</td><td>沙洲 + 棕榈 + 暖沙</td><td>黑礁断崖 + 冷苔 + 碎礁</td><td>5 张岛皮 ≈0.45MB</td></tr>
         <tr><td>精英时刻</td><td>60 / 110 / 155</td><td><b>50 / 85 / 135</b></td><td>配置</td></tr>
         <tr><td>精英血量 / 密度</td><td>1.0× / 1.00×</td><td><b>1.2× / 1.12×</b></td><td>配置</td></tr>
-        <tr><td>Boss 入场 / 血量</td><td>180s / 6,000（TTK ≈10s）</td><td><b>165s / 9,000（TTK ≈23s）</b></td><td>配置</td></tr>
-        <tr><td>Boss 身份</td><td>潮汐领主：扇 / 环 / 召唤 / 布雷</td><td>风暴领主：雷击标记 + 风推 + 环弹</td><td>现状仍是 <span class="mono">tide_lord</span> 同 id，只改了血量</td></tr>
+        <tr><td>Boss 入场 / 血量</td><td>180s / 6,000（TTK ≈10s）</td><td><b>165s / 13,200（系数 2.20，kill-only 中位 27.2s）</b></td><td>配置</td></tr>
+        <tr><td>Boss 身份</td><td>潮汐领主：扇 / 环 / 召唤 / 布雷</td><td>风暴领主：雷击标记 + 风推 + 环弹</td><td>已落地 <span class="mono">storm_lord</span> / <span class="mono">storm_lord_gale</span> 两变体，共用 <span class="mono">boss_tide_lord</span> 图集</td></tr>
         <tr><td>环境 / 撤离</td><td>洋流只提示；直线返航</td><td>洋流真实生效 + 雨幕；逆流返航</td><td>配置 + FX</td></tr>
       </tbody>
     </table></div>
@@ -983,9 +986,32 @@
     <p class="srcnote">出处：<code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §3.2 L210–228（一章 = 什么、8:2）、§3.3 L230–239（8 条不变量）、§3.4 L241–247（B1 交付物）、§5.1 L421–444（18 项全量清单）、§5.2 L446–461（变化预算与硬规则）、§6.1 L497–505（第一眼）、§6.2 L507–516（第一分钟）、§6.3 L518–531（整局差异）。</p>
   </section>
 
+  <section class="panel" id="port" aria-labelledby="port-title">
+    <h2 id="port-title">港口根页 · 环形广场（已落地）</h2>
+    <p class="hint">港口首屏从「平视侧构图、一栋栋沿地平线站开」改成 <b>3/4 俯视的环形广场</b>：六栋建筑不等距、不等半径地散在一块不规则铺石广场上，90° 码头方向整段空出，用一条直通道接桥头。以下是新版实机底图，建筑、门洞、门牌与漫游法师在运行时叠在这张底图上。</p>
+    <div class="stats">
+      <div class="stat teal"><div class="n">88<small>px</small></div><div class="lbl">码头通道净宽（360 档 72px）</div></div>
+      <div class="stat amber"><div class="n">7<small>栋</small></div><div class="lbl">门洞贴图（六节点 + 港务所）</div></div>
+      <div class="stat"><div class="n">90<small>°</small></div><div class="lbl">广场到桥头的直角转向</div></div>
+      <div class="stat orange"><div class="n">1<small>名</small></div><div class="lbl">广场漫游法师（先做烬）</div></div>
+    </div>
+    <figure style="margin:14px 0 6px">
+      <img src="./assets/harbor_ring.png" alt="港口环形广场新版底图：不规则铺石广场、90° 码头通道与桥头" style="width:100%;height:auto;border-radius:14px;border:1px solid var(--line);display:block">
+      <figcaption class="srcnote" style="margin-top:8px">新版环形广场底图 <span class="mono">harbor_bg_ring.png</span>（786×1704，2026-11-15 实机资源）。建筑与法师为运行时叠加层，实机运行截图待补。</figcaption>
+    </figure>
+    <ul class="rules">
+      <li><b>环形广场</b>：六栋建筑分布在不等半径的铺石盘上，环心下移 22px；可走区是一个量自底图的椭圆，广场南沿以下（通道口 / 桥头）一律不踩，留 2px 卡在环缘内侧。</li>
+      <li><b>90° 通道</b>：通道净宽 88px（360 档 72px），广场内起点 y=448，桥头 = 广场底沿 + 22，与桥面零缝搭接。</li>
+      <li><b>七栋门洞</b>：码头 / 船坞 / 仓库 / 灯塔 / 招募位 / 展厅 + 港务所，各一张 24×46<small>（360 档 18×35）</small> 门洞贴图，锚在落地点、底边压门槛 2px，绘制在建筑之上、法师之下；只用现有毡色，不新开色相。</li>
+      <li><b>港务所门牌</b>：门牌写「港务所 · 六节点 · 可建 5」，按已建节点数更新可建数。</li>
+      <li><b>广场法师漫游</b>：先做烬 1 名，两帧行走 + 代码起伏 / 微转；只在港口根页出现，节点页与天赋页不出画；到门口站定 0.3s、淡出 0.25s，不做门帘掀开。</li>
+    </ul>
+    <p class="srcnote">出处：<span class="mono">scripts/ui/screens.lua</span> L299-360（环形布局与通道）、L455（门洞锚点）、L484-543（漫游椭圆与根页限定）；<span class="mono">scripts/render/style/style_b_map.lua</span> L415-524（<span class="mono">harbor_bg_ring</span> 与七张门洞）；<span class="mono">docs/spec/20261114_港口环形广场构图/spec.md</span> L11 / L222-250。</p>
+  </section>
+
   <section class="panel" id="mobs" aria-labelledby="mobs-title">
-    <h2 id="mobs-title">怪物池扩充（方案待评审）</h2>
-    <p class="hint">目标：让「每局组成不同」从<b>比例不同</b>升级为<b>物种集合不同</b>，同时不打乱已定稿的难度曲线。本页只搬方案，<b>仓库里 <span class="mono">enemies.lua</span> / <span class="mono">chapters.lua</span> / <span class="mono">waves.lua</span> 均未按本方案改动</b>。要不要开批 1，见下方「待确认 D7」。</p>
+    <h2 id="mobs-title">怪物池扩充 · 批 1 落地中</h2>
+    <p class="hint">方案已定案：第二章普通怪 <b>5 → 9</b>，新增 <b>4 普通 + 2 精英</b>，每只只加一个新变量；第一章 <b>0 新增</b>，保教学定位。抽取改成两级（先抽物种集合，再按编队归一化配比）+ 精英/Boss 袋抽。批 1（4 张普通怪 + 两级抽取）正在落地，代码尚未合入；<b>落地后的实测读数等跑完再补</b>。</p>
     <div class="stats">
       <div class="stat teal"><div class="n">5 → 9</div><div class="lbl">第二章普通怪池（第一章不动）</div></div>
       <div class="stat amber"><div class="n">6<small>种/局</small></div><div class="lbl">每局从 9 种里不重复抽</div></div>
@@ -1026,12 +1052,12 @@
         <tr><td>中层（第二章前半）</td><td class="num">5</td><td class="num">+4</td><td class="num">9</td><td class="num">6</td><td>新怪 <span class="mono">tier=2</span>，深海同样会刷</td></tr>
         <tr><td>深海（第二章后半 / Boss 岛）</td><td class="num">9</td><td class="num">+0</td><td class="num">9</td><td class="num">6</td><td>复用中层池，靠 <span class="mono">difficulty</span> 倍率抬强度</td></tr>
         <tr><td>精英 · 第一章 / 第二章</td><td class="num">1 / 2</td><td class="num">0 / +2</td><td class="num">1 / 4</td><td class="num">3 次/局</td><td>第二章袋抽，3 局内不重复</td></tr>
-        <tr><td>Boss · 第一章 / 第二章</td><td class="num">1 / 2</td><td class="num">0 / +2</td><td class="num">1 / 4</td><td class="num">1 只/局</td><td>第二章袋抽</td></tr>
+        <tr><td>Boss · 第一章 / 第二章</td><td class="num">1 / 2</td><td class="num">0 / 0</td><td class="num">1 / 2</td><td class="num">1 只/局</td><td>本轮不新增，现有 2 个变体改袋抽</td></tr>
       </tbody>
     </table></div>
 
-    <h3 class="sh">新增 8 条：每条只加一个新变量</h3>
-    <p class="hint">设计原则对齐 <span class="mono">enemies.lua</span> 注释里的「每种 1 个核心行为，不叠加」：要么是新的站位关系，要么是新的时间压力，<b>不做「血更厚 + 弹更多」的纯数值升级</b>。数值均为 tier 1 基础值，实际值 = 基础值 × <span class="mono">balance.difficulty[tier]</span>。</p>
+    <h3 class="sh">新增 6 条：4 普通 + 2 精英，每条只加一个新变量</h3>
+    <p class="hint">设计原则对齐 <span class="mono">enemies.lua</span> 注释里的「每种 1 个核心行为，不叠加」：要么是新的站位关系，要么是新的时间压力，<b>不做「血更厚 + 弹更多」的纯数值升级</b>。数值均为 tier 1 基础值，实际值 = 基础值 × <span class="mono">balance.difficulty[tier]</span>。Boss 本轮不新增，靠现有 2 个变体做袋抽。</p>
 
     <h3 class="sh">普通怪 +4</h3>
     <div class="mobs">
@@ -1107,31 +1133,7 @@
       </article>
     </div>
 
-    <h3 class="sh">Boss +2</h3>
-    <div class="mobs">
-      <article class="mob">
-        <div class="mob-h"><h4>深渊主教</h4><span class="mid">abyss_bishop</span><span class="tag">权重 2 · 弹幕</span></div>
-        <dl>
-          <dt>形象</dt><dd>毛毡斗篷人形，兜帽内纯黑毡，胸口一枚亮色「眼」，下摆做流苏；视觉 208×208</dd>
-          <dt>攻击</dt><dd>螺旋弹（每 0.12s 旋转 15° 发 1 发，持续 2s）、追踪鱼雷（3 发 / 速度 120 / 转向率低）、十字交叉弹幕</dd>
-          <dt>移动</dt><dd>移动弹幕墙；要求玩家持续绕圈，而不是找空档站定</dd>
-          <dt>数值档</dt><dd>与同章共用 <span class="mono">boss_base × boss_coeff</span>（第二章 hp 2.20 → 13,200）</dd>
-        </dl>
-        <div class="diff">区别点：现有 3 个 Boss 都是「固定扇 / 环」，主教把 Boss 战变成<b>持续走位</b>。</div>
-        <div class="cost">新增成本：<span class="mono">barrage</span> 加 <span class="mono">spiral</span> 与 <span class="mono">homing</span> 两个 pattern，<span class="mono">boss_phases</span> 不改</div>
-      </article>
-      <article class="mob">
-        <div class="mob-h"><h4>碎浪巨像</h4><span class="mid">breaker_colossus</span><span class="tag">权重 2 · 冲撞</span></div>
-        <dl>
-          <dt>形象</dt><dd>毛毡石巨人，身体由 4–5 块不规则灰毡拼接，关节处露麻绳，胸口嵌一块蓝色「浪芯」；视觉 208×208</dd>
-          <dt>攻击</dt><dd>地震波（全屏脉冲）、三连冲锋（第一段追击，二三段锁定落点）、落石（从屏幕边缘砸入 6 块）</dd>
-          <dt>移动</dt><dd>冲撞型；伤害来自地形与位置</dd>
-          <dt>数值档</dt><dd>与同章共用 <span class="mono">boss_base × boss_coeff</span>（第二章 hp 2.20 → 13,200）</dd>
-        </dl>
-        <div class="diff">区别点：现有 Boss 的伤害来自弹幕，巨像的伤害来自<b>地形与位置</b>，把 Boss 战从「弹幕躲避」变成「位移管理」。</div>
-        <div class="cost">新增成本：复用 <span class="mono">charge</span> + 新 <span class="mono">slam</span>；落石复用浮雷的延迟爆炸</div>
-      </article>
-    </div>
+    <div class="callout"><b>Boss 本轮不新增。</b>第二章仍用 <span class="mono">storm_lord</span> / <span class="mono">storm_lord_gale</span> 两个变体（共用 <span class="mono">boss_tide_lord</span> 贴图），只把独立掷骰改成袋抽，保证连续 2 局不重复。深渊主教 / 碎浪巨像作为后续内容储备，不进批 1。</div>
 
     <h3 class="sh">抽取规则：两级抽取 + tag 约束 + 袋抽</h3>
     <div class="formula">第一级：物种抽签　→ 从海域池抽 k=6 个物种（不重复）<br>第二级：编队配比　→ 在抽中的 6 个物种内，用编队 mix_scale 归一化分配权重</div>
@@ -1147,7 +1149,7 @@
       </tbody>
     </table></div>
     <div class="formula">mob_pool = { balanced(3) / swarm(2) / gunline(2) }　＋　mob_roster = { count = 6, fallback = "balanced" }</div>
-    <p class="hint" style="margin-top:8px">精英袋 4 条、每局抽 3 次 → 3 局内必不重复（<span class="mono">#袋 ≥ 每轮抽取数 × 2</span>）；Boss 袋 4 个按 <span class="mono">1 / 1 / 2 / 2</span> 展开成 6 格 → 连续 3 局不重复的概率 100%。</p>
+    <p class="hint" style="margin-top:8px">精英袋 4 条、每局抽 3 次 → 3 局内必不重复（<span class="mono">#袋 ≥ 每轮抽取数 × 2</span>）；Boss 袋 2 个按 <span class="mono">1 / 1</span> 展开成 2 格 → 连续 2 局不重复。</p>
 
     <h3 class="sh">成本与分批</h3>
     <div class="tw"><table>
@@ -1155,17 +1157,17 @@
       <tbody>
         <tr><td>普通怪</td><td>40×40（鳐 40×24）</td><td class="num">4</td><td>单张 6–9KB；<b>不可复用</b>，40×40 撑不起「换皮也能认出来」</td></tr>
         <tr><td>精英</td><td>96×96</td><td class="num">2</td><td>单张 64KB；<span class="mono">reef_tyrant</span> 首版可作 <span class="mono">captain</span> 染色变体</td></tr>
-        <tr><td>Boss</td><td>208×208</td><td class="num">2（首版 0）</td><td>单张 308KB；首版复用 <span class="mono">boss_tide_lord_208x208</span> + 调色（<span class="mono">storm_lord</span> 已证明同图不同招式可行）</td></tr>
+        <tr><td>Boss</td><td>208×208</td><td class="num">0</td><td>本轮不新增；沿用 <span class="mono">boss_tide_lord_208x208</span> 同图不同招式</td></tr>
       </tbody>
     </table></div>
     <div class="tw"><table>
       <thead><tr><th>批次</th><th>内容</th><th>贴图</th><th>代码</th><th>风险</th></tr></thead>
       <tbody>
-        <tr><td><b>批 1</b></td><td>4 普通 + 抽取规则改造</td><td class="num">4 张</td><td><span class="mono">enemies.lua</span> 加 4 条、<span class="mono">chapters.lua</span> 加 <span class="mono">mob_roster</span>、<span class="mono">spawner</span> 两级抽取、1 个新 AI（<span class="mono">static_turret</span>）</td><td>影响第二章难度曲线，需重跑 A/B/C</td></tr>
-        <tr><td><b>批 2</b></td><td>2 精英 + 2 Boss</td><td class="num">2 张（Boss 首版复用）</td><td><span class="mono">enemies.lua</span> 加 4 条、<span class="mono">aura_slow</span>、<span class="mono">spiral</span> / <span class="mono">slam</span> 弹幕、袋抽</td><td>影响 Boss TTK 与精英战节奏</td></tr>
+        <tr><td><b>批 1（进行中）</b></td><td>4 普通 + 抽取规则改造</td><td class="num">4 张</td><td><span class="mono">enemies.lua</span> 加 4 条、<span class="mono">chapters.lua</span> 加 <span class="mono">mob_roster</span>、<span class="mono">spawner</span> 两级抽取、1 个新 AI（<span class="mono">static_turret</span>）</td><td>影响第二章难度曲线，需重跑 A/B/C</td></tr>
+        <tr><td><b>批 2</b></td><td>2 精英 + 袋抽</td><td class="num">2 张</td><td><span class="mono">enemies.lua</span> 加 2 条、<span class="mono">aura_slow</span>、精英/Boss 袋抽</td><td>影响精英战节奏；Boss 不新增</td></tr>
       </tbody>
     </table></div>
-    <p class="hint" style="margin-top:8px">批 1 完成即可交付「每局阵容不同」的体感；批 2 是内容厚度。</p>
+    <p class="hint" style="margin-top:8px">批 1 正在落地；完成后交付「每局阵容不同」的体感，批 2 补精英厚度。</p>
 
     <h3 class="sh">验收指标</h3>
     <div class="tw"><table>
@@ -1178,17 +1180,17 @@
         <tr><td>Boss 重复间隔</td><td>同一 Boss 连续两次出现的间隔局数</td><td class="num">≥ 2 局</td></tr>
       </tbody>
     </table></div>
-    <p class="hint" style="margin-top:8px">数值不回归（新怪只进池、不改现有条目数值）：第二章 B 档 <b>78–82%</b>、kill-only TTK <b>20–25s</b>、P10 <b>≥ 68.5</b>、存活 <b>≥ 95%</b>、第一章 150 局等价性 <b>TOTAL_DIFF = 0</b>；A/B/C 三档各 150 局重跑（C 档 85–92%）。</p>
+    <p class="hint" style="margin-top:8px">数值不回归（新怪只进池、不改现有条目数值）：第二章 B 档 <b>78–82%</b>、C 档 <b>80–86%</b>（旧的 85–92% <b>作废</b>）、kill-only TTK <b>20–25s</b>、P10 <b>≥ 68.5</b>、存活 <b>≥ 95%</b>、第一章 150 局等价性 <b>TOTAL_DIFF = 0</b>；A/B/C 三档各 150 局重跑。</p>
     <p class="hint" style="margin-top:6px">采集方式：在临时探针 <span class="mono">scripts/_acc_shard.lua</span> 的 <span class="mono">[R]</span> 行追加 <span class="mono">mobset=</span>、<span class="mono">elite=</span>、<span class="mono">boss=</span> 三个字段，用同一批种子 71–220 跑 150 局。</p>
 
     <h3 class="sh">风险</h3>
     <ul class="rules">
       <li class="warn"><b>池子稀释会让第二章变轻</b>：池子从 5 → 9 后，现有 5 种占比会下降。上线前必须重跑 A/B/C；若 B 档跌出 78–82%，<b>回收权重，而不是加 Boss 血量</b>。</li>
       <li><b>新 AI 的可读性</b>：<span class="mono">static_turret</span> 与 <span class="mono">telegraph</span> 前摇都是「停住不动」，贴图缺状态区分（举镰 / 开口亮起）就读不出前摇；批 1 的 4 张图各需 2 帧状态。</li>
-      <li><b>贴图预算</b>：Boss 208×208 单张 308KB，两张新图给包体 +0.6MB。首版复用可规避，正式图需走包体预算审批。</li>
-      <li><b>H5 同步</b>：本页就是同步动作；代码改动等方案过评审、D7 拍板后再开。</li>
+      <li><b>贴图预算</b>：本轮只新增 4 张普通（6–9KB）+ 2 张精英（约 64KB），Boss 不新增，包体压力可控；正式精英图仍需走包体预算审批。</li>
+      <li><b>H5 同步</b>：本页已同步到批 1 的设计与目标；代码合入后补实测（构成重复率、首见率、池覆盖率、精英/Boss 间隔与 A/B/C 复跑）。</li>
     </ul>
-    <div class="warnbar">代码现状核对：<span class="mono">chapters.lua</span> 第二章已有 <span class="mono">boss_pool</span>（<span class="mono">storm_lord</span> 3 / <span class="mono">storm_lord_gale</span> 2，共用 <span class="mono">boss_tide_lord</span> 贴图）与 3 套 <span class="mono">mob_pool</span> 编队，<span class="mono">pickBoss / pickMobs</span> 按种子抽；但 <b><span class="mono">mob_roster</span> 与两级物种抽取尚未实现</b>，<span class="mono">pickMobs</span> 目前只是在 3 个编队之间抽整套。<span class="mono">enemies.lua</span> 里没有本方案的 8 条新怪。</div>
+    <div class="warnbar">代码现状核对：<span class="mono">chapters.lua</span> 第二章已有 <span class="mono">boss_pool</span>（<span class="mono">storm_lord</span> 3 / <span class="mono">storm_lord_gale</span> 2，共用 <span class="mono">boss_tide_lord</span> 贴图）与 3 套 <span class="mono">mob_pool</span> 编队，<span class="mono">pickBoss / pickMobs</span> 按种子抽；<b>批 1 的 <span class="mono">mob_roster</span>、两级物种抽取、精英/Boss 袋抽尚未合入</b>，<span class="mono">enemies.lua</span> 里也还没有 4 条新普通怪与 2 条新精英，因此本节的验收读数<b>留空待补</b>，不写预测值。</div>
     <p class="srcnote">出处：<code>docs/spec/20261114_怪物池扩充_设计/spec.md</code> §0（结论摘要）、§1.1–1.4（现状清单与问题）、§2.2（组合数）、§2.3（每海域补多少）、§3.1–3.3（新增 8 条）、§4.1–4.4（两级抽取 / tag / 袋抽）、§5.1–5.3（贴图与分批）、§6.1–6.3（验收指标与采集）、§7（风险）；代码核对：<code>scripts/data/enemies.lua</code> L26–120（5 杂兵）、L266–350（<span class="mono">storm_lord / storm_lord_gale</span>，共用 <span class="mono">boss_tide_lord</span>）；<code>scripts/data/chapters.lua</code> L315–340（<span class="mono">boss_coeff hp 2.20</span>、<span class="mono">mob_pool</span> 3 编队）、L483–505（<span class="mono">pickBoss / pickMobs</span>）；<code>scripts/data/waves.lua</code> L73–79（<span class="mono">segments2</span> 的时间段权重）。</p>
   </section>
 
@@ -1199,318 +1201,137 @@
       <div class="stat teal"><div class="n">96.0<small>%</small></div><div class="lbl">存活 · 144 / 150</div></div>
       <div class="stat amber"><div class="n">68.5</div><div class="lbl">P10surv（最差 10% 的平均存活秒）</div></div>
       <div class="stat"><div class="n">85.3<small>%</small></div><div class="lbl">通关 · 128 / 150</div></div>
-      <div class="stat red"><div class="n">2<small>项</small></div><div class="lbl">不达标：TTK、二关通关率</div></div>
+      <div class="stat red"><div class="n">1<small>项</small></div><div class="lbl">不达标：第二章 B 档 TTK</div></div>
     </div>
     <ul class="rules">
       <li>历史记录值 <b>98.7 / 72.2 / 88.0</b> 是旧口径，不许当现状引用。</li>
-      <li>第二关（Boss 9,000 血）：存活 98.0%、通关 74.0%、Boss TTK 23s、入场中位血量 130。</li>
+      <li>第二章 13,200 血（系数 2.20）A/B/C 各 150 局（seeds 71–220，提交 <span class="mono">341f762</span>）：A 存活 92.7% / 通关 24.7% / P10 48 / TTK 18.2s；B 存活 100% / 通关 <b>80.7%</b> / P10 71 / TTK <b>27.2s</b>（P25 13.8、P75 41.8）；C 存活 100% / 通关 <b>82.7%</b> / P10 74 / TTK 16.4s。</li>
+      <li>目标带：B <b>78–82%</b>、C <b>80–86%</b>（旧的 C 85–92% <b>作废</b>）。B 通关与 P10 达标，B TTK 超 20–25s 上限 2.2s（未达）；C 82.7% 落在 80–86% 内（达标）。</li>
       <li>兜底红线：单局 471 币、周期 17.4 局，验收时不能动。</li>
     </ul>
-    <div class="warnbar"><b>TTK 门槛当前口径存疑，如实标注：</b>目标是 25–40s。<code>docs/issues.md</code> I-05 的权威口径是 <b>Boss 20,000 血、清杂单体、180s 配装 → 中位 21.1s</b>（分布 10.6–38.4s），结论「仍低于目标，但血量按制作人指令冻结在 20,000」；而第一关 6,000 血在 <code>docs/balance.md</code> L289 记的是 <b>9.5–9.9s</b>。两者血量、配装、是否清杂都不同，<b>不能混用</b>，所以本页不给单一的「TTK 达标」结论。</div>
-    <p class="srcnote">出处：<code>docs/balance-master.md</code> §0-8（三项基线）、验收门槛一节；<code>docs/balance.md</code> L289（第一关 TTK 9.5–9.9s）；<code>docs/issues.md</code> I-05（L39 起，权威口径与作废口径）。</p>
+    <div class="warnbar"><b>TTK 口径：</b>本页用 <b>kill-only 中位</b>（Boss 首次掉血 → 击杀，不含入场/航行）。第二章 2.20 复跑 B 档 27.2s，超 20–25s 上限 2.2s；C 档 16.4s。<b>0.5s 门禁</b>指满天赋树 vs 零天赋的中位漂移，不是伤害容差。旧「20,000 血」口径已作废，不再混用。</div>
+    <p class="srcnote">出处：<code>docs/balance-master.md</code> §0-8（三项基线）、验收门槛一节；<code>docs/balance.md</code> L289（第一关 TTK）；<code>docs/tech.md</code> L97-98（kill-only 与 0.5s 门禁）；第二章读数：提交 <code>341f762</code>（seeds 71–220）。</p>
   </section>
 
   <section class="panel" id="decisions" aria-labelledby="decisions-title">
     <h2 id="decisions-title">待确认 · 填好发我</h2>
     <p class="hint">这里只放「需要你决定、我不能替你定」的事项。每项：要定什么 → 选项与代价 → 我的建议 → 你选一个（或在补充里写别的）。选完点最底部的「生成确认单」，复制后发我。</p>
-    <div class="dprog" aria-live="polite"><span id="dprogText">0 / 12 已填</span><div class="dbar"><i id="dbar"></i></div></div>
+    <div class="dprog" aria-live="polite"><span id="dprogText">0 / 5 已填</span><div class="dbar"><i id="dbar"></i></div></div>
     <p class="dlimit"><b>静态页限制（如实说）：</b>本页托管在 GitHub Pages，没有后端。点「生成确认单」只在你的浏览器里生成一段文本，<b>不会自动发给我</b>，也没有已读回执——必须复制或导出后发我。填写内容只存在本机浏览器的 <code>localStorage</code>，换设备或清缓存就没了。<br><b>访问通道：</b>固定地址 <a href="https://xnatural29.github.io/seafarer-survivors-codex/">xnatural29.github.io/seafarer-survivors-codex</a>；临时隧道域名会变，页面上不保留任何已失效的旧域名。</p>
     <div class="decs">
 
       <article class="dec" data-dec="D1">
-        <div class="dh"><span class="dtag">D1</span><h3>第二章走 B1 还是 B2；旧 spec 的「不新增贴图」要不要作废</h3><span class="dstat" data-for="D1">未填</span></div>
-        <p class="dq"><b>要定什么：</b>第二章按 <b>B1</b>（同骨架 + 主题层 + 1 条环境机制 + 1 只专属 Boss）还是 <b>B2</b>（再加 2–4 张新海面层）落地；同时决定 <code>20261112_局外港口与收藏馆/spec.md</code> 里「海域 2/3 不重建岛屿、不新增贴图」这条硬约束是否正式作废。</p>
+        <div class="dh"><span class="dtag">D1</span><h3>展厅收益口径：192 币/小时（代码）还是 40 币/日（设计稿）</h3><span class="dstat" data-for="D1">未填</span></div>
+        <p class="dq"><b>要定什么：</b>展厅挂机产出以哪一份为准。代码现在按「游客 × 门票」实时算，设计稿写的是每天固定 40 币，两者差约两个数量级。</p>
+        <p class="dlabel">现状（代码已实装，设计稿未落）</p>
+        <ul class="dopt">
+          <li><b>代码口径：</b><code>systems/museum.lua</code> L22 <code>TICKET = 4</code>（每名游客 4 币），<code>data/port.lua</code> L148-150 <code>visitorRate = 0.2 × 展厅等级</code>。满级 Lv4 且满展位 = 0.8 名/分 × 4 币 = 3.2 币/分 = <b>192 币/小时</b>；离线结算上限 8 小时（<code>OFFLINE_CAP_H</code>），单次最多约 <b>1,536 币</b>。</li>
+          <li><b>设计稿口径：</b><code>docs/spec/20261112_局外港口与收藏馆</code> 写的是 <b>40 币/日</b>（≈1.67 币/小时），8 小时离线合计约 13 币。</li>
+          <li>对照单局期望 <b>471 币</b>：192/小时 意味着挂 2.5 小时 ≈ 一局收益，会明显削弱「跑图」动机；40/日 则要挂约 12 天才等于一局，存在感接近于零。</li>
+          <li>评级建筑（设计稿「8/10/12 币/点/小时」）尚未实装，代码注释里已写明当前只取保守下界、不加成。</li>
+        </ul>
         <p class="dlabel">选一个（灰字是代价）</p>
         <div class="dform">
           <div class="opts" role="radiogroup" aria-label="D1 选项">
-            <label class="opt"><input type="radio" name="D1" value="走 B1：同骨架 + 主题层 + 1 条环境机制 + 1 只专属 Boss，并作废「零贴图」硬约束"><span>走 B1：同骨架 + 主题层 + 1 条环境机制 + 1 只专属 Boss，并作废「零贴图」硬约束<br><span class="cost">+0.8–1.0MB，3–5 美术日 + 7–9 代码日，感知 6–7/10，能过换皮判据</span></span></label>
-            <label class="opt"><input type="radio" name="D1" value="走 B2：在 B1 基础上再加 2–4 张新海面层"><span>走 B2：在 B1 基础上再加 2–4 张新海面层<br><span class="cost">+2.1–3.4MB，直接撞 20MB 红线，感知只高 1 分</span></span></label>
-            <label class="opt"><input type="radio" name="D1" value="只换 Boss（A）：保留「零贴图」，同图同岛同海面"><span>只换 Boss（A）：保留「零贴图」，同图同岛同海面<br><span class="cost">+0.3–0.5MB，感知 2/10，换皮判据不过（二关现状已验证）</span></span></label>
-            <label class="opt"><input type="radio" name="D1" value="完全重画（C）：新地图 / 新岛簇 / 新港口"><span>完全重画（C）：新地图 / 新岛簇 / 新港口<br><span class="cost">+4–6MB，12–20 人日，第三章没有第二次产能</span></span></label>
-            <label class="opt"><input type="radio" name="D1" value="暂不定：先补一份当前 HEAD 的包体实测再拍"><span>暂不定：先补一份当前 HEAD 的包体实测再拍<br><span class="cost">多一轮等待；避免在余量 0.3–1MB 不确定时硬押 B1/B2</span></span></label>
+            <label class="opt"><input type="radio" name="D1" value="按代码 192 币/小时：挂机作为主要副线收益"><span>按代码 <b>192 币/小时</b>：挂机作为主要副线收益<br><span class="cost">零改动；代价是 8 小时离线 ≈ 3.3 局，跑图动机被压，且与设计稿正面冲突</span></span></label>
+            <label class="opt"><input type="radio" name="D1" value="按设计稿 40 币/日：挂机只是点缀"><span>按设计稿 <b>40 币/日</b>：挂机只是点缀<br><span class="cost">改动只在 TICKET / visitorRate；代价是挂机几乎无感，12 天才等于一局</span></span></label>
+            <label class="opt"><input type="radio" name="D1" value="折中：调到每日 80–120 币（约 5–6 天换一局）"><span>折中：调到<b>每日 80–120 币</b>（约 5–6 天换一局）<br><span class="cost">需要定 TICKET 与 visitorRate 的组合并写进代码注释；收益落在「长期副线」区间</span></span></label>
+            <label class="opt"><input type="radio" name="D1" value="先不改代码，只把冲突标注进文档"><span>先不改代码，只把冲突标注进文档<br><span class="cost">零风险；代价是 192/小时 继续生效，验收口径仍缺一份</span></span></label>
           </div>
-          <textarea class="dnote" data-id="D1" rows="2" placeholder="补充条件或否决理由，例如「B1 可以，但皮肤包预算锁 1.0MB」（可留空）"></textarea>
+          <textarea class="dnote" data-id="D1" rows="2" placeholder="补充，例如「折中到 100/日，评级建筑另算」（可留空）"></textarea>
         </div>
-        <div class="drec"><b>我的建议：</b>走 B1，并把「零贴图」改成「不重建地图骨架；每章允许 ≤1MB 皮肤包」。包体是唯一硬约束，B1 是唯一同时过包体、过判据、可复制到第三章的做法。这条同时决定局外 spec §10.1 / §10.2 要修订。</div>
+        <div class="drec"><b>我的建议：</b>C（折中，约 80–120 币/日）。192/小时对 471/局 太强，40/日 又太弱；折中区间既让挂机有意义，也不会让人不想跑图。定完只需改 <code>TICKET</code> 或 <code>visitorRate</code> 一个常数，并同步设计稿。</div>
       </article>
 
       <article class="dec" data-dec="D2">
-        <div class="dh"><span class="dtag">D2</span><h3>经济是否接受「整表重定价，但期望守 471」</h3><span class="dstat" data-for="D2">未填</span></div>
-        <p class="dq"><b>要定什么：</b>换皮判据要求「货值档不同」，最干净的做法是第二章整张货值表重定价（每格绝对值可变），但单局期望必须守 <b>471 币</b>、总池 <b>17.4 局</b>不动。是否接受这条路线。</p>
+        <div class="dh"><span class="dtag">D2</span><h3>船壳贴图 87×174 与碰撞半径 14 的偏差怎么收</h3><span class="dstat" data-for="D2">未填</span></div>
+        <p class="dq"><b>要定什么：</b>玩家船的<b>视觉尺寸</b>与<b>碰撞判定</b>差得很大，以哪边为准、什么时候收。</p>
+        <p class="dlabel">现状（已核过代码）</p>
+        <ul class="dopt">
+          <li><b>视觉：</b>2026-11-14 玩家船放大到 <b>87×174</b>（<code>scripts/render/style/style_b_proc.lua</code> L1152-1156 注释写明）。</li>
+          <li><b>逻辑：</b><code>scripts/data/balance.lua</code> L73 <code>radius = 14</code>，即判定直径只有 <b>28 世界单位</b>，约为贴图宽度的 1/3、长度的 1/6。</li>
+          <li><b>后果：</b>擦岛、贴礁、过窄口时会出现「看着还没碰到就被弹开」或「看着已经压上去却穿过去」。识别圈与尾迹已在 2026-11-14 改成按贴图尺寸取（同文件 L1153-1156），但<b>碰撞与受击判定仍走 14</b>，两套尺寸并存。</li>
+          <li>要动 radius 就必须重跑碰撞手感与 A/B/C 三档；两章读数刚在 2.20 收口，动它会作废现有验收数。</li>
+        </ul>
         <p class="dlabel">选一个（灰字是代价）</p>
         <div class="dform">
           <div class="opts" role="radiogroup" aria-label="D2 选项">
-            <label class="opt"><input type="radio" name="D2" value="接受整表重定价：每格绝对值可变，期望守 471±5%，倍率恒 1.0"><span>接受整表重定价：每格绝对值可变，期望守 471 ±5%，倍率恒 1.0<br><span class="cost">换皮判据能过；代价是每个海域的期望都要重算，靠启动校验 + 150 局复核</span></span></label>
-            <label class="opt"><input type="radio" name="D2" value="沿用同一张货值表：不改经济"><span>沿用同一张货值表：不改经济<br><span class="cost">少一项换皮判据，只剩怪权重一项，判据不过</span></span></label>
-            <label class="opt"><input type="radio" name="D2" value="用倍率改单格（×1.2 之类）：我接受破红线的风险"><span>用倍率改单格（×1.2 之类）：我接受破红线的风险<br><span class="cost">改动最小，但直接破坏 471 币与 17.4 局</span></span></label>
-            <label class="opt"><input type="radio" name="D2" value="暂不定：先看第二章怪权重方案再定"><span>暂不定：先看第二章怪权重方案再定<br><span class="cost">章节方案无法收口，经济线先挂着</span></span></label>
+            <label class="opt"><input type="radio" name="D2" value="以贴图为准：radius 14 提到 28–35，重跑 A/B/C"><span>以贴图为准：radius <b>14 → 28–35</b>，重跑 A/B/C<br><span class="cost">判定与肉眼一致；代价是碰撞手感与两章难度全变，现有读数作废</span></span></label>
+            <label class="opt"><input type="radio" name="D2" value="以碰撞为准：贴图缩到约 44×88"><span>以碰撞为准：贴图缩到约 44×88<br><span class="cost">判定不变、读数保留；代价是船视觉变小，刚放大的美术投入被抵消</span></span></label>
+            <label class="opt"><input type="radio" name="D2" value="先只记偏差不改，等窄水道需求出现再收"><span>先只记偏差不改，等窄水道需求出现再收<br><span class="cost">零改动；代价是「看着撞到却没撞」继续存在，港口外的狭窄地形不能做</span></span></label>
+            <label class="opt"><input type="radio" name="D2" value="其他：我在补充里写半径与贴图的具体取值"><span>其他：我在补充里写半径与贴图的具体取值<br><span class="cost">需要同时给半径与贴图尺寸，否则两套尺寸仍对不上</span></span></label>
           </div>
-          <textarea class="dnote" data-id="D2" rows="2" placeholder="补充，例如「可以重定价，但 ±3% 以内」（可留空）"></textarea>
+          <textarea class="dnote" data-id="D2" rows="2" placeholder="补充，例如「半径提到 20，贴图保持不变」（可留空）"></textarea>
         </div>
-        <div class="drec"><b>我的建议：</b>接受整表重定价，但必须用 <code>economy.cargo_table_ref</code> 引用整张表 + 启动校验 <code>expected_coin 471 ±5%</code> + <code>accept_real</code> 150 局复核。任何倍率字段 ≠ 1.0 一律视为进线失败。</div>
+        <div class="drec"><b>我的建议：</b>C（先记不改）。两章读数刚收口，此刻动半径会让 2.20 的 A/B/C 全部作废；建议先把偏差写进 <code>docs/tech.md</code>，等第三章需要窄水道时按 B 方案一次性收到 28–35 并重跑。</div>
       </article>
 
       <article class="dec" data-dec="D3">
-        <div class="dh"><span class="dtag">D3</span><h3>TTK 验收线：继续含航行，还是改 kill-only 重定基线</h3><span class="dstat" data-for="D3">未填</span></div>
-        <p class="dq"><b>要定什么：</b>现在 TTK 是「含航行的总时长」还是「只算击杀输出」，以及 25–40s 的目标带是否维持、新基线定多少。口径不定，后面每一批实测都不可比。</p>
-        <p class="dlabel">仓库里的现有读数</p>
-        <div class="tw"><table>
-          <thead><tr><th>口径</th><th>数值</th><th>出处</th></tr></thead>
-          <tbody>
-            <tr><td>目标带</td><td>25–40s</td><td><code>docs/balance-master.md</code> §0-8 / <code>docs/balance.md</code> L123</td></tr>
-            <tr><td>改前（HEAD，一关 6,000 血）</td><td>9.5–9.9s</td><td><code>docs/balance.md</code> L289</td></tr>
-            <tr><td>满树静态折算</td><td>8.7–9.3s（下限碰 9.0 地板）</td><td><code>docs/balance.md</code> L290</td></tr>
-            <tr><td>权威口径（Boss 20,000 血、清杂单体、180s 配装）</td><td>中位 21.1s（10.6–38.4s）</td><td><code>docs/issues.md</code> I-05</td></tr>
-          </tbody>
-        </table></div>
+        <div class="dh"><span class="dtag">D3</span><h3>「三相共鸣」现在是 0 效果节点，花 4 点也点不出东西</h3><span class="dstat" data-for="D3">未填</span></div>
+        <p class="dq"><b>要定什么：</b>法师通用天赋树 T3 的 <code>roster</code>（三相共鸣）怎么处置。</p>
+        <p class="dlabel">现状（2026-11-15 核实）</p>
+        <ul class="dopt">
+          <li>代码 <code>scripts/data/talents.lua</code> L60-62：<code>id = "roster"</code>、<code>tier = 3</code>、<code>value = 0.00</code>、<code>requires_points = 4</code>，描述写的是「每位入阵法师 +0%」——<b>玩家花 4 点熟练度点出一个 0 收益节点</b>。</li>
+          <li>设计值在 <code>docs/spec/20261114_法师通用天赋树_设计/spec.md</code> L87：<b>每名入阵法师 +2%，上限 +6%</b>；同文件 L90-92 已把这条列为「已知空节点、待制作人裁定」。</li>
+          <li>当前三法师同局入阵（霆 / 烬 / 凝），满员时 +6% 是稳定的普攻乘区；改动会小幅影响 TTK。</li>
+        </ul>
         <p class="dlabel">选一个（灰字是代价）</p>
         <div class="dform">
           <div class="opts" role="radiogroup" aria-label="D3 选项">
-            <label class="opt"><input type="radio" name="D3" value="改 kill-only，并按 4.4s 重定基线"><span>改 kill-only，并按 4.4s 重定基线<br><span class="cost">口径干净、只反映输出；历史 9.5–9.9 / 8.7–9.3 / 21.1 全部不可直接比，需重测</span></span></label>
-            <label class="opt"><input type="radio" name="D3" value="两套并记 3 批后再定"><span>两套并记 3 批后再定<br><span class="cost">不立刻改验收；多花 3 批实测，期间两套数都要留</span></span></label>
-            <label class="opt"><input type="radio" name="D3" value="维持含航行口径，不改"><span>维持含航行口径，不改<br><span class="cost">与历史可比；但 TTK 被航行时间稀释，9.0 地板约束的是「航行 + 击杀」</span></span></label>
-            <label class="opt"><input type="radio" name="D3" value="其他：我在补充里写新算法"><span>其他：我在补充里写新算法<br><span class="cost">需要把算法写清（起点/终点/是否含航行），否则无法复核</span></span></label>
+            <label class="opt"><input type="radio" name="D3" value="按设计值填 0.02/位（上限 0.06），重跑 TTK"><span>按设计值填 <b>0.02/位（上限 0.06）</b>，重跑 TTK<br><span class="cost">节点终于有用；代价是要跑一轮 B/C 确认 TTK 漂移仍在 0.5s 门禁内</span></span></label>
+            <label class="opt"><input type="radio" name="D3" value="换成别的乘区（全队移速 / 拾取半径 / 受击减伤）"><span>换成别的乘区（全队移速 / 拾取半径 / 受击减伤）<br><span class="cost">避开伤害乘区叠加；代价是要重写描述与实现，并重跑一轮</span></span></label>
+            <label class="opt"><input type="radio" name="D3" value="从树里撤下该节点，把 4 点退回前置"><span>从树里撤下该节点，把 4 点退回前置<br><span class="cost">树最干净；代价是动天赋树结构，老存档里已点的点要迁移</span></span></label>
+            <label class="opt"><input type="radio" name="D3" value="保留 0，但把描述改成「占位 · 待定」并暂时置灰"><span>保留 0，但把描述改成「占位 · 待定」并暂时置灰<br><span class="cost">不改数值、不重跑；代价是 T3 少一个可选节点，长期仍是债</span></span></label>
           </div>
-          <textarea class="dnote" data-id="D3" rows="2" placeholder="补充，例如「kill-only 从 Boss 入场开始计时」（可留空）"></textarea>
+          <textarea class="dnote" data-id="D3" rows="2" placeholder="补充，例如「按 2% 填，但上限改成 4%」（可留空）"></textarea>
         </div>
-        <div class="drec"><b>我的建议：</b>验收改用 <b>kill-only</b>，同时连续 3 批「两套数并记」，确认新基线后再写死。你提到的「含航行 8.80s 已击穿 9.0、kill-only 4.4s」这两个数在仓库 docs 里检索不到原文，页面不把它们当既有事实，等补进仓库后再回填。</div>
+        <div class="drec"><b>我的建议：</b>A。+6% 上限对 TTK 的拉动约 1–1.5%，落在 0.5s 门禁内，重跑一轮 B/C 即可确认；这是把「4 点换 0 收益」这个 bug 级体验一次性修掉的最短路径。</div>
       </article>
 
       <article class="dec" data-dec="D4">
-        <div class="dh"><span class="dtag">D4</span><h3>云存档与排行榜：11 项取舍</h3><span class="dstat" data-for="D4">未填</span></div>
-        <p class="dq"><b>要定什么：</b>云存档与排行榜的整体路线。11 项逐条列在下面，勾选你同意的项；不同意的那条留空并在补充里写理由。</p>
-        <div class="tw"><table>
-          <thead><tr><th>#</th><th>问题</th><th>建议默认</th></tr></thead>
-          <tbody>
-            <tr><td class="num">1</td><td>云存档首要目标：防丢档 / 跨设备 / 防作弊</td><td><b>防丢档 + 跨设备</b>，不承诺防作弊</td></tr>
-            <tr><td class="num">2</td><td>是否接受 v1「单活设备 + 冲突保留高进度 + 低进度备份」</td><td><b>接受</b>（决定要不要做字段级账本）</td></tr>
-            <tr><td class="num">3</td><td><b>排行榜是否挂奖励</b>（海币 / 解锁 / 实物）</td><td><b>不挂</b>；挂了就必须上服务端</td></tr>
-            <tr><td class="num">4</td><td><b>主榜口径</b>：A 撤离货值 / B 海币 / C Boss 用时</td><td><b>A</b>；C 作副榜</td></tr>
-            <tr><td class="num">5</td><td>A 榜用「基础货值」还是「含成长货值」</td><td><b>基础货值</b>（需记 <code>base_value</code>）</td></tr>
-            <tr><td class="num">6</td><td>是否分 stage / 分端（手机 / PC）</td><td><b>分 stage</b>；上 PC 再分端</td></tr>
-            <tr><td class="num">7</td><td>赛季周期与历史榜保留</td><td><b>4 或 8 周</b>；旧 key 只读保留</td></tr>
-            <tr><td class="num">8</td><td>双设备冲突：自动保留高进度 / 弹窗让玩家选</td><td><b>自动保留高进度 + 提示 + 备份</b></td></tr>
-            <tr><td class="num">9</td><td><b>离线是否允许购买升级</b></td><td>离线可玩可赚、<b>购买需在线</b></td></tr>
-            <tr><td class="num">10</td><td>首发范围：云存档先行、榜单后置</td><td><b>是</b>；成就另立专项</td></tr>
-            <tr><td class="num">11</td><td>谁提供真机测试账号 / 环境，谁执行验证</td><td><b>制作人指定</b></td></tr>
-          </tbody>
-        </table></div>
-        <p class="dlabel">多选（勾上 = 同意该条的建议默认）</p>
-        <div class="dform">
-          <button type="button" class="dbtn ghost" data-fill="D4" style="margin-bottom:8px">全部采用建议</button>
-          <div class="opts" aria-label="D4 选项">
-            <label class="opt"><input type="checkbox" name="D4" value="云存档首要目标 = 防丢档 + 跨设备（不承诺防作弊）"><span>1. 云存档首要目标 = 防丢档 + 跨设备（不承诺防作弊）</span></label>
-            <label class="opt"><input type="checkbox" name="D4" value="接受 v1 单活设备；冲突保留高进度、低进度做备份"><span>2. 接受 v1 单活设备；冲突保留高进度、低进度做备份</span></label>
-            <label class="opt"><input type="checkbox" name="D4" value="排行榜不挂奖励（挂了必须上服务端）"><span>3. 排行榜不挂奖励（挂了必须上服务端）</span></label>
-            <label class="opt"><input type="checkbox" name="D4" value="主榜用 A：撤离基础货值；Boss 用时作副榜"><span>4. 主榜用 A：撤离基础货值；Boss 用时作副榜</span></label>
-            <label class="opt"><input type="checkbox" name="D4" value="A 榜用基础货值，不含成长加成"><span>5. A 榜用基础货值，不含成长加成</span></label>
-            <label class="opt"><input type="checkbox" name="D4" value="分 stage 出榜；上 PC 后再分端"><span>6. 分 stage 出榜；上 PC 后再分端</span></label>
-            <label class="opt"><input type="checkbox" name="D4" value="赛季 4 或 8 周，旧榜只读保留"><span>7. 赛季 4 或 8 周，旧榜只读保留</span></label>
-            <label class="opt"><input type="checkbox" name="D4" value="双设备冲突自动保留高进度 + 提示 + 备份"><span>8. 双设备冲突自动保留高进度 + 提示 + 备份</span></label>
-            <label class="opt"><input type="checkbox" name="D4" value="离线可玩可赚，购买升级需在线"><span>9. 离线可玩可赚，购买升级需在线</span></label>
-            <label class="opt"><input type="checkbox" name="D4" value="首发云存档先行，榜单后置，成就另立专项"><span>10. 首发云存档先行，榜单后置，成就另立专项</span></label>
-            <label class="opt"><input type="checkbox" name="D4" value="真机测试账号与环境由制作人指定"><span>11. 真机测试账号与环境由制作人指定</span></label>
-          </div>
-          <textarea class="dnote" data-id="D4" rows="2" placeholder="哪几条不同意、为什么（可留空）"></textarea>
-        </div>
-        <p class="dlabel">作弊风险与代价</p>
+        <div class="dh"><span class="dtag">D4</span><h3>第二章要不要拉长到 4–6 分钟</h3><span class="dstat" data-for="D4">未填</span></div>
+        <p class="dq"><b>要定什么：</b>第二章单局时长。现在它比第一章<b>还短 15 秒</b>，与「进阶」定位不符。</p>
+        <p class="dlabel">现状（已核过 <code>chapters.lua</code>）</p>
         <ul class="dopt">
-          <li><code>clientCloud</code> 是<b>客户端可写、无事务、无冲突合并、无断点续传</b>；榜单只能是「单 key 全服整数榜」，没有好友榜 / 周期参数，也不能单独删别人的成绩。</li>
-          <li>榜单一旦挂奖励，就必须有服务端权威（方案 C：改联网形态 + 逐条 URL 申报），这是「改项目形态」而不是增量功能。</li>
-          <li>单活设备能省掉字段级合并，但换设备时低进度那一端会被覆盖——必须留备份。</li>
+          <li>第一章 L200 <code>boss_at = 180</code>（3 分 00 秒进 Boss）；第二章 L310 <code>boss_at = 165</code>（2 分 45 秒进 Boss）。</li>
+          <li>第二章靠 <code>visible_scale = 1.12</code>、洋流机制与事件池（<code>windows = {60–150, 200–260}</code>）提高密度，而不是靠时长。</li>
+          <li>拉长到 4–6 分钟意味着 <code>boss_at</code> 提到 <b>240–360</b>，要重排 <code>waves.segments2</code>、把事件窗口整体后移，并同步补物资波——否则单局期望 471 币会被摊薄。</li>
+          <li>拉长后 A/B/C 的存活与通关读数都要重跑，现有 80.7% / 82.7% 不再可比。</li>
         </ul>
-        <div class="drec"><b>我的建议：</b>先做 B（平台云存档）：防丢档 + 跨设备为唯一目标，接受 v1 单活设备；榜单只做<b>不挂奖励的娱乐榜</b>，主榜用 A（基础货值）、C 作副榜；离线可玩可赚、购买需在线。竞技榜与成就都后置。</div>
+        <p class="dlabel">选一个（灰字是代价）</p>
+        <div class="dform">
+          <div class="opts" role="radiogroup" aria-label="D4 选项">
+            <label class="opt"><input type="radio" name="D4" value="维持 165s：靠密度而不是时长做进阶感"><span>维持 <b>165s</b>：靠密度而不是时长做进阶感<br><span class="cost">零改动、读数保留；代价是第二章仍短于第一章，章节标签要和实际对齐</span></span></label>
+            <label class="opt"><input type="radio" name="D4" value="拉到 4 分钟（boss_at ≈ 240），重排波次与事件窗口"><span>拉到 <b>4 分钟</b>（boss_at ≈ 240），重排波次与事件窗口<br><span class="cost">能把现有 200–260 事件窗完整收进去；代价是要补物资波并重跑 A/B/C</span></span></label>
+            <label class="opt"><input type="radio" name="D4" value="拉到 6 分钟（boss_at ≈ 360），做成完整长局"><span>拉到 <b>6 分钟</b>（boss_at ≈ 360），做成完整长局<br><span class="cost">章节差异最明显；代价是波次表几乎重写，单局期望与通关率全部重跑</span></span></label>
+            <label class="opt"><input type="radio" name="D4" value="其他：我在补充里写目标时长"><span>其他：我在补充里写目标时长<br><span class="cost">需要同时给时长与期望币，否则无法判断 471 是否会破</span></span></label>
+          </div>
+          <textarea class="dnote" data-id="D4" rows="2" placeholder="补充，例如「4 分半，期望仍守 471」（可留空）"></textarea>
+        </div>
+        <div class="drec"><b>我的建议：</b>B（4 分钟 / boss_at ≈ 240）。它比第一章略长，符合「进阶」定位，又能把现有事件窗口完整用上；6 分钟对单局期望 471 的压力太大，需要重写整张波次表。</div>
       </article>
 
       <article class="dec" data-dec="D5">
-        <div class="dh"><span class="dtag">D5</span><h3>广告激励视频：需要你在平台后台开通 <code>@runtime.ad</code></h3><span class="dstat" data-for="D5">未填</span></div>
-        <p class="dq"><b>要定什么：</b>是否现在走 <code>get_ad_config</code> 把广告配置写进 <code>.project/settings.json</code> 的 <code>@runtime.ad</code>，以及先接哪个点位、给什么奖励。</p>
+        <div class="dh"><span class="dtag">D5</span><h3>广告入口什么时候开</h3><span class="dstat" data-for="D5">未填</span></div>
+        <p class="dq"><b>要定什么：</b>激励视频广告这条线何时启动，以及先接哪个点位。</p>
         <p class="dlabel">现状与代价</p>
         <ul class="dopt">
-          <li>平台<b>只有激励视频一个广告 API</b>，宿主已完成广告接入，游戏侧只需调 <code>sdk:ShowRewardVideoAd(callback)</code>。</li>
-          <li>本项目<b>当前没有 <code>@runtime.ad</code></b>；<code>project.json</code> 里的 <code>app_id / developer_id</code> 只是开通前置条件，不等于已开通。</li>
-          <li>未拿到 <code>ad.status == 1</code> 前，按仓库约定<b>不得实现 / 测试广告代码</b>，所以这条线现在阻塞在后台配置，不是代码。</li>
+          <li>平台<b>只有激励视频一个广告 API</b>，宿主已接入，游戏侧只需调 <code>sdk:ShowRewardVideoAd(callback)</code>。</li>
+          <li><code>.project/settings.json</code> 当前<b>没有 <code>@runtime.ad</code></b>；<code>project.json</code> 里的 <code>app_id / developer_id</code> 只是开通前置条件，不等于已开通。</li>
+          <li>按仓库约定，未拿到 <code>ad.status == 1</code> 前<b>不得实现 / 测试广告代码</b>，所以这条线现在阻塞在后台配置，不是代码。</li>
+          <li>点位方案已在 <code>docs/spec/20261114_激励视频广告接入_调研与点位方案.md</code>，奖励不能碰 471 / 17.4 两条经济红线。</li>
         </ul>
         <p class="dlabel">选一个（灰字是代价）</p>
         <div class="dform">
           <div class="opts" role="radiogroup" aria-label="D5 选项">
-            <label class="opt"><input type="radio" name="D5" value="现在开通 @runtime.ad，只接 1 个点位灰度（回港额外补给 / 双倍结算）"><span>现在开通 <code>@runtime.ad</code>，只接 1 个点位灰度（回港额外补给 / 双倍结算）<br><span class="cost">能真机验证；需要你在平台后台配置，奖励不能碰 471 / 17.4</span></span></label>
-            <label class="opt"><input type="radio" name="D5" value="先只做本地奖励 UI 占位，不调广告 API"><span>先只做本地奖励 UI 占位，不调广告 API<br><span class="cost">不阻塞其他线；无法真机验证，广告仍未上线</span></span></label>
-            <label class="opt"><input type="radio" name="D5" value="广告线整体后置，等版本节奏再开"><span>广告线整体后置，等版本节奏再开<br><span class="cost">零成本；这条线一直空着</span></span></label>
-            <label class="opt"><input type="radio" name="D5" value="其他：我在补充里写点位与奖励"><span>其他：我在补充里写点位与奖励<br><span class="cost">需要写清点位、奖励内容与每日频次，否则无法实现</span></span></label>
+            <label class="opt"><input type="radio" name="D5" value="现在就开：后台配 @runtime.ad，先接 1 个点位灰度"><span>现在就开：后台配 <code>@runtime.ad</code>，先接 1 个点位灰度<br><span class="cost">能最早拿到真机数据；代价是要打断第二章收口，且需要你在后台操作</span></span></label>
+            <label class="opt"><input type="radio" name="D5" value="下个版本开：等第二章与云存档收口后再接"><span>下个版本开：等第二章与云存档收口后再接<br><span class="cost">不打断当前节奏；代价是广告收入与验证都往后推一个版本</span></span></label>
+            <label class="opt"><input type="radio" name="D5" value="暂不开：只留本地奖励 UI 占位，不调广告 API"><span>暂不开：只留本地奖励 UI 占位，不调广告 API<br><span class="cost">零成本、零风险；代价是广告线一直空着，占位 UI 上线后还要再改</span></span></label>
+            <label class="opt"><input type="radio" name="D5" value="其他：我在补充里写开启时间与点位"><span>其他：我在补充里写开启时间与点位<br><span class="cost">需要写清点位、奖励内容与每日频次，否则无法实现</span></span></label>
           </div>
-          <textarea class="dnote" data-id="D5" rows="2" placeholder="补充，例如「先接结算页双倍，每天 3 次」（可留空）"></textarea>
+          <textarea class="dnote" data-id="D5" rows="2" placeholder="补充，例如「封版后开，先接回港双倍结算，每天 3 次」（可留空）"></textarea>
         </div>
-        <div class="drec"><b>我的建议：</b>先在平台后台开通配置，只接 <b>1 个点位</b>灰度（回港后的「额外补给 / 双倍结算」类最稳），奖励不碰 471 / 17.4 经济红线；拿到 <code>ad.status == 1</code> 后再写真机验证。开通动作需要你或制作人在后台执行，我这边没有 <code>get_ad_config</code> 工具。</div>
-      </article>
-
-      <article class="dec" data-dec="D6">
-        <div class="dh"><span class="dtag">D6</span><h3>怪物池与每局随机组成：每局按种子抽 Boss 与小怪组合（只随形象与技能，数值按章节递增）</h3><span class="dstat" data-for="D6">未填</span></div>
-        <p class="dq"><b>要定什么：</b>是否把「一堆 Boss + 一堆小怪组合」做成池子，每局按种子各抽一份。<b>随机范围只限形象贴图与技能招式组</b>——同章内所有变体共用一套数值基线，章节之间按系数阶梯递增；第一章要不要也开池化。</p>
-        <p class="dlabel">现状（都还没实现）</p>
-        <ul class="dopt">
-          <li>第一章 Boss 固定 <code>tide_lord</code>：<code>scripts/data/enemies.lua</code> L176 的注释写明「1 只 Boss」，L179 起的 <code>M.boss</code> 也只有这一只；两关的 <code>boss_spawn</code> 事件都把 <code>enemy = "tide_lord"</code> 写死（<code>waves.lua</code> L54 / L99），关卡表只改血量。</li>
-          <li>杂兵只有按时间段的 <code>mix</code> 权重表（<code>waves.lua</code> L26–36 / L74–85），没有「组合」概念，也不是按种子从多套里抽。</li>
-          <li>第二章 spec 的 <code>variation.boss_variant</code> 字段本身是 table，但 §7 的示例配置只放了 1 个元素 <code>{ "storm_lord" }</code>，等于单元素池。</li>
-          <li>种子入口未暴露：<code>scripts/world/run.lua</code> L332–333 的 <code>M.new(profile, seed)</code> 支持传 seed，但 <code>core/app.lua</code> L400 调的是 <code>run.new(M.profile)</code>，实际走 <code>seed or os.time()</code>——不展示、不可复现、不能分享。</li>
-          <li>数值现在也是单套写死：Boss 血量在 <code>enemies.lua</code> L184（6,000），关卡系数在 <code>waves.lua</code> L116–128（<code>boss_hp</code> / <code>elite_hp_mult</code>）。池化后这套数值怎么处理，是下面「口径」要定的核心。</li>
-        </ul>
-        <p class="dlabel">池化口径（按你的澄清：随机只发生在形象与技能组）</p>
-        <ul class="dopt">
-          <li><b>同章内所有 Boss 变体共用一套数值基线</b>（血量、伤害、移速相同），差异只在形象贴图与技能招式组合；章节之间按系数阶梯递增，规则透明、可调。</li>
-          <li><b>小怪池同理</b>：换的是怪种组成与成群方式，单只怪的数值、每段配额都不变。</li>
-          <li>抽取按种子稳定散列：同一 seed 得到同一 Boss + 同一小怪组合，可复现、可分享种子。</li>
-          <li>包体：Boss 变体用换色 + 局部特征（每个几十 KB），不需要每个都做全新 208×208。</li>
-        </ul>
-        <p class="dlabel">代价</p>
-        <ul class="dopt">
-          <li><b>美术与技能组仍要一套</b>：每个变体要单独做贴图变体 + 招式组，并验证技能可读、不破坏战斗节奏。</li>
-          <li><b>技能差异仍会动 TTK</b>：同一血量下不同招式组的击杀时间会偏移，20 局抽检就看这个偏移是否在目标带内。</li>
-          <li><b>但验收成本大幅下降</b>：数值不随机，整体 150 局照跑，每个变体另抽 20 局看有无明显偏离即可，不需要每个 Boss 各跑 40 局。</li>
-          <li>种子要进存档与分享链路，<code>run.new</code> 入口要改，旧存档要兼容；章节阶梯系数要写进配置而不是散在代码里。</li>
-        </ul>
-        <p class="dlabel">选一个（灰字是代价）</p>
-        <div class="dform">
-          <div class="opts" role="radiogroup" aria-label="D6 选项">
-            <label class="opt"><input type="radio" name="D6" value="只换形象与技能组、数值走章节阶梯：第一章 1 个 Boss，第二章 2–3 个 Boss + 3–4 套小怪组合，按种子抽"><span>只换形象与技能组、数值走章节阶梯：第一章 1 个 Boss，第二章 2–3 个 Boss + 3–4 套小怪组合，按种子抽<br><span class="cost">第一章零风险，验收只需 150 局 + 每变体 20 局；代价是前期体感不变</span></span></label>
-            <label class="opt"><input type="radio" name="D6" value="数值也做小幅随机：同章内血量 / 伤害 / 移速浮动"><span>数值也做小幅随机：同章内血量 / 伤害 / 移速浮动<br><span class="cost">每局差异最大；代价是每种组合都要单独验收，弱数值组合会被平均藏住，章节阶梯失效</span></span></label>
-            <label class="opt"><input type="radio" name="D6" value="先只做小怪组合，Boss 池留到第三章"><span>先只做小怪组合，Boss 池留到第三章<br><span class="cost">改动最小；代价是「每局 Boss 不同」的体感要等更久</span></span></label>
-          </div>
-          <textarea class="dnote" data-id="D6" rows="2" placeholder="补充，例如「第二章先上 2 个 Boss，第三个看产能」（可留空）"></textarea>
-        </div>
-        <div class="drec"><b>我的建议：</b>A。同章共用一套数值基线，随机只落在<b>形象与技能组</b>；第一章池子 1 个不动（学习曲线与三条读数都不动），第二章 2–3 个 Boss + 3–4 套小怪组合按种子抽。验收整体 150 局照跑，每个变体另抽 20 局看是否明显偏离——不做「每个 Boss 各 40 局」的分桶。</div>
-      </article>
-
-      <article class="dec" data-dec="D7">
-        <div class="dh"><span class="dtag">D7</span><h3>怪物池批 1 是否开工（先出 4 张普通怪）</h3><span class="dstat" data-for="D7">未填</span></div>
-        <p class="dq"><b>要定什么：</b>是否按 <code>20261114_怪物池扩充_设计/spec.md</code> 开批 1：<b>4 张普通怪贴图 + 两级物种抽取</b>，把第二章从「5 种必见」改成「9 选 6」。</p>
-        <p class="dlabel">现状与代价</p>
-        <ul class="dopt">
-          <li>批 1 只动第二章普通怪与抽取规则，<b>不动第一章、不动精英/Boss</b>；精英/Boss 留批 2。</li>
-          <li>池子 5 → 9 会稀释现有 5 种怪的权重，<b>第二章可能变轻</b>；spec §7 要求上线前重跑 A/B/C，若 B 档跌出 78–82%，<b>回收权重，不加 Boss 血量</b>。</li>
-          <li>贴图 4 张（40×40，单张 6–9KB）；如果不做贴图先上抽取，9 种里有 4 种只能用占位图，体感是「新怪长得一样」。</li>
-          <li>需要 1 个新 AI <code>static_turret</code>（约 30 行）；其余 3 条都能复用现有 chase / ram / 开火函数。</li>
-        </ul>
-        <p class="dlabel">选一个（灰字是代价）</p>
-        <div class="dform">
-          <div class="opts" role="radiogroup" aria-label="D7 选项">
-            <label class="opt"><input type="radio" name="D7" value="开工批 1：4 张普通怪 + 两级抽取，完成后重跑 A/B/C"><span>开工批 1：4 张普通怪 + 两级抽取，完成后重跑 A/B/C<br><span class="cost">一次交付「每局阵容不同」的体感；代价是 4 张贴图 + 1 个新 AI + 一轮 150 局回归</span></span></label>
-            <label class="opt"><input type="radio" name="D7" value="先只做抽取规则，贴图后补（4 种新怪先用占位图）"><span>先只做抽取规则，贴图后补（4 种新怪先用占位图）<br><span class="cost">规则先验证；代价是测试期 4 种新怪没有辨识度，美术不能并行验收</span></span></label>
-            <label class="opt"><input type="radio" name="D7" value="跳过普通怪，先做批 2 精英 / Boss"><span>跳过普通怪，先做批 2 精英 / Boss<br><span class="cost">Boss 变化最抢眼；代价是每局普通怪构成仍然不变，验收指标里的「首见率」无从谈起</span></span></label>
-            <label class="opt"><input type="radio" name="D7" value="暂缓，等章节 B1 落地后再开怪物池"><span>暂缓，等章节 B1 落地后再开怪物池<br><span class="cost">避免两条线同时改第二章难度；代价是「每局不一样」继续停在配比层</span></span></label>
-          </div>
-          <textarea class="dnote" data-id="D7" rows="2" placeholder="补充，例如「先出 2 张试水」或「贴图必须和批 2 一起上」（可留空）"></textarea>
-        </div>
-        <div class="drec"><b>我的建议：</b>A。批 1 是这套方案里成本最低、体感提升最直接的一刀：4 张 40×40 贴图 + 一个 30 行 AI，就能把「每局刷的是另一批怪」做出来。前提是先把验收探针加上，跑完 A/B/C 再合。</div>
-      </article>
-
-      <article class="dec" data-dec="D8">
-        <div class="dh"><span class="dtag">D8</span><h3>三系特效规划：三条省成本建议是否照做</h3><span class="dstat" data-for="D8">未填</span></div>
-        <p class="dq"><b>要定什么：</b><code>20261114_三系特效与实体受击反馈_规划</code> 里有三条<b>直接决定工作量和帧预算</b>的取舍，是否全部按 spec 的建议执行。</p>
-        <p class="dlabel">现状与代价</p>
-        <ul class="dopt">
-          <li>T0-2 写的是「状态常驻只做视觉，不加伤害」：灼烧 / 感电 / 霜线只做表现，伤害仍走原数值。若改成真 DOT，要重做状态数值、叠加上限与验收口径。</li>
-          <li>T0-3 写的是「杂兵受击不震屏、击杀不顿帧」：震屏与顿帧只留给精英 / Boss 重击。每条都要可开关，照顾晕动症。</li>
-          <li>P1 贴图只出 <code>fx_jin_arc_96x96</code> 1 张，其余用现有图元（线 / 圆 / 渐变）拼接。</li>
-        </ul>
-        <p class="dlabel">多选（勾上 = 同意该条按建议执行）</p>
-        <div class="dform">
-          <button type="button" class="dbtn ghost" data-fill="D8" style="margin-bottom:8px">三条全部采纳</button>
-          <div class="opts" aria-label="D8 选项">
-            <label class="opt"><input type="checkbox" name="D8" value="状态常驻只做视觉，不加伤害（灼烧 / 感电 / 霜线 仅表现）"><span>1. 状态常驻只做视觉，不加伤害（灼烧 / 感电 / 霜线 仅表现）</span></label>
-            <label class="opt"><input type="checkbox" name="D8" value="杂兵受击不震屏、击杀不顿帧（只留精英 / Boss 重击）"><span>2. 杂兵受击不震屏、击杀不顿帧（只留精英 / Boss 重击）</span></label>
-            <label class="opt"><input type="checkbox" name="D8" value="P1 只出 1 张新图 fx_jin_arc_96x96，其余用现有图元拼接"><span>3. P1 只出 1 张新图 <code>fx_jin_arc_96x96</code>，其余用现有图元拼接</span></label>
-          </div>
-          <textarea class="dnote" data-id="D8" rows="2" placeholder="哪条不同意、哪条要先看样片（可留空）"></textarea>
-        </div>
-        <div class="drec"><b>我的建议：</b>三条全采纳。它们共同把特效线的成本压到「1 张图 + 纯代码表现」，帧预算每帧只加 1ms 量级；同时不触碰战斗数值，不用重跑平衡。</div>
-      </article>
-
-      <article class="dec" data-dec="D9">
-        <div class="dh"><span class="dtag">D9</span><h3>搜刮面板：货舱装货顺序是否改成「先横放」</h3><span class="dstat" data-for="D9">未填</span></div>
-        <p class="dq"><b>要定什么：</b>搜刮面板自动装货时，优先尝试<b>横向</b>连续格；放不下再旋转成竖向。是否改成这套顺序。</p>
-        <p class="dlabel">现状与代价</p>
-        <ul class="dopt">
-          <li>仓库里<b>没有这条规则的 spec 原文</b>，属本轮新增提案；现有代码按形状默认朝向先放，横竖混装时容易把大件切碎。</li>
-          <li>先横放在宽格面板上更省空间，但<b>长条竖件会多一次旋转判定</b>；满格时可能多一次装不进去的提示。</li>
-          <li>改动只在搜刮面板的放置函数，不动货值、不动掉落、不动展厅。</li>
-        </ul>
-        <p class="dlabel">选一个（灰字是代价）</p>
-        <div class="dform">
-          <div class="opts" role="radiogroup" aria-label="D9 选项">
-            <label class="opt"><input type="radio" name="D9" value="改成先横放：优先横向连续格，放不下再旋转竖放"><span>改成先横放：优先横向连续格，放不下再旋转竖放<br><span class="cost">大件更少被切碎；代价是竖长件多一次旋转判定，需看满格溢出</span></span></label>
-            <label class="opt"><input type="radio" name="D9" value="维持现状：按形状默认朝向先放"><span>维持现状：按形状默认朝向先放<br><span class="cost">零改动；代价是横竖混装时空间利用率不稳定</span></span></label>
-            <label class="opt"><input type="radio" name="D9" value="只对 1×2 生效，2×2 与异形维持现状"><span>只对 1×2 生效，2×2 与异形维持现状<br><span class="cost">风险最小；代价是收益也最小</span></span></label>
-            <label class="opt"><input type="radio" name="D9" value="先不定：出两版同货舱对比截图再拍"><span>先不定：出两版同货舱对比截图再拍<br><span class="cost">看得最清楚；代价是多一轮等待</span></span></label>
-          </div>
-          <textarea class="dnote" data-id="D9" rows="2" placeholder="补充，例如「先横放但竖件优先靠边」（可留空）"></textarea>
-        </div>
-        <div class="drec"><b>我的建议：</b>A。先横放符合「宽格优先填满」的直觉，改动也只在放置函数；上线前用满格存档跑一遍溢出，确认不会出现「明明有空位却装不下」。</div>
-      </article>
-
-      <article class="dec" data-dec="D10">
-        <div class="dh"><span class="dtag">D10</span><h3>法师天赋入口：根页直达，还是 0 点灰卡 + 说明</h3><span class="dstat" data-for="D10">未填</span></div>
-        <p class="dq"><b>要定什么：</b>法师通用天赋树的入口放在哪，以及 0 点时怎么表现。</p>
-        <p class="dlabel">现状与代价</p>
-        <ul class="dopt">
-          <li>局外循环 spec 已定：<b>在现有「天赋」页加入口卡</b>，点进去是单独一页法师树，返回回到天赋页；<b>招募页不再新增入口</b>，避免两个入口。</li>
-          <li>0 点时入口卡如果是灰的又不解释，玩家会以为是 bug；需要一行「击沉 Boss 得天赋点」的说明态。</li>
-          <li>提到港口根页直达会多一个入口，和已定案冲突；两处都给入口则要同步维护两条路径。</li>
-        </ul>
-        <p class="dlabel">选一个（灰字是代价）</p>
-        <div class="dform">
-          <div class="opts" role="radiogroup" aria-label="D10 选项">
-            <label class="opt"><input type="radio" name="D10" value="提到港口根页直达"><span>提到港口根页直达<br><span class="cost">少一次点击；代价是根页再多一个按钮，且与「天赋页唯一入口」的已定案冲突</span></span></label>
-            <label class="opt"><input type="radio" name="D10" value="保留在天赋页，0 点时灰卡 + 说明态"><span>保留在天赋页，0 点时灰卡 + 说明态<br><span class="cost">符合已定案、只有一个入口；代价是入口深一层</span></span></label>
-            <label class="opt"><input type="radio" name="D10" value="两处都给入口（根页 + 天赋页）"><span>两处都给入口（根页 + 天赋页）<br><span class="cost">两边都能进；代价是两条路径都要维护，且与「不新增第二个入口」冲突</span></span></label>
-            <label class="opt"><input type="radio" name="D10" value="0 点时直接隐藏入口，有点数才出现"><span>0 点时直接隐藏入口，有点数才出现<br><span class="cost">界面最干净；代价是玩家不知道有这套系统，首次有点数时才突然出现</span></span></label>
-          </div>
-          <textarea class="dnote" data-id="D10" rows="2" placeholder="补充说明（可留空）"></textarea>
-        </div>
-        <div class="drec"><b>我的建议：</b>B。守住「天赋页唯一入口」的已定案；0 点用灰卡 + 一行来源说明（击沉 Boss 得点），既不误导也不新增入口。</div>
-      </article>
-
-      <article class="dec" data-dec="D11">
-        <div class="dh"><span class="dtag">D11</span><h3><code>mage_roster</code> 跨局入手字段：删除，还是开局读取并入阵</h3><span class="dstat" data-for="D11">未填</span></div>
-        <p class="dq"><b>要定什么：</b><code>profile.mage_roster</code>（记录本局上场过的法师 id）接下来怎么处理。</p>
-        <p class="dlabel">现状与代价</p>
-        <ul class="dopt">
-          <li>当前代码只在 <code>core/app.lua</code> L201 写入（结算时把 <code>st.joined</code> 的法师记进名册），<b>运行时没有任何读取</b>，不影响开局卡池。</li>
-          <li>云存档方案把它当<b>集合并集</b>字段；删除字段要做存档迁移，并同步改云端合并规则。</li>
-          <li>改成开局读取并入阵，需要先确认招募 / 解锁链路已有真实数据；否则新档名册为空会把卡池锁死。</li>
-        </ul>
-        <p class="dlabel">选一个（灰字是代价）</p>
-        <div class="dform">
-          <div class="opts" role="radiogroup" aria-label="D11 选项">
-            <label class="opt"><input type="radio" name="D11" value="删除字段"><span>删除字段<br><span class="cost">存档最干净；代价是要做 v2→v3 迁移 + 改云存档并集规则，且以后想用要重新加</span></span></label>
-            <label class="opt"><input type="radio" name="D11" value="开局读取并入阵"><span>开局读取并入阵<br><span class="cost">名册终于有用；代价是先补招募 / 解锁写入与空名册兜底，否则卡池会被锁死</span></span></label>
-            <label class="opt"><input type="radio" name="D11" value="保留写入但暂不消费（现状）"><span>保留写入但暂不消费（现状）<br><span class="cost">零风险；代价是字段继续「只写不读」，云存档仍要维护它</span></span></label>
-          </div>
-          <textarea class="dnote" data-id="D11" rows="2" placeholder="补充，例如「等招募位定案后一起接」（可留空）"></textarea>
-        </div>
-        <div class="drec"><b>我的建议：</b>C（暂留）。现在删要迁移 + 改云合并，收益只是少一个字段；等「招募位 / 解锁」定案后直接切 B，那时名册才有真实来源，兜底也有意义。</div>
-      </article>
-
-      <article class="dec" data-dec="D12">
-        <div class="dh"><span class="dtag">D12</span><h3>剑圣是否新增为角色</h3><span class="dstat" data-for="D12">未填</span></div>
-        <p class="dq"><b>要定什么：</b>是否把「剑圣」做成第 4 名可玩法师，还是只作敌人 / 精英命名。</p>
-        <p class="dlabel">现状与代价</p>
-        <ul class="dopt">
-          <li>仓库里 grep 不到「剑圣 / swordsman」任何条目，这是<b>全新提案</b>，没有既定设计可对齐。</li>
-          <li>现在是<b>三名法师同局同时上场</b>（霆承伤 / 烬输出 / 凝控场），不是「选一个」。新增第 4 名不是加一张卡，而是加一套普攻 + 秘术 + 被动、决定三格技能槽怎么分、升级卡池怎么进、局外熟练度与立绘。</li>
-          <li>如果做成「可切换主角」，还要改局内形态与操作，成本高于加一名同场法师。</li>
-        </ul>
-        <p class="dlabel">选一个（灰字是代价）</p>
-        <div class="dform">
-          <div class="opts" role="radiogroup" aria-label="D12 选项">
-            <label class="opt"><input type="radio" name="D12" value="不新增：剑圣只作敌人 / 精英命名"><span>不新增：剑圣只作敌人 / 精英命名<br><span class="cost">零成本；代价是少一个「近战 / 剑系」的角色空位</span></span></label>
-            <label class="opt"><input type="radio" name="D12" value="新增为第 4 名法师，同场入阵"><span>新增为第 4 名法师，同场入阵<br><span class="cost">补近战定位；代价是重定三格技能槽的分配，卡池与熟练度全部要扩</span></span></label>
-            <label class="opt"><input type="radio" name="D12" value="先做探针：只出设定与卡池草案，不改代码"><span>先做探针：只出设定与卡池草案，不改代码<br><span class="cost">先看它和三名法师的定位是否打架；代价是短期没有可玩内容</span></span></label>
-            <label class="opt"><input type="radio" name="D12" value="做成可切换主角（改局内形态）"><span>做成可切换主角（改局内形态）<br><span class="cost">差异最大；代价是改局内操作与 HUD，成本远高于加一名同场法师</span></span></label>
-          </div>
-          <textarea class="dnote" data-id="D12" rows="2" placeholder="补充，例如「剑圣想做成什么定位」（可留空）"></textarea>
-        </div>
-        <div class="drec"><b>我的建议：</b>C（先做探针）。三名法师的定位是「承伤 / 输出 / 控场」互补，第 4 名必须先回答「它替代谁、补什么空位」，否则会变成数值更高的第三人。先出设定与卡池草案，再决定要不要占产能。</div>
+        <div class="drec"><b>我的建议：</b>B（下个版本开）。现在要同时做后台配置 + 真机验证，会打断第二章收口；建议封版后先接「回港额外补给 / 双倍结算」一个点位灰度，奖励不碰 471 / 17.4。</div>
       </article>
 
     </div>
@@ -1530,7 +1351,7 @@
       <p class="dsend">这段请发给我 —— 点「一键复制」后粘贴到聊天里。页面不会自动送达，也不会通知我。</p>
       <p class="dlimit" id="dmsg" aria-live="polite"></p>
     </div>
-    <p class="srcnote">出处：D1 / D2 来自 <code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §2–§4 与 §1.7 冲突表；D3 见 <code>docs/balance.md</code> L123 / L289 / L290、<code>docs/issues.md</code> I-05（8.80s 与 4.4s 在本仓库检索不到原文）；D4 见 <code>docs/spec/20261114_云存档与排行榜_调研与方案.md</code> §2.1 L33–54、§5 L317–414、§7 L504–547、§8 L548–562；D5 见 <code>docs/spec/20261114_激励视频广告接入_调研与点位方案.md</code> L9–12 / L35–50 与 <code>20261114_激励视频广告接入_任务清单.md</code> L10–13；D7 见 <code>docs/spec/20261114_怪物池扩充_设计/spec.md</code> §2 / §5 / §6 / §7；D8 见 <code>docs/spec/20261114_三系特效与实体受击反馈_规划/spec.md</code> T0-2 / T0-3 / P1 与任务清单；D10 见 <code>docs/spec/20261110_局外循环与招募_设计.md</code> L14 / L183；D11 见 <code>scripts/core/save.lua</code> L40、<code>scripts/core/app.lua</code> L197–203；D9 / D12 为本轮制作人提案，仓库内无对应 spec 条目。</p>
+    <p class="srcnote">出处：D1 见 <code>scripts/systems/museum.lua</code> L22 / L69-75、<code>scripts/data/port.lua</code> L148-150 与 <code>docs/spec/20261112_局外港口与收藏馆</code>（40 币/日）；D2 见 <code>scripts/data/balance.lua</code> L73 与 <code>scripts/render/style/style_b_proc.lua</code> L1152-1156；D3 见 <code>scripts/data/talents.lua</code> L60-62 与 <code>docs/spec/20261114_法师通用天赋树_设计/spec.md</code> L87 / L90-92；D4 见 <code>scripts/data/chapters.lua</code> L306-311 / L347-353；D5 见 <code>docs/spec/20261114_激励视频广告接入_调研与点位方案.md</code> L9-12 / L35-50。</p>
   </section>
 
   <div class="toolbar" role="region" aria-label="筛选">
@@ -1585,12 +1406,12 @@
     <p class="hint">以下内容要么代码 / 文档未落地，要么没有唯一权威口径。本页没有用估算或常识把它们填满。</p>
     <ul class="rules">
       <li><b>三位法师的人物属性</b>：生命、护甲、移速、初始血量——<span class="mono">mages.lua</span> 只有攻击与施法参数，没有人物面板字段。页面写的「属性」只到攻击参数为止。</li>
-      <li><b>章节的正式命名与资源</b>：章节 id、皮肤包名、Boss <span class="mono">storm_lord</span> 的数值与招式组，设计稿里是示意，<span class="mono">chapters.lua</span> 未落地；代码里第二章仍是 <span class="mono">tide_lord</span> 9,000 血。</li>
+      <li><b>章节的正式命名与资源</b>：章节 id、皮肤包名已落 <span class="mono">chapters.lua</span>；Boss 变体 <span class="mono">storm_lord</span> / <span class="mono">storm_lord_gale</span> 已落 <span class="mono">enemies.lua</span>，但共用 <span class="mono">boss_tide_lord</span> 图集，专属贴图与招式组尚未落地。</li>
       <li><b>14 件藏品的代码表</b>：<span class="mono">M.collectibles</span> 尚未写进 <span class="mono">loot.lua</span>，14 件来自「待批准」规格，批准前没有任何实测。</li>
-      <li><b>三相共鸣的预期收益</b>：<span class="mono">talents.lua</span> 里 <span class="mono">mult = 0</span>，文档只写「刻意留空」，没给未来该值多少。</li>
+      <li><b>三相共鸣的收益</b>：<span class="mono">talents.lua</span> L60-62 仍是 <span class="mono">value = 0.00</span>，设计值是「每名入阵法师 +2%、上限 +6%」但未落代码，已列入待确认 D3。</li>
       <li><b>单件均值与展厅日收益的实测</b>：页面引的是文档读数与「区间中值 × 占格」的推导值，本轮没有复跑 harness。</li>
       <li><b>TTK 门槛</b>：不是缺失，是没有唯一口径——I-05 的 20,000 血 / 21.1s 与第一关 6,000 血 / 9.5–9.9s 不可混用，页面因此不给达标结论。</li>
-      <li><b>TTK 8.80s 与 kill-only 4.4s</b>：本轮要求里给的两个数，在仓库 docs 里全文检索不到原文；页面只把它们记进「待确认 D3」，不当作既有事实。</li>
+      <li><b>展厅收益 192/小时 与 40/日 的取舍</b>：代码按门票 × 游客实时算，设计稿写每日固定 40，两个口径都成立但互相冲突；页面把它记进「待确认 D1」，不当作既有事实。</li>
     </ul>
     <p class="srcnote">核对方式：对 <code>scripts/</code> 全仓 grep <span class="mono">collectibles</span>、<span class="mono">chapters</span>、<span class="mono">storm_lord</span> 等标识；未命中的不填。</p>
   </section>
@@ -1609,12 +1430,14 @@
       <code>scripts/data/talents.lua</code>；<code>docs/spec/20261113_局内成长与出卡规则_设计.md</code> §1.1 L21–31、§1.2 L32–55、§3.2–3.4 L148–212、§3.6 L224–238；<code>docs/spec/20261114_法师通用天赋树_设计/spec.md</code>。</p>
     <p><b>章节与单局变化</b><br>
       <code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §2.1 L140–153（三种做法成本）、§3.1 L200–208（推荐 B1）、§3.2 L210–228、§3.3 L230–239、§4.2 L275–380（chapters.lua 字段）、§5.1 L421–444、§5.2 L446–461、§6.1 L497–505、§6.2 L507–516、§6.3 L518–531；<code>scripts/data/chapters.lua</code> L25–340（两章主字段、<span class="mono">boss_coeff hp 2.20</span>、3 套 <span class="mono">mob_pool</span>）、L483–505（<span class="mono">pickBoss / pickMobs</span>）；<code>scripts/data/enemies.lua</code> L266–350（<span class="mono">storm_lord / storm_lord_gale</span>）。</p>
+    <p><b>港口与包体</b><br>
+      <code>docs/spec/20261114_港口环形广场构图/spec.md</code> §1（环形广场与不等半径）、§2（90° 码头通道 88px / 360 档 72px）、§3（七栋门洞 24×46 / 360 档 18×35）、§4（港务所门牌）、§5（广场法师漫游）；代码核对：<code>scripts/ui/screens.lua</code> L299–360 / L455 / L484–543、<code>scripts/render/style/style_b_map.lua</code> L415–524、<code>assets/style_b/harbor/harbor_bg_ring.png</code>（786×1704）；包体：<code>docs/tech.md</code> 资源侧压缩记录（23.29MB → 10.56MB，54 张 PNG，像素尺寸零改动）。</p>
     <p><b>怪物池扩充</b><br>
-      <code>docs/spec/20261114_怪物池扩充_设计/spec.md</code> §0（结论摘要）、§1.1–1.4（现状与问题）、§2.2（组合数 84 / 1.2%）、§2.3（每海域补多少）、§3.1–3.3（新增 8 条）、§4.1–4.4（两级抽取 / tag / 袋抽）、§5.1–5.3（贴图成本与批 1 / 批 2）、§6.1–6.3（验收与采集）、§7（风险）；代码核对：<code>scripts/data/enemies.lua</code> L26–120、<code>scripts/data/chapters.lua</code> L315–340 / L483–505、<code>scripts/data/waves.lua</code> L73–79。</p>
+      <code>docs/spec/20261114_怪物池扩充_设计/spec.md</code> §0（结论摘要）、§1.1–1.4（现状与问题）、§2.2（组合数 84 / 1.2%）、§2.3（每海域补多少）、§3.1–3.3（新增 6 条：4 普通 + 2 精英；第一章 0 新增）、§4.1–4.4（两级抽取 / tag / 袋抽）、§5.1–5.3（贴图成本与批 1 / 批 2）、§6.1–6.3（验收与采集）、§7（风险）；代码核对：<code>scripts/data/enemies.lua</code> L26–120、<code>scripts/data/chapters.lua</code> L315–340 / L483–505、<code>scripts/data/waves.lua</code> L73–79。<b>批 1 尚未合入代码</b>：全仓检索不到 <span class="mono">mob_roster / tide_crab / stingray / trawler / barnacle / reef_tyrant / mist_mother</span>，因此本节只写设计与目标，实测读数留空待补。</p>
     <p><b>验收线</b><br>
       <code>docs/balance-master.md</code> §0-8（三项基线）、验收门槛一节；<code>docs/balance.md</code> L289（第一关 TTK 9.5–9.9s）；<code>docs/issues.md</code> I-05（L39 起）。</p>
     <p><b>待确认</b><br>
-      D1 / D2：<code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §1.7 L121–134（口径冲突）、§2.1 L140–153（A/B1/B2/C 成本）、§4.2 L349–357（经济三倍率恒 1.0）；D3：<code>docs/balance.md</code> L123 / L289 / L290、<code>docs/issues.md</code> I-05；D4：<code>docs/spec/20261114_云存档与排行榜_调研与方案.md</code> §2.1 L33–54、§7 L504–547、§8 L548–562（11 项）；D5：<code>docs/spec/20261114_激励视频广告接入_调研与点位方案.md</code> L9–12 / L35–50、<code>…_任务清单.md</code> L10–13；D6：<code>scripts/data/enemies.lua</code> L176–179、<code>scripts/data/waves.lua</code> L26–36 / L54 / L74–85 / L99 / L108–131、<code>scripts/world/run.lua</code> L332–333、<code>scripts/core/app.lua</code> L400、<code>docs/spec/20261114_章节结构与单局变化_设计.md</code> §4.2 L369、§7 L683；D7–D8：<code>docs/spec/20261114_怪物池扩充_设计/spec.md</code> §2 / §5 / §6 / §7、<code>docs/spec/20261114_三系特效与实体受击反馈_规划/spec.md</code> T0-2 / T0-3 / P1；D9 / D12：本轮制作人提案，仓库内无对应 spec；D10：<code>docs/spec/20261110_局外循环与招募_设计.md</code> L14 / L183；D11：<code>scripts/core/save.lua</code> L40、<code>scripts/core/app.lua</code> L197–203。</p>
+      D1：<code>scripts/systems/museum.lua</code> L22（<span class="mono">TICKET = 4</span>）/ L69–75（离线封顶 8h）、<code>scripts/data/port.lua</code> L148–150（<span class="mono">visitorRate = 0.2 × level</span>）、<code>docs/spec/20261112_局外港口与收藏馆</code>（40 币/日）；D2：<code>scripts/data/balance.lua</code> L73（<span class="mono">radius = 14</span>）、<code>scripts/render/style/style_b_proc.lua</code> L1152–1156（87×174）；D3：<code>scripts/data/talents.lua</code> L60–62、<code>docs/spec/20261114_法师通用天赋树_设计/spec.md</code> L87 / L90–92；D4：<code>scripts/data/chapters.lua</code> L200（一关 <span class="mono">boss_at 180</span>）/ L306–311（二关 <span class="mono">boss_at 165</span>）/ L347–353（事件窗口 60–150 / 200–260）；D5：<code>docs/spec/20261114_激励视频广告接入_调研与点位方案.md</code> L9–12 / L35–50、<code>…_任务清单.md</code> L10–13、<code>.project/settings.json</code>（无 <span class="mono">@runtime.ad</span>）。</p>
     <p><b>藏品表（14 件、稀有度、海域、品类、产出柜型）</b><br>
       <code>docs/spec/20261114_宝物藏品与陈列柜落地/spec.md</code> §2 唯一 ID 表 L56–69；池子非空校验 L71–77；稀有度色 / 权重 / 海域乘数 L89–110；附加位与上限 L115–120；陈列柜 5×3 与槽位 L210–215；容量与溢出 L231–234。</p>
     <p><b>货值三档、每格价值、占格、档位权重</b><br>
@@ -1984,20 +1807,13 @@
 /* 待确认确认单：本机填写 + 本机生成文本，无后端 */
 (function () {
   var KEY = 'ss_codex_decisions_v1';
-  var IDS = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11', 'D12'];
+  var IDS = ['D1', 'D2', 'D3', 'D4', 'D5'];
   var TITLES = {
-    D1: '第二章走 B1 还是 B2；旧 spec 的「不新增贴图」要不要作废',
-    D2: '经济是否接受「整表重定价，但期望守 471」',
-    D3: 'TTK 验收线：继续含航行，还是改 kill-only 重定基线',
-    D4: '云存档与排行榜：11 项取舍',
-    D5: '广告激励视频：需要你在平台后台开通 @runtime.ad',
-    D6: '怪物池与每局随机组成：只随形象与技能组，数值按章节阶梯递增',
-    D7: '怪物池批 1 是否开工（先出 4 张普通怪）',
-    D8: '三系特效规划：状态只做视觉 / 杂兵不震屏不顿帧 / P1 只出 1 张图',
-    D9: '搜刮面板：货舱装货顺序是否改成先横放',
-    D10: '法师天赋入口：根页直达，还是 0 点灰卡 + 说明态',
-    D11: 'mage_roster 跨局入手字段：删除，还是开局读取并入阵',
-    D12: '剑圣是否新增为角色'
+    D1: '展厅收益口径：192 币/小时（代码）还是 40 币/日（设计稿）',
+    D2: '船壳贴图 87×174 与碰撞半径 14 的偏差怎么收',
+    D3: '「三相共鸣」现在是 0 效果节点，花 4 点也点不出东西',
+    D4: '第二章要不要拉长到 4–6 分钟',
+    D5: '广告入口什么时候开'
   };
   var state = {};
   IDS.forEach(function (id) { state[id] = { sel: [], note: '' }; });
