@@ -1433,7 +1433,7 @@
       var on = isFilled(id);
       var stat = $('.dstat[data-for="' + id + '"]');
       var card = $('.dec[data-dec="' + id + '"]');
-      if (stat) { stat.textContent = on ? '已填' : '未填'; stat.classList.toggle('on', on); }
+      if (stat) { stat.textContent = on ? '已选' : '未填'; stat.classList.toggle('on', on); }
       if (card) card.classList.toggle('done', on);
       $all('input[name="' + id + '"]').forEach(function (inp) {
         var lab = inp.closest('.opt');
